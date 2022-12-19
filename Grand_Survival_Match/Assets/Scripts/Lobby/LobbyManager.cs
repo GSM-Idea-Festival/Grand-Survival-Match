@@ -16,6 +16,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject playerListLayer;
     public GameObject playerNamePrefab;
     public GameObject playerNameLayer;
+    public GameObject HostingButton;
+    public GameObject GameStartButton;
+    public GameObject RoomnameText;
     Dictionary<Player,GameObject> playerShowerMap = new Dictionary<Player, GameObject>();
     List<GameObject> showedPrefabs = new List<GameObject>();
     List<RoomInfo> roomList = new List<RoomInfo>();
@@ -86,16 +89,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         foreach(Player player in PhotonNetwork.PlayerList)
         {
             GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
-            instance.GetComponentInChildren<Text>().text = player.NickName;
-            Debug.Log(playerShowerMap);
+            instance.GetComponent<PlayerName>().nameText.text = player.NickName;
+            instance.GetComponentInChildren<Dropdown>().interactable = player.NickName == PhotonNetwork.LocalPlayer.NickName;
+            if (player.NickName != PhotonNetwork.LocalPlayer.NickName)
+            {
+                Destroy(instance.GetComponent<PlayerName>().characterText);
+            }
             playerShowerMap.Add(player, instance);
         }
+
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            GameStartButton.SetActive(false);
+            HostingButton.SetActive(false);
+        }
+        RoomnameText.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name+"님의 게임";
     }
 
     public void CreatRoom()
     {
         Debug.Log("방생성");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { IsVisible = true, MaxPlayers = 8 });
+        PhotonNetwork.CreateRoom(PhotonNetwork.NickName, new RoomOptions { IsVisible = true, MaxPlayers = 8/* ,IsOpen = false*/});
         //ShowRoomList();
     }
 
@@ -125,6 +139,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
         instance.GetComponentInChildren<Text>().text = newPlayer.NickName;
+        instance.GetComponentInChildren<Dropdown>().interactable = false;
         playerShowerMap.Add(newPlayer,instance);
     }
 
@@ -134,9 +149,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         playerShowerMap.Remove(otherPlayer);
     }
 
-
-    private void Update()
+    public override void OnLeftRoom()
     {
-        
+        roomLayer.SetActive(false);
+        roomSelectLayer.SetActive(true);
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public void Hosting()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+        }
+    }
+
+    public void StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("InGameScene");
+        }
     }
 }
