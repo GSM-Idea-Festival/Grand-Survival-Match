@@ -16,7 +16,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject playerListLayer;
     public GameObject playerNamePrefab;
     public GameObject playerNameLayer;
-    Dictionary<Player,GameObject> playerShowerMap;
+    Dictionary<Player,GameObject> playerShowerMap = new Dictionary<Player, GameObject>();
     List<GameObject> showedPrefabs = new List<GameObject>();
     List<RoomInfo> roomList = new List<RoomInfo>();
 
@@ -83,6 +83,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("·ë Âü°¡");
         roomSelectLayer.SetActive(false);
         roomLayer.SetActive(true);
+        foreach(Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
+            instance.GetComponentInChildren<Text>().text = player.NickName;
+            Debug.Log(playerShowerMap);
+            playerShowerMap.Add(player, instance);
+        }
     }
 
     public void CreatRoom()
@@ -126,6 +133,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Destroy(playerShowerMap[otherPlayer]);
         playerShowerMap.Remove(otherPlayer);
     }
+
 
     private void Update()
     {
