@@ -11,6 +11,7 @@ public class RoomInfoShower : MonoBehaviour
     public Text roomPeopleText;
     string roomName;
 
+    //LobbyManager에서 호출하는 UI 설정용함수
     public void ShowRoomInfo(RoomInfo info)
     {
         roomName = info.Name;
@@ -18,11 +19,9 @@ public class RoomInfoShower : MonoBehaviour
         roomPeopleText.text = info.PlayerCount.ToString() + "/" + info.MaxPlayers.ToString();
     }
 
+    //버튼연결용 wrap
     public void JoinRoom()
     {
-        //if (!PhotonNetwork.RejoinRoom(roomName))
-        //{
-            PhotonNetwork.JoinRoom(roomName);
-       // }
+        PhotonNetwork.JoinRoom(roomName);
     }
 }
