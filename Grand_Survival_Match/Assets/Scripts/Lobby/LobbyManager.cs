@@ -1,8 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,14 +56,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("서버 연결성공");
         PhotonNetwork.JoinLobby();
         //Debug.Log(PhotonNetwork.InLobby);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("룸리스트 업데이트");
         //base.OnRoomListUpdate(roomList);
         foreach(RoomInfo info in roomList)
         {
@@ -83,7 +79,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("룸 참가");
         roomSelectLayer.SetActive(false);
         roomLayer.SetActive(true);
         foreach(Player player in PhotonNetwork.PlayerList)
@@ -108,7 +103,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreatRoom()
     {
-        Debug.Log("방생성");
         PhotonNetwork.CreateRoom(PhotonNetwork.NickName, new RoomOptions { IsVisible = true, MaxPlayers = 8/* ,IsOpen = false*/});
         //ShowRoomList();
     }
@@ -128,10 +122,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         
         for(int i = 0; i < roomList.Count; i++)
         {
-            //표시창 생성 후 정보전달
-            GameObject infoShower = Instantiate(roomInformationPrefab, roomListLayer.transform);
-            showedPrefabs.Add(infoShower);
-            infoShower.GetComponent<RoomInfoShower>().ShowRoomInfo(roomList[i]);
+            if (roomList[i].PlayerCount != 0 && roomList[i].PlayerCount != roomList[i].MaxPlayers)
+            {
+                //표시창 생성 후 정보전달
+                GameObject infoShower = Instantiate(roomInformationPrefab, roomListLayer.transform);
+                showedPrefabs.Add(infoShower);
+                infoShower.GetComponent<RoomInfoShower>().ShowRoomInfo(roomList[i]);
+            }
         }
     }
 
@@ -153,6 +150,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         roomLayer.SetActive(false);
         roomSelectLayer.SetActive(true);
+        foreach(GameObject g in playerShowerMap.Values)
+        {
+            Destroy(g);
+        }
+        playerShowerMap = new Dictionary<Player, GameObject>();
+        ShowRoomList();
     }
 
     public void LeaveRoom()

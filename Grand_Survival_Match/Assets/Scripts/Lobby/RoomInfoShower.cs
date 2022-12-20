@@ -20,6 +20,9 @@ public class RoomInfoShower : MonoBehaviour
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(roomName);
+        //if (!PhotonNetwork.RejoinRoom(roomName))
+        //{
+            PhotonNetwork.JoinRoom(roomName);
+       // }
     }
 }
