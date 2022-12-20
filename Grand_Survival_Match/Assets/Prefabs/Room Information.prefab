@@ -159,7 +159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\uCC38\uAC00"
 --- !u!1 &4014135756375798017
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7019645063040187896}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 221231141680733333}
+        m_TargetAssemblyTypeName: RoomInfoShower, Assembly-CSharp
+        m_MethodName: JoinRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5788967681639155690
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +305,7 @@ GameObject:
   - component: {fileID: 5788967681639155691}
   - component: {fileID: 5788967681639155689}
   - component: {fileID: 5788967681639155688}
+  - component: {fileID: 221231141680733333}
   m_Layer: 5
   m_Name: Room Information
   m_TagString: Untagged
@@ -361,6 +374,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &221231141680733333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788967681639155690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45dda07b469e9214c97b5cbe95802b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomNameText: {fileID: 2722335023290870798}
+  roomPeopleText: {fileID: 1513795929883169999}
 --- !u!1 &7776721643858070376
 GameObject:
   m_ObjectHideFlags: 0
