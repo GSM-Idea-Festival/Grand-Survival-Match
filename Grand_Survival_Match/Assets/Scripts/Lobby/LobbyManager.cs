@@ -14,12 +14,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject roomLayer;
     public GameObject roomInformationPrefab;
     public GameObject roomListLayer;
-    public GameObject playerListLayer;
+    //public GameObject playerListLayer;
     public GameObject playerNamePrefab;
     public GameObject playerNameLayer;
     public GameObject HostingButton;
     public GameObject GameStartButton;
     public GameObject RoomnameText;
+    Text myCharacterText;
 
     //룸 내에서 보이는 플레이어리스트 목록
     Dictionary<Player,GameObject> playerShowerMap = new Dictionary<Player, GameObject>();
@@ -102,6 +103,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 Destroy(instance.GetComponent<PlayerName>().characterText);
             }
             playerShowerMap.Add(player, instance);
+            if(player.NickName == PhotonNetwork.NickName)
+            {
+                myCharacterText = instance.GetComponent<PlayerName>().characterText;
+            }
         }
 
         //방장만 게임시작버튼 활성화
@@ -202,6 +207,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            switch (myCharacterText.text)
+            {
+                case "전사":
+                    GameManager.myCharacterType = CharacterType.Knight;
+                    break;
+                case "마법사":
+                    GameManager.myCharacterType = CharacterType.Wizard;
+                    break;
+                case "창술사":
+                    GameManager.myCharacterType = CharacterType.SpearMan;
+                    break;
+                case "저격수":
+                    GameManager.myCharacterType = CharacterType.Gunner;
+                    break;
+                case "암살자":
+                    GameManager.myCharacterType = CharacterType.Assassin;
+                    break;
+
+            }
             PhotonNetwork.LoadLevel("InGameScene");
         }
     }
