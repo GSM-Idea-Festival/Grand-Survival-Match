@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warrior : CharacterStats
+public class Knight : CharacterStats
 {
     public CharacterSkill qSkill;
     public CharacterSkill wSkill;
@@ -11,7 +11,7 @@ public class Warrior : CharacterStats
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

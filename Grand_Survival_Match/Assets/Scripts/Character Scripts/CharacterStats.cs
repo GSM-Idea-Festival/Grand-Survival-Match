@@ -74,7 +74,7 @@ public class CharacterStats : MonoBehaviour
 
     }
 
-    protected void Damaged(float damage)
+    public void Damaged(float damage)
     {
         if (barrier > 0)
         {
@@ -110,7 +110,7 @@ public class CharacterStats : MonoBehaviour
         
     }   //대미지
 
-    protected void HpDamaged(float percent)
+    public void HpDamaged(float percent)
     {
         float damage = hp * percent;
         if (barrier > 0)
@@ -146,7 +146,7 @@ public class CharacterStats : MonoBehaviour
         }
     }   //현재체력 비례 대미지
 
-    protected void LostHpDamaged(float percent)
+    public void LostHpDamaged(float percent)
     {
         float damage = (maxHP - hp) * percent;
         if (barrier > 0)
@@ -182,7 +182,7 @@ public class CharacterStats : MonoBehaviour
         }
     }   //잃은체력 비례 대미지
 
-    protected void Heal(int value)
+    public void Heal(int value)
     {
         if (hp + value > maxHP)
         {
@@ -213,7 +213,7 @@ public class CharacterStats : MonoBehaviour
     }
     #endregion
 
-    protected void SetStun(float time)
+    public void SetStun(float time)
     {
         if (isUnstoppable)
         {
@@ -222,7 +222,7 @@ public class CharacterStats : MonoBehaviour
         stunTime = time;
     }   //스턴 설정
 
-    protected void SkillCoolInit(int skillIndex)
+    public void SkillCoolInit(int skillIndex)
     {
         switch (skillIndex)
         {
@@ -241,7 +241,7 @@ public class CharacterStats : MonoBehaviour
         }
     }   //스킬쿨타임 초기화
 
-    protected IEnumerator SetATK(float value, float time)
+    public IEnumerator SetATK(float value, float time)
     {
         atk += value;
         yield return new WaitForSeconds(time);
@@ -249,7 +249,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //기본공격력 설정
 
-    protected IEnumerator SetDEF(float value, float time)
+    public IEnumerator SetDEF(float value, float time)
     {
         def += value;
         yield return new WaitForSeconds(time);
@@ -257,7 +257,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //방어력 설정
     
-    protected IEnumerator SetPercentDEF(float value, float time)
+    public IEnumerator SetPercentDEF(float value, float time)
     {
         float addDef = def * value;
         def += addDef;
@@ -266,7 +266,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //현재 방어력 비례 방어력 증가
 
-    protected IEnumerator SetASP(float value, float time)
+    public IEnumerator SetASP(float value, float time)
     {
         asp += value;
         yield return new WaitForSeconds(time);
@@ -274,7 +274,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //공격속도 설정
 
-    protected IEnumerator SetSpeed(float value, float time)
+    public IEnumerator SetSpeed(float value, float time)
     {
         if (value < 0)
         {
@@ -288,7 +288,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //이동속도 설정
 
-    protected IEnumerator SetBarrier(float value, float time)
+    public IEnumerator SetBarrier(float value, float time)
     {
         barrier += value;
         yield return new WaitForSeconds(time);
@@ -296,7 +296,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //보호막 설정
 
-    protected IEnumerator SetHpBarrier(float value, float time)
+    public IEnumerator SetHpBarrier(float value, float time)
     {
         float addBarrier = maxHP * value;
         barrier += addBarrier;
@@ -305,7 +305,7 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //최대체력비례 보호막 설정
 
-    protected IEnumerator SetUnstoppable(float time)
+    public IEnumerator SetUnstoppable(float time)
     {
         isUnstoppable = true;
         yield return new WaitForSeconds(time);
