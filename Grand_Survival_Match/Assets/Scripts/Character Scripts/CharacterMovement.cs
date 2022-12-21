@@ -7,6 +7,7 @@ using Photon.Pun;
 public class CharacterMovement : MonoBehaviour
 {
     NavMeshAgent agent;
+    public CharacterStats CharacterStats;
 
     public float rotateSpeedMovement = 0.1f;
     float rotateVelocity;
@@ -22,20 +23,23 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PV.IsMine)
+        if (CharacterStats.StunTime <= 0)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (PV.IsMine)
             {
-                RaycastHit hit;
-
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
+                if (Input.GetMouseButtonDown(1))
                 {
-                    agent.SetDestination(hit.point);
+                    RaycastHit hit;
 
-                    Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                    float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
+                    {
+                        agent.SetDestination(hit.point);
 
-                    transform.eulerAngles = new Vector3(0, rotationY, 0);
+                        Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
+                        float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+
+                        transform.eulerAngles = new Vector3(0, rotationY, 0);
+                    }
                 }
             }
         }
