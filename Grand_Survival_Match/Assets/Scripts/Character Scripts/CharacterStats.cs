@@ -23,6 +23,7 @@ public class CharacterStats : MonoBehaviour
 
     protected bool isUnstoppable;   //저지불가
     protected bool isSkillUsing;    //스킬사용중
+    protected bool isDead;          //사망
 
     #region Property
     public float MaxHP { get { return maxHP; } }
@@ -37,6 +38,9 @@ public class CharacterStats : MonoBehaviour
     public float WCooltime { get { return wCooltime;} }
     public float ECooltime { get { return eCooltime;} }
     public float RCooltime { get { return rCooltime;} }
+    public bool IsUnstoppable { get { return isUnstoppable; } }
+    public bool IsSkillUsing { get { return isSkillUsing; } }
+    public bool IsDead { get { return isDead; } }
     #endregion
     //프로퍼티
 
@@ -88,7 +92,7 @@ public class CharacterStats : MonoBehaviour
                 barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
-                    //isDie
+                    isDead = true;
                 }
                 else
                 {
@@ -100,7 +104,7 @@ public class CharacterStats : MonoBehaviour
         {
             if (hp - damage * (damage / (damage + def)) <= 0)
             {
-                //isDie
+                isDead=true;
             }
             else
             {
@@ -125,7 +129,7 @@ public class CharacterStats : MonoBehaviour
                 barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
-                    //isDie
+                    isDead = true;
                 }
                 else
                 {
@@ -137,7 +141,7 @@ public class CharacterStats : MonoBehaviour
         {
             if (hp - damage * (damage / (damage + def)) <= 0)
             {
-                //isDie
+                isDead = true;
             }
             else
             {
@@ -161,7 +165,7 @@ public class CharacterStats : MonoBehaviour
                 barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
-                    //isDie
+                    isDead = true;
                 }
                 else
                 {
@@ -173,7 +177,7 @@ public class CharacterStats : MonoBehaviour
         {
             if (hp - damage * (damage / (damage + def)) <= 0)
             {
-                //isDie
+                isDead = true;
             }
             else
             {
@@ -265,6 +269,15 @@ public class CharacterStats : MonoBehaviour
         def -= addDef;
         yield break;
     }   //현재 방어력 비례 방어력 증가
+
+    public IEnumerator SetHpDef(float value, float time)
+    {
+        float addDef = maxHP * value;
+        def += addDef;
+        yield return new WaitForSeconds(time);
+        def -= addDef;
+        yield break;
+    }   //최대 체력 비례 방어력 증가
 
     public IEnumerator SetASP(float value, float time)
     {

@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CharacterStats.StunTime <= 0)
+        if (CharacterStats.StunTime <= 0 && !CharacterStats.IsDead)
         {
             if (PV.IsMine)
             {

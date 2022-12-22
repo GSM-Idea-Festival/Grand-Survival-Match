@@ -19,7 +19,7 @@ public class Knight : CharacterStats
     {
         base.Update();
 
-        if (stunTime <= 0)
+        if (stunTime <= 0 && !isDead)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
