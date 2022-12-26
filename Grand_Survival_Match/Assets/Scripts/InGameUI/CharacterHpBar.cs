@@ -31,7 +31,7 @@ public class CharacterHpBar : MonoBehaviour
 
         //SetUIValue(hp, maxHp, barrier);
 
-        if (hp + barrier <= maxHp)
+        if (smothGraphic != null && hp + barrier <= maxHp)
         {
             smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, hpSlider.anchorMax.x, Time.deltaTime * 5), 1);
         }
