@@ -10,7 +10,12 @@ public class CharacterHpBar : MonoBehaviour
     [SerializeField]Text playerName;
     [SerializeField]RectTransform hpSlider;
     [SerializeField]RectTransform shiledSlider;
+    [SerializeField] RectTransform smothGraphic;
     [SerializeField] Text text;
+
+    float hp;
+    float maxHp;
+    float barrier;
 
     private void Update()
     {
@@ -23,31 +28,48 @@ public class CharacterHpBar : MonoBehaviour
         {
             layer.SetActive(false);
         }
+
+        //SetUIValue(hp, maxHp, barrier);
+
+        if (hp + barrier <= maxHp)
+        {
+            smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, hpSlider.anchorMax.x, Time.deltaTime * 5), 1);
+        }
+        else
+        {
+            smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, shiledSlider.anchorMax.x, Time.deltaTime * 5), 1);
+        }
     }
 
     public void SetUIValue(float hp,float maxHp,float barrier)
     {
-        if (hp + barrier <= maxHp)
+        this.hp = hp;
+        this.maxHp = maxHp;
+        this.barrier = barrier;
+        if (maxHp > 0)
         {
-            hpSlider.anchorMax = new Vector2(hp / (maxHp), 1);
-            shiledSlider.anchorMax = new Vector2((hp + barrier) / (maxHp), 1);
-        }
-        else
-        {
-            hpSlider.anchorMax = new Vector2(hp / (hp + barrier), 1);
-            shiledSlider.anchorMax = new Vector2((hp + barrier) / (hp + barrier), 1);
+            if (hp + barrier <= maxHp)
+            {
+                hpSlider.anchorMax = new Vector2(hp / (maxHp), 1);
+                shiledSlider.anchorMax = new Vector2((hp + barrier) / (maxHp), 1);
+            }
+            else
+            {
+                hpSlider.anchorMax = new Vector2(hp / (hp + barrier), 1);
+                shiledSlider.anchorMax = new Vector2((hp + barrier) / (hp + barrier), 1);
+            }
         }
         shiledSlider.anchorMin = new Vector2(hpSlider.anchorMax.x, 0);
         if (text != null)
         {
-            if (barrier == 0f)
-            {
-                text.text = hp + "/" + maxHp;
-            }
+/*            if (barrier == 0f)
+            {*/
+                text.text = (hp + barrier) + "/" + maxHp;
+/*            }
             else
             {
                 text.text = hp + "+" + barrier + "/" + maxHp;
-            }
+            }*/
         }
     }
 
