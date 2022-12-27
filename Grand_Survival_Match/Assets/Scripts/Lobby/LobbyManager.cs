@@ -91,7 +91,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //로비화면에서 방화면으로 넘어가기
         roomSelectLayer.SetActive(false);
         roomLayer.SetActive(true);
-
+        Debug.Log(PhotonNetwork.LocalPlayer);
         //플레이어리스트 출력
         foreach(Player player in PhotonNetwork.PlayerList)
         {
