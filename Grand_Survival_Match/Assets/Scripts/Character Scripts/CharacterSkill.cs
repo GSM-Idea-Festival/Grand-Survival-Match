@@ -7,11 +7,5 @@ using UnityEngine;
 public class CharacterSkill : ScriptableObject
 {
     [SerializeField]
-    private GameObject SkillPrefabs;
-
-    [SerializeField]
-    BuffData[] MyBuffData;
-
-    [SerializeField]
-    BuffData[] EnemyBuffData;
+    public DebuffData[] DebuffDatas;
 }

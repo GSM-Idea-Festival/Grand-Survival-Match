@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DTT.AreaOfEffectRegions;
 
-public class Knight : CharacterStats
+public class Wizard : CharacterStats
 {
     [Header("Skill Datas")]
     public CharacterSkill QSkillData;
+    public CharacterSkill WSkillData;
     public CharacterSkill ESkillData;
     public CharacterSkill TSkillData;
 
     [Header("Skill Indicator Prefabs")]
     public GameObject SkillIndicatorAxis;
     public GameObject QSkillIndicator;
+    public GameObject WSkillRangeIndicator;
+    public GameObject WSkillIndicator;
+    public GameObject ESkillRangeIndicator;
     public GameObject ESkillIndicator;
     public GameObject TSkillIndicator;
 
@@ -21,32 +24,32 @@ public class Knight : CharacterStats
     public GameObject QSkillPrefab;
     public GameObject WSkillPrefab;
     public GameObject ESkillPrefab;
-    public GameObject RSkillPrefab;
     public GameObject TSkillPrefab;
 
     bool qSkillOn;
+    bool wSkillOn;
     bool eSkillOn;
+    bool rSkillOn;
     bool tSkillOn;
 
-    public float usingESkill;
-
     Vector3 position;
+    Vector3 posUp;
+
+    Vector3 WSkillHitPos;
+    Vector3 ESkillHitPos;
+    
 
     [Header("Other")]
     public Transform player;
-    public Rigidbody rigidbody;
 
-    // Start is called before the first frame update
     void Start()
     {
-        maxHP = 1500;
-        hp = 1500;
-        atk = 50;
-        def = 50;
+        maxHP = 900;
+        hp = 900;
+        atk = 30;
+        def = 30;
         speed = 3.5f;
     }
-
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
@@ -65,8 +68,29 @@ public class Knight : CharacterStats
 
         SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //마우스가 보고있는 방향으로 스킬 표시기 회전 설정
 
-    }
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.gameObject != this.gameObject)
+            {
+                posUp = new Vector3(hit.point.x, 10f, hit.point.z);
+                position = hit.point;
+            }
+        }
 
+        var hitPosDir = (hit.point - transform.position).normalized;
+        float wSkillDistance = Vector3.Distance(hit.point, transform.position);
+        wSkillDistance = Mathf.Min(wSkillDistance, 5.25f);
+        float eSkillDistance = Vector3.Distance(hit.point, transform.position);
+        eSkillDistance = Mathf.Min(eSkillDistance, 3.25f);
+
+        WSkillHitPos = transform.position + hitPosDir * wSkillDistance;
+        WSkillIndicator.transform.position = new Vector3(WSkillHitPos.x, 0.1f, WSkillHitPos.z);
+
+        ESkillHitPos = transform.position + hitPosDir * eSkillDistance;
+        ESkillIndicator.transform.position = new Vector3(ESkillHitPos.x, 0.1f, ESkillHitPos.z);
+
+        TSkillIndicator.transform.position = new Vector3(WSkillHitPos.x, 0.1f, WSkillHitPos.z);
+    }
     void SkillIndicatorActivate()
     {
         #region Q스킬
@@ -98,49 +122,60 @@ public class Knight : CharacterStats
         #region W스킬
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
+            wSkillOn = true;
+            qSkillOn = false;
+            eSkillOn = false;
+            rSkillOn = false;
+            tSkillOn = false;
+        }
+        if (Input.GetKey(KeyCode.W) && wSkillOn)
+        {
+            WSkillIndicator.SetActive(true);
+            WSkillRangeIndicator.SetActive(true);
+            if (Input.GetMouseButtonDown(1))
+            {
+                wSkillOn = false;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.W) && wCooltime <= 0 && wSkillOn)
+        {
             UseW(5);
+            wSkillOn = false;
+        }
+        if (!wSkillOn)
+        {
+            WSkillIndicator.SetActive(false);
+            WSkillRangeIndicator.SetActive(false);
         }
         #endregion
 
         #region E스킬
         if (Input.GetKeyDown(KeyCode.E) && eCooltime <= 0)
         {
-            ESkillIndicator.GetComponent<LineRegion>().FillProgress = 0;
-            speed -= 2.5f;
-            usingESkill = 2.5f;
-            def += 25;
-            isUnstoppable = true;
-        }
-        if (Input.GetKey(KeyCode.E) && eCooltime <= 0)
-        {
             eSkillOn = true;
             qSkillOn = false;
+            wSkillOn = false;
+            rSkillOn = false;
             tSkillOn = false;
-
-            ESkillIndicator.SetActive(true);
-            ESkillIndicator.GetComponent<LineRegion>().FillProgress += Time.deltaTime / 1.5f;
-
-            usingESkill -= Time.deltaTime;
         }
-        if ((Input.GetKeyUp(KeyCode.E) && eCooltime <= 0 && eSkillOn) || (eCooltime <= 0 && eSkillOn && usingESkill <= 0))
+        if (Input.GetKey(KeyCode.E) && eSkillOn)
         {
-            player.rotation = SkillIndicatorAxis.transform.rotation;
-            UseE(8);
-            speed += 2.5f;
-            def -= 25;
-            isUnstoppable = false;
+            ESkillIndicator.SetActive(true);
+            ESkillRangeIndicator.SetActive(true);
+            if (Input.GetMouseButtonDown(1))
+            {
+                eSkillOn = false;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.E) && eCooltime <= 0 && eSkillOn)
+        {
+            UseE(6);
             eSkillOn = false;
         }
         if (!eSkillOn)
         {
             ESkillIndicator.SetActive(false);
-        }
-        #endregion
-
-        #region R스킬
-        if (Input.GetKeyDown(KeyCode.R) && rCooltime <= 0)
-        {
-            UseR(5);
+            ESkillRangeIndicator.SetActive(false);
         }
         #endregion
 
@@ -149,11 +184,14 @@ public class Knight : CharacterStats
         {
             tSkillOn = true;
             qSkillOn = false;
+            wSkillOn = false;
             eSkillOn = false;
+            rSkillOn = false;
         }
         if (Input.GetKey(KeyCode.T) && tSkillOn)
         {
             TSkillIndicator.SetActive(true);
+            WSkillRangeIndicator.SetActive(true);
             if (Input.GetMouseButtonDown(1))
             {
                 tSkillOn = false;
@@ -161,7 +199,7 @@ public class Knight : CharacterStats
         }
         if (Input.GetKeyUp(KeyCode.T) && tCooltime <= 0 && tSkillOn)
         {
-            UseT(2);
+            UseT(6);
             tSkillOn = false;
         }
         if (!tSkillOn)
@@ -183,31 +221,24 @@ public class Knight : CharacterStats
     protected override void UseW(float coolTime)
     {
         base.UseW(coolTime);
-        Instantiate(WSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
-        StartCoroutine(SetATK(75, 2f));
+        WSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
+        WSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = WSkillData;
+        Vector3 pos = new Vector3(WSkillHitPos.x, -0.5f, WSkillHitPos.z);
+        Instantiate(WSkillPrefab, pos, gameObject.transform.rotation);
     }
 
     protected override void UseE(float coolTime)
     {
         base.UseE(coolTime);
-        StartCoroutine(UseEDash());
-    }
-
-    IEnumerator UseEDash()
-    {
-        Vector3 locVel = transform.InverseTransformDirection(rigidbody.velocity);
-        locVel.x = 0;
-        locVel.x = 5f;
-        locVel.y = 0;
-        rigidbody.velocity = transform.InverseTransformDirection(locVel);
-        yield break;
+        ESkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
+        ESkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = ESkillData;
+        Vector3 pos = new Vector3(ESkillHitPos.x, 0, ESkillHitPos.z);
+        Instantiate(ESkillPrefab, pos, gameObject.transform.rotation);
     }
 
     protected override void UseR(float coolTime)
     {
         base.UseR(coolTime);
-        Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
-        SetHpBarrier(3, 0.1f);
     }
 
     protected override void UseT(float coolTime)
@@ -215,6 +246,6 @@ public class Knight : CharacterStats
         base.UseT(coolTime);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
-        Instantiate(TSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        Instantiate(TSkillPrefab, WSkillHitPos, gameObject.transform.rotation);
     }
 }
