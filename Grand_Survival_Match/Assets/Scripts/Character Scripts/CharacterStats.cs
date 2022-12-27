@@ -251,6 +251,9 @@ public class CharacterStats : MonoBehaviour
             case 3:
                 rCooltime = 0;
                 break;
+            case 4:
+                tCooltime = 0;
+                break;
         }
     }   //스킬쿨타임 초기화
 

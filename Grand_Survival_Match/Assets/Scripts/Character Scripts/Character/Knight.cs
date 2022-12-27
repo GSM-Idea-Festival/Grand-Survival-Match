@@ -17,15 +17,11 @@ public class Knight : CharacterStats
     public GameObject ESkillIndicator;
     public GameObject TSkillIndicator;
 
-    [Header("Skill Effect Prefabs")]
-    public GameObject QSkillEffect;
-    public GameObject WSkillEffect;
-    public GameObject RSkillEffect;
-    public GameObject TSkillEffect;
-
     [Header("Skill Prefabs")]
     public GameObject QSkillPrefab;
+    public GameObject WSkillPrefab;
     public GameObject ESkillPrefab;
+    public GameObject RSkillPrefab;
     public GameObject TSkillPrefab;
 
     bool qSkillOn;
@@ -38,6 +34,7 @@ public class Knight : CharacterStats
 
     [Header("Other")]
     public Transform player;
+    public Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
@@ -121,14 +118,14 @@ public class Knight : CharacterStats
             tSkillOn = false;
 
             ESkillIndicator.SetActive(true);
-            ESkillIndicator.GetComponent<LineRegion>().FillProgress += Time.deltaTime / 2f;
+            ESkillIndicator.GetComponent<LineRegion>().FillProgress += Time.deltaTime / 1.5f;
 
             usingESkill -= Time.deltaTime;
         }
         if ((Input.GetKeyUp(KeyCode.E) && eCooltime <= 0 && eSkillOn) || (eCooltime <= 0 && eSkillOn && usingESkill <= 0))
         {
-            UseE(8);
             player.rotation = SkillIndicatorAxis.transform.rotation;
+            UseE(8);
             speed += 2.5f;
             def -= 25;
             isUnstoppable = false;
@@ -177,7 +174,6 @@ public class Knight : CharacterStats
     protected override void UseQ(float coolTime)
     {
         base.UseQ(coolTime);
-        Instantiate(QSkillEffect, SkillIndicatorAxis.transform.position, SkillIndicatorAxis.transform.rotation);
         QSkillData.DebuffDatas[0].value = atk;
         QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
@@ -187,26 +183,36 @@ public class Knight : CharacterStats
     protected override void UseW(float coolTime)
     {
         base.UseW(coolTime);
-        Instantiate(WSkillEffect, gameObject.transform.position, gameObject.transform.rotation);
+        Instantiate(WSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
         StartCoroutine(SetATK(75, 2f));
     }
 
     protected override void UseE(float coolTime)
     {
         base.UseE(coolTime);
+        StartCoroutine(UseEDash());
+    }
+
+    IEnumerator UseEDash()
+    {
+        Vector3 locVel = transform.InverseTransformDirection(rigidbody.velocity);
+        locVel.x = 0;
+        locVel.x = 5f;
+        locVel.y = 0;
+        rigidbody.velocity = transform.InverseTransformDirection(locVel);
+        yield break;
     }
 
     protected override void UseR(float coolTime)
     {
         base.UseR(coolTime);
-        Instantiate(RSkillEffect, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
+        Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
         SetHpBarrier(3, 0.1f);
     }
 
     protected override void UseT(float coolTime)
     {
         base.UseT(coolTime);
-        Instantiate(TSkillEffect, SkillIndicatorAxis.transform.position, SkillIndicatorAxis.transform.rotation);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
         Instantiate(TSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);

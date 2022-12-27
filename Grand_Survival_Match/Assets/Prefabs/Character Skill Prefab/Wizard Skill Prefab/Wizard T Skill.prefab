@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1596296417823519786}
   - component: {fileID: 1596296417823519788}
   - component: {fileID: 8182414378239472683}
-  - component: {fileID: -8564927522707594653}
   - component: {fileID: 1179611493999794359}
+  - component: {fileID: 1873231779152868884}
+  - component: {fileID: 8455497072561920853}
   m_Layer: 0
   m_Name: Wizard T Skill
   m_TagString: Untagged
@@ -71,21 +72,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attacker: {fileID: 0}
+  Target: []
   CharacterSkill: {fileID: 11400000, guid: d68846e4d27aa2a4fb8d729750ca5046, type: 2}
   count: 0
---- !u!114 &-8564927522707594653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596296417823519789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d60586f0a223a64c82d7fadb5858806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 1
+  time: 0.1
+  isSpearMan: 0
+  isWizardQSkill: 0
 --- !u!54 &1179611493999794359
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,3 +94,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1873231779152868884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596296417823519789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8455497072561920853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596296417823519789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

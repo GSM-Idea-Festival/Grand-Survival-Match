@@ -9,7 +9,6 @@ public class Wizard : CharacterStats
     public CharacterSkill QSkillData;
     public CharacterSkill WSkillData;
     public CharacterSkill ESkillData;
-    public CharacterSkill RSkillData;
     public CharacterSkill TSkillData;
 
     [Header("Skill Indicator Prefabs")]
@@ -19,14 +18,12 @@ public class Wizard : CharacterStats
     public GameObject WSkillIndicator;
     public GameObject ESkillRangeIndicator;
     public GameObject ESkillIndicator;
-    public GameObject RSkillIndicator;
     public GameObject TSkillIndicator;
 
     [Header("Skill Prefabs")]
     public GameObject QSkillPrefab;
     public GameObject WSkillPrefab;
     public GameObject ESkillPrefab;
-    public GameObject RSkillPrefab;
     public GameObject TSkillPrefab;
 
     bool qSkillOn;
@@ -48,6 +45,7 @@ public class Wizard : CharacterStats
     void Start()
     {
         maxHP = 900;
+        hp = 900;
         atk = 30;
         def = 30;
         speed = 3.5f;
@@ -95,6 +93,32 @@ public class Wizard : CharacterStats
     }
     void SkillIndicatorActivate()
     {
+        #region Q스킬
+        if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
+        {
+            qSkillOn = true;
+            eSkillOn = false;
+            tSkillOn = false;
+        }
+        if (Input.GetKey(KeyCode.Q) && qSkillOn)
+        {
+            QSkillIndicator.SetActive(true);
+            if (Input.GetMouseButtonDown(1))
+            {
+                qSkillOn = false;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Q) && qCooltime <= 0 && qSkillOn)
+        {
+            UseQ(2);
+            qSkillOn = false;
+        }
+        if (!qSkillOn)
+        {
+            QSkillIndicator.SetActive(false);
+        }
+        #endregion
+
         #region W스킬
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
@@ -188,6 +212,10 @@ public class Wizard : CharacterStats
     protected override void UseQ(float coolTime)
     {
         base.UseQ(coolTime);
+        QSkillData.DebuffDatas[0].value = atk;
+        QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
+        QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
+        Instantiate(QSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseW(float coolTime)
@@ -195,7 +223,8 @@ public class Wizard : CharacterStats
         base.UseW(coolTime);
         WSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         WSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = WSkillData;
-        Instantiate(WSkillPrefab, WSkillHitPos, gameObject.transform.rotation);
+        Vector3 pos = new Vector3(WSkillHitPos.x, -0.5f, WSkillHitPos.z);
+        Instantiate(WSkillPrefab, pos, gameObject.transform.rotation);
     }
 
     protected override void UseE(float coolTime)
@@ -203,7 +232,8 @@ public class Wizard : CharacterStats
         base.UseE(coolTime);
         ESkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         ESkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = ESkillData;
-        Instantiate(ESkillPrefab, ESkillHitPos, gameObject.transform.rotation);
+        Vector3 pos = new Vector3(ESkillHitPos.x, 0, ESkillHitPos.z);
+        Instantiate(ESkillPrefab, pos, gameObject.transform.rotation);
     }
 
     protected override void UseR(float coolTime)
