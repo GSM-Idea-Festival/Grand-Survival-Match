@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
 {
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     protected float maxHP; //최대체력
     protected float hp;    //현재체력
     protected float atk;   //기본공격력
     protected float def;   //방어력
-    protected float asp;   //공격속도 (Attack Speed)
     protected float speed; //이동속도
     protected float barrier; //보호막
     protected float stunTime; //기절시간
@@ -20,6 +19,7 @@ public class CharacterStats : MonoBehaviour
     protected float wCooltime;
     protected float eCooltime;
     protected float rCooltime;
+    protected float tCooltime;
 
     protected bool isUnstoppable;   //저지불가
     protected bool isSkillUsing;    //스킬사용중
@@ -30,7 +30,6 @@ public class CharacterStats : MonoBehaviour
     public float Hp { get {  return hp;} }
     public float Atk { get { return atk;} }
     public float Def { get { return def; } }
-    public float Asp { get { return asp;} }
     public float Speed { get { return speed; } }
     public float Barrier { get { return barrier;} }
     public float StunTime { get { return stunTime;} }
@@ -38,6 +37,7 @@ public class CharacterStats : MonoBehaviour
     public float WCooltime { get { return wCooltime;} }
     public float ECooltime { get { return eCooltime;} }
     public float RCooltime { get { return rCooltime;} }
+    public float TCooltime { get { return tCooltime;} }
     public bool IsUnstoppable { get { return isUnstoppable; } }
     public bool IsSkillUsing { get { return isSkillUsing; } }
     public bool IsDead { get { return isDead; } }
@@ -46,7 +46,6 @@ public class CharacterStats : MonoBehaviour
 
     private void Start()
     {
-        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     protected virtual void Update()
@@ -76,6 +75,12 @@ public class CharacterStats : MonoBehaviour
             rCooltime -= Time.deltaTime;
         }
 
+        if (tCooltime > 0)
+        {
+            tCooltime -= Time.deltaTime;
+        }
+
+        agent.speed = speed;
     }
 
     public void Damaged(float damage)
@@ -199,21 +204,25 @@ public class CharacterStats : MonoBehaviour
     }   //체력회복
 
     #region 스킬사용
-    protected void UseQ(float coolTime)
+    protected virtual void UseQ(float coolTime)
     {
         qCooltime = coolTime;
     }
-    protected void UseW(float coolTime)
+    protected virtual void UseW(float coolTime)
     {
         wCooltime = coolTime;
     }
-    protected void UseE(float coolTime)
+    protected virtual void UseE(float coolTime)
     {
         eCooltime = coolTime;
     }
-    protected void UseR(float coolTime)
+    protected virtual void UseR(float coolTime)
     {
         rCooltime = coolTime;
+    }
+    protected virtual void UseT(float coolTime)
+    {
+        tCooltime = coolTime;
     }
     #endregion
 
@@ -241,6 +250,9 @@ public class CharacterStats : MonoBehaviour
                 break;
             case 3:
                 rCooltime = 0;
+                break;
+            case 4:
+                tCooltime = 0;
                 break;
         }
     }   //스킬쿨타임 초기화
@@ -279,14 +291,6 @@ public class CharacterStats : MonoBehaviour
         yield break;
     }   //최대 체력 비례 방어력 증가
 
-    public IEnumerator SetASP(float value, float time)
-    {
-        asp += value;
-        yield return new WaitForSeconds(time);
-        asp -= value;
-        yield break;
-    }   //공격속도 설정
-
     public IEnumerator SetSpeed(float value, float time)
     {
         if (value < 0)
@@ -294,10 +298,8 @@ public class CharacterStats : MonoBehaviour
             if (isUnstoppable) yield break;
         }
         speed += value;
-        agent.speed = speed;
         yield return new WaitForSeconds(time);
         speed -= value;
-        agent.speed = speed;
         yield break;
     }   //이동속도 설정
 
