@@ -72,4 +72,7 @@ EditorBuildSettings:
     path: Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
       for 4.unity
     guid: e7a7f9734636d415ca84ef3aaf7680f6
+  - enabled: 0
+    path: Assets/Models/SpecialSkillsEffectsPack/EffectsScenes/EffectsScene.unity
+    guid: c125bc2a97c864beb819e619289f85e1
   m_configObjects: {}
