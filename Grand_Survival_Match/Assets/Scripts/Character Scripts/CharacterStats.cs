@@ -101,6 +101,7 @@ public class CharacterStats : MonoBehaviourPun
 
     public void Damaged(float damage)
     {
+        Debug.Log("damaged");
         if (barrier > 0)
         {
             if (barrier >= damage)

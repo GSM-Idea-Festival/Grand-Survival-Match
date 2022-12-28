@@ -782,6 +782,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6906534b46bbee842acd7468d7a79d05, type: 3}
+--- !u!114 &1290327500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5370179076130997206, guid: 6906534b46bbee842acd7468d7a79d05, type: 3}
+  m_PrefabInstance: {fileID: 1290327499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c56e0c265ef26849972c82e2116dc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1407865048 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5370179076130997204, guid: 6906534b46bbee842acd7468d7a79d05, type: 3}
@@ -924,7 +935,7 @@ MonoBehaviour:
   gunnerPrefab: {fileID: 4695897031422502217, guid: e99fb01b628d29a41b94f964a364112d, type: 3}
   spearManPrefab: {fileID: 3035352258029093058, guid: 8eacaeec96e11844b8673285c3901c19, type: 3}
   assassinPrefab: {fileID: 5766642645484733059, guid: d0df3def76673db48bf84bf382993840, type: 3}
-  rankingManager: {fileID: 0}
+  rankingManager: {fileID: 1290327500}
 --- !u!4 &1852177919
 Transform:
   m_ObjectHideFlags: 0

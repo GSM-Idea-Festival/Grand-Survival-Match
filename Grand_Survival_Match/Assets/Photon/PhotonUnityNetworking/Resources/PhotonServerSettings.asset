@@ -42,6 +42,10 @@ MonoBehaviour:
   - AddRankingData
   - ShowRanking
   - Load
+  - SetPos
+  - GameOver
+  - SetPlayerFalse
+  - SetPlayerTrue
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
