@@ -53,7 +53,6 @@ public class Wizard : CharacterStats
     protected override void Update()
     {
         base.Update();
-        SkillIndicatorActivate();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //게임 화면 내에 마우스 방향으로 레이 발사
@@ -91,7 +90,7 @@ public class Wizard : CharacterStats
 
         TSkillIndicator.transform.position = new Vector3(WSkillHitPos.x, 0.1f, WSkillHitPos.z);
     }
-    void SkillIndicatorActivate()
+    protected override void SkillIndicatorActivate()
     {
         #region Q스킬
         if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
