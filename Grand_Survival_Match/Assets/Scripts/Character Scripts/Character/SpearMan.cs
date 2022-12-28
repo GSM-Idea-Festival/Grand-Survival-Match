@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SpearMan : CharacterStats
 {
@@ -211,11 +212,11 @@ public class SpearMan : CharacterStats
         UltQSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
         if (tSkillTime <= 0)
         {
-            Instantiate(QSkillPrefab, player.transform.position, SkillIndicatorAxis.transform.rotation);
+            PhotonNetwork.Instantiate(QSkillPrefab.name, player.transform.position, SkillIndicatorAxis.transform.rotation);
         }
         else
         {
-            Instantiate(UltQSkillPrefab, player.transform.position, SkillIndicatorAxis.transform.rotation);
+            PhotonNetwork.Instantiate(UltQSkillPrefab.name, player.transform.position, SkillIndicatorAxis.transform.rotation);
         }
     }
 
@@ -229,7 +230,7 @@ public class SpearMan : CharacterStats
         base.UseE(coolTime);
         ESkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         ESkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = ESkillData;
-        Instantiate(ESkillPrefab, player.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(ESkillPrefab.name, player.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseR(float coolTime)
@@ -237,7 +238,7 @@ public class SpearMan : CharacterStats
         base.UseR(coolTime);
         RSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         RSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = RSkillData;
-        Instantiate(RSkillPrefab, player.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(RSkillPrefab.name, player.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseT(float coolTime)
