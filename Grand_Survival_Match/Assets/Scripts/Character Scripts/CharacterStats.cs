@@ -92,6 +92,11 @@ public class CharacterStats : MonoBehaviourPun
         }
 
         agent.speed = speed;
+
+        if (photonView.IsMine)
+        {
+            SkillIndicatorActivate();
+        }
     }
 
     public void Damaged(float damage)
@@ -267,6 +272,11 @@ public class CharacterStats : MonoBehaviourPun
                 break;
         }
     }   //스킬쿨타임 초기화
+
+    protected virtual void SkillIndicatorActivate()
+    {
+
+    }
 
     public IEnumerator SetATK(float value, float time)
     {
