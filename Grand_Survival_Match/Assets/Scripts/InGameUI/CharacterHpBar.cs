@@ -21,23 +21,28 @@ public class CharacterHpBar : MonoBehaviour
     {
         if (trackingTarget != null)
         {
-            layer.SetActive(true);
-            transform.position = trackingTarget.transform.position;
-        }
-        else
-        {
-            layer.SetActive(false);
+            if (trackingTarget.activeSelf)
+            {
+                layer.SetActive(true);
+                transform.position = trackingTarget.transform.position;
+            }
+            else
+            {
+                layer.SetActive(false);
+            }
         }
 
         //SetUIValue(hp, maxHp, barrier);
-
-        if (smothGraphic != null && hp + barrier <= maxHp)
+        if (smothGraphic != null)
         {
-            smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, hpSlider.anchorMax.x, Time.deltaTime * 5), 1);
-        }
-        else
-        {
-            smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, shiledSlider.anchorMax.x, Time.deltaTime * 5), 1);
+            if (hp + barrier <= maxHp)
+            {
+                smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, hpSlider.anchorMax.x, Time.deltaTime * 5), 1);
+            }
+            else
+            {
+                smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, shiledSlider.anchorMax.x, Time.deltaTime * 5), 1);
+            }
         }
     }
 

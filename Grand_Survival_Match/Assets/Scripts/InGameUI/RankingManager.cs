@@ -9,8 +9,7 @@ public class RankingManager : MonoBehaviour
     public GameObject rankInfoLayer;
     GameObject[] rankInfoBuf = new GameObject[8];
 
-
-    public void setRank(RankingData[] rankList)
+    public void SetRank(RankingData[] rankList)
     {
         //버블정렬
         while (true)
@@ -47,7 +46,7 @@ public class RankingManager : MonoBehaviour
         {
             GameObject g = Instantiate(rankInfoPrefab, rankInfoLayer.transform);
             Text rankName = g.GetComponentInChildren<Text>();
-            rankName.text = (rankList.Length - j) + ". " + rankList[j].name + " " + rankList[j].kill + "/" + rankList[j].death;
+            rankName.text = (rankList.Length - j) + ". " + rankList[j]._name + " " + rankList[j].kill + "/" + rankList[j].death;
             rankInfoBuf[j] = g;
         }
     }

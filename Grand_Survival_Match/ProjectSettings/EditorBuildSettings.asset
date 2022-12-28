@@ -75,4 +75,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Models/SpecialSkillsEffectsPack/EffectsScenes/EffectsScene.unity
     guid: c125bc2a97c864beb819e619289f85e1
+  - enabled: 1
+    path: Assets/Scenes/LobbyScene.unity
+    guid: a34b3f10b594a08438bdf2b3412db9cd
+  - enabled: 1
+    path: Assets/Scenes/InGameScene.unity
+    guid: b00796dadb0d70e479730608d1a29569
   m_configObjects: {}

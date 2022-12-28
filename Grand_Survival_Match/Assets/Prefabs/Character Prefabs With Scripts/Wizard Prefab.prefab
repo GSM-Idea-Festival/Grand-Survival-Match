@@ -44004,7 +44004,7 @@ Animator:
   m_GameObject: {fileID: 1648894326030724}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 038320a534bd8b444b43734860d1a211, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 44892375a0f12174094e27fb7c5df0a6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -44152,7 +44152,6 @@ MonoBehaviour:
   QSkillData: {fileID: 11400000, guid: 7dc732c60d36b614aa558f2e0478a8bf, type: 2}
   WSkillData: {fileID: 11400000, guid: 2fc6a68c1d2d96e4b803dc414445939e, type: 2}
   ESkillData: {fileID: 11400000, guid: afd424549de0670468e7d11b41e7bcae, type: 2}
-  RSkillData: {fileID: 0}
   TSkillData: {fileID: 11400000, guid: d68846e4d27aa2a4fb8d729750ca5046, type: 2}
   SkillIndicatorAxis: {fileID: 1338733331}
   QSkillIndicator: {fileID: 795787725996734584}
@@ -44160,12 +44159,10 @@ MonoBehaviour:
   WSkillIndicator: {fileID: 8748669034020387437}
   ESkillRangeIndicator: {fileID: 1102408299}
   ESkillIndicator: {fileID: 731659048}
-  RSkillIndicator: {fileID: 0}
   TSkillIndicator: {fileID: 1899713490}
   QSkillPrefab: {fileID: 554558102573608318, guid: 3f381f04756493448be54b22b3b99abb, type: 3}
   WSkillPrefab: {fileID: 285633562173302669, guid: 4801ef118db871f43808f6f925e2a3b3, type: 3}
   ESkillPrefab: {fileID: 8543644541225701797, guid: d9f43b67b76554e49ac3114911048c70, type: 3}
-  RSkillPrefab: {fileID: 0}
   TSkillPrefab: {fileID: 1596296417823519789, guid: 0068f3722bac6364984a6d9b23508e68, type: 3}
   player: {fileID: 4973852515144292}
 --- !u!1 &1649211764448346

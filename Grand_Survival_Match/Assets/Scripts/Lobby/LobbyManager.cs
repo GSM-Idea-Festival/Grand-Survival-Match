@@ -210,23 +210,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             switch (myCharacterText.text)
             {
                 case "전사":
-                    GameManager.myCharacterType = CharacterType.Knight;
+                    GameManager.MyCharacterType = CharacterType.Knight;
                     break;
                 case "마법사":
-                    GameManager.myCharacterType = CharacterType.Wizard;
+                    GameManager.MyCharacterType = CharacterType.Wizard;
                     break;
                 case "창술사":
-                    GameManager.myCharacterType = CharacterType.SpearMan;
+                    GameManager.MyCharacterType = CharacterType.SpearMan;
                     break;
                 case "저격수":
-                    GameManager.myCharacterType = CharacterType.Gunner;
+                    GameManager.MyCharacterType = CharacterType.Gunner;
                     break;
                 case "암살자":
-                    GameManager.myCharacterType = CharacterType.Assassin;
+                    GameManager.MyCharacterType = CharacterType.Assassin;
                     break;
 
             }
-            PhotonNetwork.LoadLevel("InGameScene");
+            photonView.RPC(nameof(Load), RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    void Load()
+    {
+        PhotonNetwork.LoadLevel("InGameScene");
     }
 }

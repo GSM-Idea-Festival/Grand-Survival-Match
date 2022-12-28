@@ -19,6 +19,6 @@ public class CharacterAnimator : MonoBehaviour
     void Update()
     {
         float speed = agent.velocity.magnitude / agent.speed;
-        anim.SetFloat("Speed", speed, motionSmoothTime, Time.deltaTime);
+        anim.SetFloat("speed", speed, motionSmoothTime, Time.deltaTime);
     }
 }
