@@ -226,7 +226,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                     break;
 
             }
-            PhotonNetwork.LoadLevel("InGameScene");
+            photonView.RPC(nameof(Load), RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    void Load()
+    {
+        PhotonNetwork.LoadLevel("InGameScene");
     }
 }

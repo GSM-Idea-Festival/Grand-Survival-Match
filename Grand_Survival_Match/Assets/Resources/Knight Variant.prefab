@@ -243,6 +243,30 @@ PrefabInstance:
       propertyPath: m_SynchronizeParameters.Array.data[5].Type
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1276669120, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: sceneViewId
       value: 0
@@ -1653,15 +1677,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4005077195242232, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005077195242232, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005077195242232, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4005077195242232, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1741,7 +1765,7 @@ MonoBehaviour:
   ESkillIndicator: {fileID: 2182391815825998342}
   TSkillIndicator: {fileID: 1105584378188429199}
   QSkillPrefab: {fileID: 5883993159170183047, guid: 8fd8664f491e2954682d901b505d750a, type: 3}
-  WSkillPrefab: {fileID: 5685637337513244916, guid: 170931665e2d6854a855330846ec651c, type: 3}
+  WSkillPrefab: {fileID: 3341510750625396023, guid: 59e6fc138349eaf429f17af2899d5c49, type: 3}
   ESkillPrefab: {fileID: 0}
   RSkillPrefab: {fileID: 6981823151164971269, guid: 5546b1707fa41b64d930e076b5f985a0, type: 3}
   TSkillPrefab: {fileID: 5685637337513244916, guid: 170931665e2d6854a855330846ec651c, type: 3}

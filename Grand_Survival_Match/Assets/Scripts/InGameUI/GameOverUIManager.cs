@@ -11,12 +11,12 @@ public class GameOverUIManager : MonoBehaviour
 
     public void ShowGameResult(RankingData[] ranking)
     {
-        rank.setRank(ranking);
+        rank.SetRank(ranking);
         for(int i = 0; i < ranking.Length; i++)
         {
-            if (ranking[i].name == PhotonNetwork.NickName)
+            if (ranking[i]._name == PhotonNetwork.NickName)
             {
-                myScore.text = ranking[i].name + " " + ranking[i].kill + "/" + ranking[i].death;
+                myScore.text = ranking[i]._name + " " + ranking[i].kill + "/" + ranking[i].death;
             }
         }
     }

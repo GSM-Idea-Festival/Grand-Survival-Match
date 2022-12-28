@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class CharacterStats : MonoBehaviour
+public class CharacterStats : MonoBehaviourPun
 {
     public NavMeshAgent agent;
 
@@ -23,7 +24,17 @@ public class CharacterStats : MonoBehaviour
 
     protected bool isUnstoppable;   //저지불가
     protected bool isSkillUsing;    //스킬사용중
-    protected bool isDead;          //사망
+    protected bool isDead
+    {
+        get
+        {
+            return false;
+        }
+        set
+        {
+            FindObjectOfType<GameManager>().RespawnRequest(gameObject);
+        }
+    }        //사망
 
     #region Property
     public float MaxHP { get { return maxHP; } }
