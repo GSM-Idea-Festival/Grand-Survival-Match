@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct RankingData
 {
-    public string _name;
+    public int id;
     public int kill;
     public int death;
 }

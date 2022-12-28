@@ -14,9 +14,9 @@ public class GameOverUIManager : MonoBehaviour
         rank.SetRank(ranking);
         for(int i = 0; i < ranking.Length; i++)
         {
-            if (ranking[i]._name == PhotonNetwork.NickName)
+            if (PhotonNetwork.PlayerList[ranking[i].id].NickName == PhotonNetwork.NickName)
             {
-                myScore.text = ranking[i]._name + " " + ranking[i].kill + "/" + ranking[i].death;
+                myScore.text = PhotonNetwork.PlayerList[ranking[i].id].NickName + " " + ranking[i].kill + "/" + ranking[i].death;
             }
         }
     }

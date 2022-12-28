@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviourPun
 
     [SerializeField] RankingManager rankingManager;
 
-    RankingData[] ranking = new RankingData[8];
+    public static RankingData[] ranking = new RankingData[8];
 
     GameObject player;
 
+    float timer;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
@@ -56,15 +57,15 @@ public class GameManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             //·©Å· °ü¸®
-            /*for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
-                ranking[i]._name = PhotonNetwork.PlayerList[i].NickName;
+                ranking[i].id = i;
                 ranking[i].kill = 0;
                 ranking[i].death = 0;
-            }*/
+            }
         }
 
-        //RequestSendRankingData(0, 0);
+        RequestSendRankingData(0, 0);
     }
 
     [PunRPC]
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviourPun
     {
         for(int i=0;i< PhotonNetwork.PlayerList.Length; i++)
         {
-            if (ranking[i]._name == name)
+            if (PhotonNetwork.PlayerList[ranking[i].id].NickName == name)
             {
                 ranking[i].kill += kill;
                 ranking[i].death += death;
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void ShowRanking(RankingData[] ranking)
     {
+        Debug.Log(ranking[0]);
         rankingManager.SetRank(ranking);
     }
 
@@ -98,19 +100,44 @@ public class GameManager : MonoBehaviourPun
 
     public void RespawnRequest(GameObject player)
     {
-        player.SetActive(false);
+        photonView.RPC(nameof(SetPlayerFalse), RpcTarget.All);
         StartCoroutine(Respawn(player));
     }
 
     IEnumerator Respawn(GameObject player)
     {
         yield return new WaitForSeconds(5);
+        photonView.RPC(nameof(SetPlayerTrue), RpcTarget.All);
+    }
+
+    [PunRPC]
+    void SetPlayerFalse()
+    {
+        player.SetActive(false);
+    }
+
+    [PunRPC]
+    void SetPlayerTrue()
+    {
         player.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            timer += Time.deltaTime;
+            if(timer > 60)
+            {
+                photonView.RPC(nameof(GameOver), RpcTarget.All);
+            }
+        }
+    }
+
+    [PunRPC]
+    void GameOver()
+    {
+        PhotonNetwork.LoadLevel("GameOverScene");
     }
 }

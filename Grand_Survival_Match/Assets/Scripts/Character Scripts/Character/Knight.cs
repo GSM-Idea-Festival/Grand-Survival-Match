@@ -206,8 +206,18 @@ public class Knight : CharacterStats
     protected override void UseR(float coolTime)
     {
         base.UseR(coolTime);
-        PhotonNetwork.Instantiate(RSkillPrefab.name, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
+        
+        photonView.RPC(nameof(SetPos),RpcTarget.All);
         SetHpBarrier(3, 0.1f);
+    }
+
+    [PunRPC]
+    void SetPos()
+    {
+        GameObject g = Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
+        g.transform.parent = player.transform;
+        g.transform.localPosition = Vector3.zero;
+        g.GetComponent<TrackingPlayerSkill>().trackingTarget = gameObject;
     }
 
     protected override void UseT(float coolTime)
