@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DTT.AreaOfEffectRegions;
+using Photon.Pun;
 
 public class Knight : CharacterStats
 {
@@ -176,13 +177,13 @@ public class Knight : CharacterStats
         QSkillData.DebuffDatas[0].value = atk;
         QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
-        Instantiate(QSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(QSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseW(float coolTime)
     {
         base.UseW(coolTime);
-        Instantiate(WSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(WSkillPrefab.name, gameObject.transform.position, gameObject.transform.rotation);
         StartCoroutine(SetATK(75, 2f));
     }
 
@@ -205,7 +206,7 @@ public class Knight : CharacterStats
     protected override void UseR(float coolTime)
     {
         base.UseR(coolTime);
-        Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
+        PhotonNetwork.Instantiate(RSkillPrefab.name, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
         SetHpBarrier(3, 0.1f);
     }
 
@@ -214,6 +215,6 @@ public class Knight : CharacterStats
         base.UseT(coolTime);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
-        Instantiate(TSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(TSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 }

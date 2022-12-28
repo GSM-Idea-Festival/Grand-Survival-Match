@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DTT.AreaOfEffectRegions;
+using Photon.Pun;
 
 public class Wizard : CharacterStats
 {
@@ -214,7 +215,7 @@ public class Wizard : CharacterStats
         QSkillData.DebuffDatas[0].value = atk;
         QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
-        Instantiate(QSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(QSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseW(float coolTime)
@@ -223,7 +224,7 @@ public class Wizard : CharacterStats
         WSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         WSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = WSkillData;
         Vector3 pos = new Vector3(WSkillHitPos.x, -0.5f, WSkillHitPos.z);
-        Instantiate(WSkillPrefab, pos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(WSkillPrefab.name, pos, gameObject.transform.rotation);
     }
 
     protected override void UseE(float coolTime)
@@ -232,7 +233,7 @@ public class Wizard : CharacterStats
         ESkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         ESkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = ESkillData;
         Vector3 pos = new Vector3(ESkillHitPos.x, 0, ESkillHitPos.z);
-        Instantiate(ESkillPrefab, pos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(ESkillPrefab.name, pos, gameObject.transform.rotation);
     }
 
     protected override void UseR(float coolTime)
@@ -245,6 +246,6 @@ public class Wizard : CharacterStats
         base.UseT(coolTime);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
-        Instantiate(TSkillPrefab, WSkillHitPos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(TSkillPrefab.name, WSkillHitPos, gameObject.transform.rotation);
     }
 }
