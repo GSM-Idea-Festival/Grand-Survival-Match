@@ -20,6 +20,7 @@ public class HitBox : MonoBehaviourPun
     public float destroyTimer;
 
     bool isActive = false;
+    List<GameObject> counts = new List<GameObject>();
 
     public GameObject attacker { protected get; set; }
 
@@ -36,10 +37,16 @@ public class HitBox : MonoBehaviourPun
     }
 
 
-    protected virtual void OnTriggerEnter(Collider collision)
+    protected virtual void OnTriggerStay(Collider collision)
     {
-        if (isActive && collision.gameObject != attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient)
+        if (isActive && collision.gameObject != attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject)==-1)
         {
+            counts.Add(collision.gameObject);
+            Debug.Log("hit");
+            /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+            {
+                FindObjectOfType<GameManager>().Kill();
+            }*/
             collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
         }
     }

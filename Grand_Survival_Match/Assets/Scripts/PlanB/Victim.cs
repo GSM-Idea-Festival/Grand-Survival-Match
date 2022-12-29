@@ -72,11 +72,16 @@ public class Victim : MonoBehaviourPun
             if (Hp <= 0)
             {
                 photonView.RPC(nameof(RespawnRequest), RpcTarget.All);
+                if (photonView.IsMine)
+                {
+                    FindObjectOfType<GameManager>().Death();
+                }
+                //return true;
             }
             
         }
 
-       
+        //return false;
     }
 
     [PunRPC]

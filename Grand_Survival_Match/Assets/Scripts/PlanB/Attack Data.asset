@@ -17,6 +17,6 @@ MonoBehaviour:
   coolTime: 1
   spawnDelayTime: 0.2
   activeDelayTime: 0
-  activeTime: 0
+  activeTime: 0.4
   destroyTimer: 1
-  stunTime: 0
+  stunTime: 0.6

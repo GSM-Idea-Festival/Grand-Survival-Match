@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviourPun
     GameObject player;
 
 
-    float timer = 60;
+    [SerializeField] float gameOverTimer = 60;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
@@ -90,6 +90,16 @@ public class GameManager : MonoBehaviourPun
         RequestSendRankingData(0, 0);
     }
 
+    public void Kill()
+    {
+        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 1, 0);
+    }
+
+    public void Death()
+    {
+        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 0, 1);
+    }
+
     [PunRPC]
     void AddRankingData(string name,int kill,int death)
     {
@@ -131,8 +141,8 @@ public class GameManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            timer -= Time.deltaTime;
-            if(timer <= 0)
+            gameOverTimer -= Time.deltaTime;
+            if(gameOverTimer <= 0)
             {
                 photonView.RPC(nameof(GameOver), RpcTarget.All);
             }
