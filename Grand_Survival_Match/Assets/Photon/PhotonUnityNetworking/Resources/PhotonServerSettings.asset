@@ -46,6 +46,10 @@ MonoBehaviour:
   - GameOver
   - SetPlayerFalse
   - SetPlayerTrue
+  - ApplyUpdateHP
+  - Damaged
+  - HpDamaged
+  - LostHpDamaged
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
