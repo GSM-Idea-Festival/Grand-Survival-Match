@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviourPun
 
     public void spawnHpBar(GameObject target,string name)
     {
-        Debug.Log("¿Ã∏ß«• : "+name);
         CharacterHpBar bar = Instantiate(hpBarPrefab, hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
         bar.trackingTarget = target;
         bar.SetPlayerName(name);

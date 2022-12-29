@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Attack Data
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 5883993159170183047, guid: 8fd8664f491e2954682d901b505d750a, type: 3}
-  mana: 0
   damage: 10
   coolTime: 1
-  spawnDelayTime: 0
+  spawnDelayTime: 0.2
+  activeDelayTime: 0
+  activeTime: 0
+  destroyTimer: 1
   stunTime: 0

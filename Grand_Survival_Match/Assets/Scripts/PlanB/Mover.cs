@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Mover : MonoBehaviour
 {
     NavMeshAgent agent;
-    
+    StatManager statManager;
 
     public bool IsRunning
     {
@@ -23,7 +23,8 @@ public class Mover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        statManager = GetComponent<StatManager>();
         targetPos = transform.position;
     }
 
@@ -31,6 +32,10 @@ public class Mover : MonoBehaviour
     void Update()
     {
         if (IsRunning && Vector3.Distance(transform.position,targetPos) <= 0.3f)
+        {
+            agent.isStopped = true;
+        }
+        if (statManager.GetBuff(Buff.Stun))
         {
             agent.isStopped = true;
         }

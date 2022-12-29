@@ -14,29 +14,66 @@ public class HitBox : MonoBehaviourPun
             photonView.RPC(nameof(ShareDamage), RpcTarget.All, value);
         }
     }
+
+    public float activeDelayTime;
+    public float activeTime;
+    public float destroyTimer;
+
+    bool isActive = false;
+
     public GameObject attacker { protected get; set; }
 
     protected virtual void Start()
     {
         if (photonView.IsMine)
         {
-            StartCoroutine(Timer(0.1f));
+            StartCoroutine(DestroyTimer());
+        }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(ActiveDelayTimer());
         }
     }
 
 
     protected virtual void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject != attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient)
+        if (isActive && collision.gameObject != attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient)
         {
             collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
         }
     }
 
-    IEnumerator Timer(float timer)
+    public void ShareTimerWrap()
     {
-        yield return new WaitForSeconds(timer);
+        photonView.RPC(nameof(ShareTimers), RpcTarget.MasterClient, activeDelayTime, activeTime, destroyTimer);
+    }
+
+    [PunRPC]
+    void ShareTimers(float activeDelayTime, float activeTime, float destroyTimer)
+    {
+        this.activeDelayTime = activeDelayTime;
+        this.activeTime = activeTime;
+        this.destroyTimer = destroyTimer;
+    }
+
+    IEnumerator DestroyTimer()
+    {
+        yield return new WaitForSeconds(destroyTimer);
         PhotonNetwork.Destroy(gameObject);
+    }
+
+    IEnumerator ActiveDelayTimer()
+    {
+        yield return new WaitForSeconds(activeDelayTime);
+        isActive = true;
+        StartCoroutine(UnActiveTimer());
+    }
+
+    IEnumerator UnActiveTimer()
+    {
+        yield return new WaitForSeconds(activeTime);
+        isActive = false;
     }
 
     [PunRPC]

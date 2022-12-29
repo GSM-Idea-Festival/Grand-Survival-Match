@@ -14,14 +14,6 @@ public class AttackData : ScriptableObject
 
 
     [SerializeField]
-    private float mana;
-    public float Mana
-    {
-        get { return mana; }
-    }
-
-
-    [SerializeField]
     private float damage;
     public float Damage
     {
@@ -41,6 +33,27 @@ public class AttackData : ScriptableObject
     public float SpawnDelayTime
     {
         get { return spawnDelayTime; }
+    }
+
+    [SerializeField]
+    private float activeDelayTime;
+    public float ActiveDelayTime
+    {
+        get { return activeDelayTime; }
+    }
+
+    [SerializeField]
+    private float activeTime;
+    public float ActiveTime
+    {
+        get { return activeTime; }
+    }
+
+    [SerializeField]
+    private float destroyTimer;
+    public float DestroyTimer
+    {
+        get { return destroyTimer; }
     }
 
     [SerializeField]

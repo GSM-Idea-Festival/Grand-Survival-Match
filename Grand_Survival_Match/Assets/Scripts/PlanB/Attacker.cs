@@ -10,7 +10,6 @@ public class Attacker : MonoBehaviourPun
 {
     StatManager statManager;
     AttackData[] attackDatas;
-    public float Mana { get; private set; }
     float[] coolTime;
 
     void Start()
@@ -23,7 +22,6 @@ public class Attacker : MonoBehaviourPun
     // Update is called once per frame
     protected virtual void Update()
     {
-        Mana = Mathf.Min(Mana + Time.deltaTime, statManager.GetStat(PlayerStat.Mana));
         for (int i = 0; i < coolTime.Length; i++)
         {
             coolTime[i] -= Time.deltaTime;
@@ -33,7 +31,6 @@ public class Attacker : MonoBehaviourPun
 
     public bool UseAttack(int index)
     {
-        
         if (statManager.GetBuff(Buff.Stun))
         {
             return false;
@@ -71,7 +68,10 @@ public class Attacker : MonoBehaviourPun
                 prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
             }
             prefab.GetComponent<HitBox>().attacker = gameObject;
-            
+            prefab.GetComponent<HitBox>().destroyTimer = attackDatas[index].DestroyTimer;
+            prefab.GetComponent<HitBox>().activeTime = attackDatas[index].ActiveTime;
+            prefab.GetComponent<HitBox>().activeDelayTime = attackDatas[index].ActiveDelayTime;
+            prefab.GetComponent<HitBox>().ShareTimerWrap();
         }
     }
 }
