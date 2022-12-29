@@ -36,6 +36,27 @@ public class Control : MonoBehaviour
                 }
             }
 
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                UseAttack(0);
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                UseAttack(1);
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                UseAttack(2);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                UseAttack(3);
+            }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                UseAttack(4);
+            }
+
             if (animator != null)
             {
                 if (mover.IsRunning)

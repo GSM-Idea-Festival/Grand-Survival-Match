@@ -6,6 +6,7 @@ using UnityEngine;
 public class HitBox : MonoBehaviour
 {
     public float damage { protected get; set; }
+    GameObject attacker;
 
     protected virtual void Start()
     {
@@ -15,7 +16,7 @@ public class HitBox : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider collision)
     {
-        if (!collision.CompareTag(transform.tag) && collision.gameObject.GetComponent<Victim>() != null)
+        if (collision.gameObject != attacker&& collision.gameObject.GetComponent<Victim>() != null)
         {
             collision.gameObject.GetComponent<Victim>().TakeDamage(damage);
         }
