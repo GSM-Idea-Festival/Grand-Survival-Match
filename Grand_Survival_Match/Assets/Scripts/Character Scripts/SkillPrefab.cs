@@ -25,7 +25,7 @@ public class SkillPrefab : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Attacker && other.gameObject.CompareTag("Player"))
+        if (other.gameObject != Attacker && other.GetComponent<CharacterStats>() != null)
         {
             if (!PhotonNetwork.IsMasterClient)
             {
