@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterData", menuName = "Scriptable Object/Character Data", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "CharacterData", menuName = "Scriptable Object/Character Data", order = int.MinValue)]
 
 public class CharacterData : ScriptableObject
 {
