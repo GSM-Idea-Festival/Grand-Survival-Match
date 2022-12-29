@@ -99,124 +99,157 @@ public class CharacterStats : MonoBehaviourPun
         }
     }
 
+    [PunRPC]
+    public void ApplyUpdateHP(float hp)
+    {
+        this.hp = hp;
+    }
+
+    [PunRPC]
     public void Damaged(float damage)
     {
-        Debug.Log("damaged");
-        if (barrier > 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (barrier >= damage)
+            if (barrier > 0)
             {
-                barrier -= damage;
+                if (barrier >= damage)
+                {
+                    barrier -= damage;
+                }
+                else
+                {
+                    damage -= barrier;
+                    barrier = 0;
+                    if (hp - damage * (damage / (damage + def)) <= 0)
+                    {
+                        isDead = true;
+                        hp = 0;
+                    }
+                    else
+                    {
+                        hp -= damage * (damage / (damage + def));
+                    }
+                }
             }
             else
             {
-                damage -= barrier;
-                barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
                     isDead = true;
+                    hp = 0;
                 }
                 else
                 {
                     hp -= damage * (damage / (damage + def));
                 }
             }
+
+            photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
-        else
-        {
-            if (hp - damage * (damage / (damage + def)) <= 0)
-            {
-                isDead=true;
-            }
-            else
-            {
-                hp -= damage * (damage / (damage + def));
-            }
-        }
-        
     }   //대미지
 
+    [PunRPC]
     public void HpDamaged(float percent)
     {
-        float damage = hp * percent;
-        if (barrier > 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (barrier >= damage)
+            float damage = hp * percent;
+            if (barrier > 0)
             {
-                barrier -= damage;
+                if (barrier >= damage)
+                {
+                    barrier -= damage;
+                }
+                else
+                {
+                    damage -= barrier;
+                    barrier = 0;
+                    if (hp - damage * (damage / (damage + def)) <= 0)
+                    {
+                        isDead = true;
+                        hp = 0;
+                    }
+                    else
+                    {
+                        hp -= damage * (damage / (damage + def));
+                    }
+                }
             }
             else
             {
-                damage -= barrier;
-                barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
                     isDead = true;
+                    hp = 0;
                 }
                 else
                 {
                     hp -= damage * (damage / (damage + def));
                 }
             }
-        }
-        else
-        {
-            if (hp - damage * (damage / (damage + def)) <= 0)
-            {
-                isDead = true;
-            }
-            else
-            {
-                hp -= damage * (damage / (damage + def));
-            }
+
+            photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
     }   //현재체력 비례 대미지
 
+    [PunRPC]
     public void LostHpDamaged(float percent)
     {
-        float damage = (maxHP - hp) * percent;
-        if (barrier > 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (barrier >= damage)
+            float damage = (maxHP - hp) * percent;
+            if (barrier > 0)
             {
-                barrier -= damage;
+                if (barrier >= damage)
+                {
+                    barrier -= damage;
+                }
+                else
+                {
+                    damage -= barrier;
+                    barrier = 0;
+                    if (hp - damage * (damage / (damage + def)) <= 0)
+                    {
+                        isDead = true;
+                        hp = 0;
+                    }
+                    else
+                    {
+                        hp -= damage * (damage / (damage + def));
+                    }
+                }
             }
             else
             {
-                damage -= barrier;
-                barrier = 0;
                 if (hp - damage * (damage / (damage + def)) <= 0)
                 {
                     isDead = true;
+                    hp = 0;
                 }
                 else
                 {
                     hp -= damage * (damage / (damage + def));
                 }
             }
-        }
-        else
-        {
-            if (hp - damage * (damage / (damage + def)) <= 0)
-            {
-                isDead = true;
-            }
-            else
-            {
-                hp -= damage * (damage / (damage + def));
-            }
+
+            photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
     }   //잃은체력 비례 대미지
 
     public void Heal(int value)
     {
-        if (hp + value > maxHP)
+        if (PhotonNetwork.IsMasterClient)
         {
-            hp = maxHP;
-        }
-        else
-        {
-            hp += value;
+            if (hp + value > maxHP)
+            {
+                hp = maxHP;
+            }
+            else
+            {
+                hp += value;
+            }
+
+            photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
     }   //체력회복
 

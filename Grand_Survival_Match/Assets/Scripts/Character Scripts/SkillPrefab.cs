@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class SkillPrefab : MonoBehaviour
+public class SkillPrefab : MonoBehaviourPun
 {
     public GameObject Attacker { set; private get; }
 
@@ -24,17 +25,21 @@ public class SkillPrefab : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Attacker)
+        if (other.gameObject != Attacker && other.GetComponent<CharacterStats>() != null)
         {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
             for (int i = 0; i < CharacterSkill.DebuffDatas.Length; i++)
             {
                 switch (CharacterSkill.DebuffDatas[i].debuffType)
                 {
                     case DebuffType.Damaged:
-                        other.GetComponent<CharacterStats>().Damaged(CharacterSkill.DebuffDatas[i].value);
+                        other.GetComponent<CharacterStats>().photonView.RPC("Damaged", RpcTarget.All, CharacterSkill.DebuffDatas[i].value);
                         if (isSpearMan)
                         {
-                            Attacker.GetComponent<SpearMan>().Heal(10);
+                            Attacker.GetComponent<SpearMan>().photonView.RPC("Heal", RpcTarget.All, 10);
                         }
                         if (isWizardQSkill)
                         {
@@ -43,7 +48,7 @@ public class SkillPrefab : MonoBehaviour
                         count++;
                         break;
                     case DebuffType.HpDamaged:
-                        other.GetComponent<CharacterStats>().HpDamaged(CharacterSkill.DebuffDatas[i].value);
+                        other.GetComponent<CharacterStats>().photonView.RPC("HpDamaged", RpcTarget.All, CharacterSkill.DebuffDatas[i].value);
                         if (isSpearMan)
                         {
                             Attacker.GetComponent<SpearMan>().Heal(10);
@@ -51,7 +56,7 @@ public class SkillPrefab : MonoBehaviour
                         count++;
                         break;
                     case DebuffType.LostHpDamaged:
-                        other.GetComponent<CharacterStats>().LostHpDamaged(CharacterSkill.DebuffDatas[i].value);
+                        other.GetComponent<CharacterStats>().photonView.RPC("LostHpDamaged", RpcTarget.All, CharacterSkill.DebuffDatas[i].value);
                         if (isSpearMan)
                         {
                             Attacker.GetComponent<SpearMan>().Heal(10);
