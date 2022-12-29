@@ -9,6 +9,11 @@ public class GameOverUIManager : MonoBehaviour
     public RankingManager rank;
     public Text myScore;
 
+    private void Start()
+    {
+        ShowGameResult(GameManager.ranking);
+    }
+
     public void ShowGameResult(RankingData[] ranking)
     {
         rank.SetRank(ranking);

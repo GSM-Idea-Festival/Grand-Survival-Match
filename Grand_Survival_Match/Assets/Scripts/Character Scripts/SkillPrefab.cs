@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class SkillPrefab : MonoBehaviourPun
 {
-    public GameObject Attacker;
+    public GameObject Attacker { set; private get; }
 
     public GameObject[] Target;
 

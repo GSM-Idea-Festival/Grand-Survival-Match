@@ -34177,7 +34177,7 @@ Transform:
   m_GameObject: {fileID: 3851960422633540931}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1083831240186069781}
@@ -39074,10 +39074,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5883993159170183041}
-  - component: {fileID: 7978652185129719929}
   - component: {fileID: 4287131091258110161}
   - component: {fileID: -7715906690597813789}
   - component: {fileID: -2935419538495721562}
+  - component: {fileID: -7034180023998930161}
+  - component: {fileID: 5350277554567722740}
   m_Layer: 0
   m_Name: Knight Q Skill
   m_TagString: Untagged
@@ -39107,25 +39108,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7978652185129719929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5883993159170183047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330f9f6a36e204f419fcd0fb7f708b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attacker: {fileID: 0}
-  Target: []
-  CharacterSkill: {fileID: 11400000, guid: a70f433667cb72844b6bf1d0e70488f4, type: 2}
-  count: 0
-  time: 0.25
-  isSpearMan: 0
-  isWizardQSkill: 0
 --- !u!54 &4287131091258110161
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39181,6 +39163,34 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-7034180023998930161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883993159170183047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcd15f773ad5ae42ba57d5533f79f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeDelayTime: 0
+  activeTime: 0
+  destroyTimer: 0
+--- !u!65 &5350277554567722740
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883993159170183047}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!1 &5883993159330284478
 GameObject:
   m_ObjectHideFlags: 0
@@ -39198,7 +39208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993159330284473
 Transform:
   m_ObjectHideFlags: 0
@@ -39252,7 +39262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993159636409348
 Transform:
   m_ObjectHideFlags: 0
@@ -39306,7 +39316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993160277968481
 Transform:
   m_ObjectHideFlags: 0
@@ -39360,7 +39370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993160880397070
 Transform:
   m_ObjectHideFlags: 0
@@ -39414,7 +39424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993161068342122
 Transform:
   m_ObjectHideFlags: 0
@@ -39468,7 +39478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883993161164424309
 Transform:
   m_ObjectHideFlags: 0

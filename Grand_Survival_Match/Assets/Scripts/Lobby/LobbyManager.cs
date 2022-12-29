@@ -194,11 +194,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     //버튼연결용 wrap
-    public void Hosting()
+    public void CloseHosting()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 

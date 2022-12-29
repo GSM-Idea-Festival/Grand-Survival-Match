@@ -685,6 +685,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4262197978906465064}
     m_Modifications:
+    - target: {fileID: 8723315631489167373, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723315631519838853, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8723315631865485304, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Name
       value: Skill Icon
@@ -806,6 +814,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: E
       objectReference: {fileID: 0}
+    - target: {fileID: 8723315631519838853, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8723315631865485304, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Name
       value: Skill Icon (2)
@@ -922,6 +934,10 @@ PrefabInstance:
     - target: {fileID: 7353720455461881854, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Text
       value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723315631519838853, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8723315631865485304, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Name
@@ -1040,6 +1056,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: W
       objectReference: {fileID: 0}
+    - target: {fileID: 8723315631519838853, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8723315631865485304, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Name
       value: Skill Icon (1)
@@ -1156,6 +1176,10 @@ PrefabInstance:
     - target: {fileID: 7353720455461881854, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Text
       value: T
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723315631519838853, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8723315631865485304, guid: 838b16f98345c0d46b471e8cedd47507, type: 3}
       propertyPath: m_Name

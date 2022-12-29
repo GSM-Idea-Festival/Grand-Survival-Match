@@ -32,7 +32,7 @@ public class CharacterStats : MonoBehaviourPun
         }
         set
         {
-            FindObjectOfType<GameManager>().RespawnRequest(gameObject);
+            //FindObjectOfType<GameManager>().RespawnRequest(gameObject);
         }
     }        //»ç¸Á
 

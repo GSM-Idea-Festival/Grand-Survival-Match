@@ -17,13 +17,24 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] GameObject spearManPrefab;
     [SerializeField] GameObject assassinPrefab;
 
+    [SerializeField] GameObject canvas;
+
+    [SerializeField] GameObject knightBottomInfo;
+    [SerializeField] GameObject wizardBottomInfo;
+    [SerializeField] GameObject gunnerBottomInfo;
+    [SerializeField] GameObject spearManBottomInfo;
+    [SerializeField] GameObject assassinBottomInfo;
+
+    [SerializeField] GameObject hpBarLayerCanvas;
     [SerializeField] RankingManager rankingManager;
+    [SerializeField] GameObject hpBarPrefab;
 
     public static RankingData[] ranking = new RankingData[8];
 
     GameObject player;
 
-    float timer;
+
+    [SerializeField] float gameOverTimer = 60;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
@@ -32,26 +43,37 @@ public class GameManager : MonoBehaviourPun
     void Start()
     {
         GameObject spawnPrefab = null;
+        GameObject spawnBottomInfo = null; 
         switch (MyCharacterType)
         {
             case CharacterType.Knight:
                 spawnPrefab = knightPrefab;
+                spawnBottomInfo = knightBottomInfo;
                 break;
             case CharacterType.Wizard:
                 spawnPrefab = wizardPrefab;
+                spawnBottomInfo= wizardBottomInfo;
                 break;
             case CharacterType.Assassin:
                 spawnPrefab = assassinPrefab;
+                spawnBottomInfo = assassinBottomInfo;
                 break;
             case CharacterType.SpearMan:
                 spawnPrefab = spearManPrefab;
+                spawnBottomInfo = spearManBottomInfo;
                 break;
             case CharacterType.Gunner:
                 spawnPrefab = gunnerPrefab;
+                spawnBottomInfo = gunnerBottomInfo;
                 break;
         }
+
         player = PhotonNetwork.Instantiate(spawnPrefab.name,Vector3.zero,Quaternion.identity);
+        Instantiate(spawnBottomInfo,canvas.transform);
         FindObjectOfType<Camera>().GetComponent<CameraFollow>().player = player.transform;
+
+
+        
 
 
         if (PhotonNetwork.IsMasterClient)
@@ -66,6 +88,16 @@ public class GameManager : MonoBehaviourPun
         }
 
         RequestSendRankingData(0, 0);
+    }
+
+    public void Kill()
+    {
+        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 1, 0);
+    }
+
+    public void Death()
+    {
+        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 0, 1);
     }
 
     [PunRPC]
@@ -83,7 +115,12 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("ShowRanking", RpcTarget.All,ranking);
     }
 
-
+    public void spawnHpBar(GameObject target,string name)
+    {
+        CharacterHpBar bar = Instantiate(hpBarPrefab, hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
+        bar.trackingTarget = target;
+        bar.SetPlayerName(name);
+    }
 
     [PunRPC]
     void ShowRanking(RankingData[] ranking)
@@ -98,37 +135,14 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("AddRankingData", RpcTarget.MasterClient, PhotonNetwork.NickName, kill, death);
     }
 
-    public void RespawnRequest(GameObject player)
-    {
-        photonView.RPC(nameof(SetPlayerFalse), RpcTarget.All);
-        StartCoroutine(Respawn(player));
-    }
-
-    IEnumerator Respawn(GameObject player)
-    {
-        yield return new WaitForSeconds(5);
-        photonView.RPC(nameof(SetPlayerTrue), RpcTarget.All);
-    }
-
-    [PunRPC]
-    void SetPlayerFalse()
-    {
-        player.SetActive(false);
-    }
-
-    [PunRPC]
-    void SetPlayerTrue()
-    {
-        player.SetActive(true);
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            timer += Time.deltaTime;
-            if(timer > 60)
+            gameOverTimer -= Time.deltaTime;
+            if(gameOverTimer <= 0)
             {
                 photonView.RPC(nameof(GameOver), RpcTarget.All);
             }
@@ -139,5 +153,28 @@ public class GameManager : MonoBehaviourPun
     void GameOver()
     {
         PhotonNetwork.LoadLevel("GameOverScene");
+    }
+
+    public void RespawnRequest(GameObject player)
+    {
+        player.SetActive(false);
+        StartCoroutine(Respawn(player));
+    }
+
+    IEnumerator Respawn(GameObject player)
+    {
+        yield return new WaitForSeconds(5);
+        player.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform.position;
+        player.SetActive(true);
+    }
+
+    void SetPlayerFalse()
+    {
+        player.SetActive(false);
+    }
+
+    void SetPlayerTrue()
+    {
+        gameObject.SetActive(true);
     }
 }

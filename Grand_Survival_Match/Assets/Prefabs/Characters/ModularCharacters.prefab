@@ -42060,9 +42060,6 @@ GameObject:
   - component: {fileID: 1276669119}
   - component: {fileID: 1276669120}
   - component: {fileID: 1276669122}
-  - component: {fileID: 1276669123}
-  - component: {fileID: 1276669124}
-  - component: {fileID: -4430470979543977896}
   m_Layer: 0
   m_Name: ModularCharacters
   m_TagString: Untagged
@@ -42100,7 +42097,7 @@ Animator:
   m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -42215,46 +42212,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1276669123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588895830433058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89b6eb5161da0d4d892e67efb58ea97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterStats: {fileID: 0}
-  rotateSpeedMovement: 0.1
-  PV: {fileID: 1276669120}
---- !u!114 &1276669124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588895830433058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3583de6dc3e88449abc74e153ea4cb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 95241917264262668}
---- !u!114 &-4430470979543977896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588895830433058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b6502a47f151a40990374852652b9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1595597176900030
 GameObject:
   m_ObjectHideFlags: 0
