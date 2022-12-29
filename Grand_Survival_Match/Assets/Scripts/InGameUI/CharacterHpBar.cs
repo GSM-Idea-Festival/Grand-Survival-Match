@@ -24,7 +24,7 @@ public class CharacterHpBar : MonoBehaviour
             if (trackingTarget.activeSelf)
             {
                 layer.SetActive(true);
-                transform.position = trackingTarget.transform.position;
+                transform.position = trackingTarget.transform.position + Vector3.up * 4;
             }
             else
             {
@@ -43,6 +43,10 @@ public class CharacterHpBar : MonoBehaviour
             {
                 smothGraphic.anchorMax = new Vector2(Mathf.Lerp(smothGraphic.anchorMax.x, shiledSlider.anchorMax.x, Time.deltaTime * 5), 1);
             }
+        }
+        if (trackingTarget != null)
+        {
+            SetUIValue(trackingTarget.GetComponent<Victim>().Hp, trackingTarget.GetComponent<StatManager>().GetStat(PlayerStat.Hp), 0);
         }
     }
 

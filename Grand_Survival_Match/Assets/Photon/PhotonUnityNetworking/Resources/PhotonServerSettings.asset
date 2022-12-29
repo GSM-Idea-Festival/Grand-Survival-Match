@@ -52,6 +52,9 @@ MonoBehaviour:
   - LostHpDamaged
   - ShareHP
   - TakeDamage
+  - RespawnRequest
+  - UseAttackRPC
+  - ShareDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

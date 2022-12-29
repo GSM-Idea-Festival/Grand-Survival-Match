@@ -24,7 +24,7 @@ public class SkillPrefab : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Attacker && other.gameObject.CompareTag("Player"))
+        if (other.gameObject != Attacker)
         {
             for (int i = 0; i < CharacterSkill.DebuffDatas.Length; i++)
             {

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Mover : MonoBehaviour
 {
     NavMeshAgent agent;
+    
 
     public bool IsRunning
     {
@@ -23,6 +24,7 @@ public class Mover : MonoBehaviour
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
+        
     }
 
     // Update is called once per frame

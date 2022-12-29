@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
-public class Attacker : MonoBehaviour
+public class Attacker : MonoBehaviourPun
 {
     StatManager statManager;
     AttackData[] attackDatas;
@@ -31,15 +32,14 @@ public class Attacker : MonoBehaviour
 
     public bool UseAttack(int index)
     {
+        
         if (statManager.GetBuff(Buff.Stun))
         {
             return false;
         }
         if (coolTime[index] <= 0)
         {
-            StartCoroutine(SpawnAttackFrefab(index));
-            coolTime[index] = attackDatas[index].CoolTime;
-            statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
+            UseAttackRPC(index);
             return true;
         }
         else
@@ -48,19 +48,26 @@ public class Attacker : MonoBehaviour
         }
     }
 
+    void UseAttackRPC(int index)
+    {
+        StartCoroutine(SpawnAttackFrefab(index));
+        coolTime[index] = attackDatas[index].CoolTime;
+        statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
+    }
+
     IEnumerator SpawnAttackFrefab(int index)
     {
         yield return new WaitForSeconds(attackDatas[index].SpawnDelayTime);
         if (attackDatas[index].AttackFrefab != null)
         {
-            GameObject prefab = Instantiate(attackDatas[index].AttackFrefab, transform.position, transform.rotation);
+            GameObject prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
             if (!statManager.GetBuff(Buff.DamageUp))
             {
-                prefab.GetComponent<HitBox>().damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage);
+                prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage);
             }
             else
             {
-                prefab.GetComponent<HitBox>().damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
+                prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
             }
             prefab.GetComponent<HitBox>().attacker = gameObject;
             

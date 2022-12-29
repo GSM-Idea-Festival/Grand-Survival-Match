@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
 
-public class Control : MonoBehaviour
+public class Control : MonoBehaviourPun
 {
-    PhotonView PV;
 
     Mover mover;
     Attacker attacker;
@@ -18,13 +17,12 @@ public class Control : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         mover = GetComponent<Mover>();
         attacker = GetComponent<Attacker>();
-        PV = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PV.IsMine)
+        if (photonView.IsMine)
         {
             if (Input.GetMouseButtonDown(1))
             {

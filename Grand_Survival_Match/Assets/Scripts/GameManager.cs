@@ -17,11 +17,22 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] GameObject spearManPrefab;
     [SerializeField] GameObject assassinPrefab;
 
+    [SerializeField] GameObject canvas;
+
+    [SerializeField] GameObject knightBottomInfo;
+    [SerializeField] GameObject wizardBottomInfo;
+    [SerializeField] GameObject gunnerBottomInfo;
+    [SerializeField] GameObject spearManBottomInfo;
+    [SerializeField] GameObject assassinBottomInfo;
+
+    [SerializeField] GameObject hpBarLayerCanvas;
     [SerializeField] RankingManager rankingManager;
+    [SerializeField] GameObject hpBarPrefab;
 
     public static RankingData[] ranking = new RankingData[8];
 
     GameObject player;
+
 
     float timer;
     private void Awake()
@@ -32,26 +43,39 @@ public class GameManager : MonoBehaviourPun
     void Start()
     {
         GameObject spawnPrefab = null;
+        GameObject spawnBottomInfo = null; 
         switch (MyCharacterType)
         {
             case CharacterType.Knight:
                 spawnPrefab = knightPrefab;
+                spawnBottomInfo = knightBottomInfo;
                 break;
             case CharacterType.Wizard:
                 spawnPrefab = wizardPrefab;
+                spawnBottomInfo= wizardBottomInfo;
                 break;
             case CharacterType.Assassin:
                 spawnPrefab = assassinPrefab;
+                spawnBottomInfo = assassinBottomInfo;
                 break;
             case CharacterType.SpearMan:
                 spawnPrefab = spearManPrefab;
+                spawnBottomInfo = spearManBottomInfo;
                 break;
             case CharacterType.Gunner:
                 spawnPrefab = gunnerPrefab;
+                spawnBottomInfo = gunnerBottomInfo;
                 break;
         }
+
         player = PhotonNetwork.Instantiate(spawnPrefab.name,Vector3.zero,Quaternion.identity);
+        Instantiate(spawnBottomInfo,canvas.transform);
         FindObjectOfType<Camera>().GetComponent<CameraFollow>().player = player.transform;
+
+
+        //CharacterHpBar bar = Instantiate(hpBarPrefab,hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
+        //bar.trackingTarget = player;
+        //bar.SetPlayerName(PhotonNetwork.NickName);
 
 
         if (PhotonNetwork.IsMasterClient)
@@ -98,29 +122,6 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("AddRankingData", RpcTarget.MasterClient, PhotonNetwork.NickName, kill, death);
     }
 
-    public void RespawnRequest(GameObject player)
-    {
-        photonView.RPC(nameof(SetPlayerFalse), RpcTarget.All, player);
-        StartCoroutine(Respawn(player));
-    }
-
-    IEnumerator Respawn(GameObject player)
-    {
-        yield return new WaitForSeconds(5);
-        photonView.RPC(nameof(SetPlayerTrue), RpcTarget.All,player);
-    }
-
-    [PunRPC]
-    void SetPlayerFalse(GameObject player)
-    {
-        player.SetActive(false);
-    }
-
-    [PunRPC]
-    void SetPlayerTrue(GameObject player)
-    {
-        player.SetActive(true);
-    }
 
     // Update is called once per frame
     void Update()
@@ -139,5 +140,27 @@ public class GameManager : MonoBehaviourPun
     void GameOver()
     {
         PhotonNetwork.LoadLevel("GameOverScene");
+    }
+
+    public void RespawnRequest(GameObject player)
+    {
+        player.SetActive(false);
+        StartCoroutine(Respawn(player));
+    }
+
+    IEnumerator Respawn(GameObject player)
+    {
+        yield return new WaitForSeconds(5);
+        player.SetActive(true);
+    }
+
+    void SetPlayerFalse()
+    {
+        player.SetActive(false);
+    }
+
+    void SetPlayerTrue()
+    {
+        gameObject.SetActive(true);
     }
 }

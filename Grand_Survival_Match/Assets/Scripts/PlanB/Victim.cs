@@ -6,15 +6,17 @@ using Photon.Pun;
 public class Victim : MonoBehaviourPun
 {
     StatManager statManager;
+    
 
     private float hp;
-    public float HP
+    public float Hp
     {
         get { return hp; }
         private set
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                Debug.Log(value);
                 hp = Mathf.Clamp(0, value, statManager.GetStat(PlayerStat.Hp));
                 photonView.RPC(nameof(ShareHP), RpcTarget.Others,hp);
             }
@@ -23,35 +25,44 @@ public class Victim : MonoBehaviourPun
 
     private void Start()
     {
-        statManager = GetComponent<StatManager>();
-        hp = statManager.GetStat(PlayerStat.Hp);
+        
     }
+
+    private void OnEnable()
+    {
+        statManager = GetComponent<StatManager>();
+        Hp = statManager.GetStat(PlayerStat.Hp);
+    }
+
+
 
     [PunRPC]
     public void TakeDamage(float damage)
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            Debug.Log("마스터클라이언트");
             if (!statManager.GetBuff(Buff.Immune))
             {
                 if (!statManager.GetBuff(Buff.Defence))
                 {
-                    hp -= damage;
+                    Hp -= damage;
                 }
                 else
                 {
-                    hp -= damage * 0.5f;
+                    Hp -= damage * 0.5f;
                 }
             }
 
             photonView.RPC(nameof(TakeDamage), RpcTarget.Others, damage);
-            FindObjectOfType<GameManager>().RespawnRequest(gameObject);
-        }
-
-        if (hp <= 0)
-        {
+            if (Hp <= 0)
+            {
+                photonView.RPC(nameof(RespawnRequest), RpcTarget.All);
+            }
             
         }
+
+       
     }
 
     [PunRPC]
@@ -64,4 +75,10 @@ public class Victim : MonoBehaviourPun
     {
         hp += heal;
     }*/
+
+    [PunRPC]
+    void RespawnRequest()
+    {
+        FindObjectOfType<GameManager>().RespawnRequest(gameObject);
+    }
 }
