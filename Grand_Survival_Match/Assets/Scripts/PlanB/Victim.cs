@@ -16,7 +16,6 @@ public class Victim : MonoBehaviourPun
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log(value);
                 hp = Mathf.Clamp(0, value, statManager.GetStat(PlayerStat.Hp));
                 photonView.RPC(nameof(ShareHP), RpcTarget.Others,hp);
             }
@@ -25,7 +24,10 @@ public class Victim : MonoBehaviourPun
 
     private void Start()
     {
-        
+        if (photonView.IsMine)
+        {
+            photonView.RPC(nameof(SpawnHpBar), RpcTarget.All, PhotonNetwork.NickName);
+        }
     }
 
     private void OnEnable()
@@ -34,14 +36,26 @@ public class Victim : MonoBehaviourPun
         Hp = statManager.GetStat(PlayerStat.Hp);
     }
 
+    private void Update()
+    {
+        if (photonView.IsMine)
+        {
+            FindObjectOfType<BottomUIManager>().GetComponentInChildren<CharacterHpBar>().SetUIValue(Hp, statManager.GetStat(PlayerStat.Hp), 0);
+        }
+    }
 
+    [PunRPC]
+    void SpawnHpBar(string name)
+    {
+        
+        FindObjectOfType<GameManager>().spawnHpBar(gameObject, name);
+    }
 
     [PunRPC]
     public void TakeDamage(float damage)
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("마스터클라이언트");
             if (!statManager.GetBuff(Buff.Immune))
             {
                 if (!statManager.GetBuff(Buff.Defence))

@@ -42,7 +42,6 @@ public class HitBox : MonoBehaviourPun
     [PunRPC]
     void ShareDamage(float newdamage)
     {
-        Debug.Log(newdamage);
         damage = newdamage;
     }
 }

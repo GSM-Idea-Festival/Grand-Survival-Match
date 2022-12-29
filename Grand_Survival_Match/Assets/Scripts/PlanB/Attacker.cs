@@ -27,6 +27,7 @@ public class Attacker : MonoBehaviourPun
         for (int i = 0; i < coolTime.Length; i++)
         {
             coolTime[i] -= Time.deltaTime;
+            FindObjectOfType<BottomUIManager>().SetCoolTime(i, coolTime[i], statManager.CharacterData.AttackData[i].CoolTime);
         }
     }
 

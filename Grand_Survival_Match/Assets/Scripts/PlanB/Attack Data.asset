@@ -15,6 +15,6 @@ MonoBehaviour:
   attackFrefab: {fileID: 5883993159170183047, guid: 8fd8664f491e2954682d901b505d750a, type: 3}
   mana: 0
   damage: 10
-  coolTime: 0
+  coolTime: 1
   spawnDelayTime: 0
   stunTime: 0

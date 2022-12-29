@@ -24,21 +24,23 @@ public class Mover : MonoBehaviour
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
-        
+        targetPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsRunning && Vector3.Distance(transform.position,targetPos) <= 1f)
+        if (IsRunning && Vector3.Distance(transform.position,targetPos) <= 0.3f)
         {
             agent.isStopped = true;
         }
+
     }
 
     public void UseMove(Vector3 targetPos)
     {
-
+        agent.isStopped = false;
+        this.targetPos = targetPos;
         agent.SetDestination(targetPos);
 
         Quaternion rotationToLookAt = Quaternion.LookRotation(targetPos - transform.position);

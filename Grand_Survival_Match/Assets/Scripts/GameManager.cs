@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviourPun
     GameObject player;
 
 
-    float timer;
+    float timer = 60;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
@@ -73,9 +73,7 @@ public class GameManager : MonoBehaviourPun
         FindObjectOfType<Camera>().GetComponent<CameraFollow>().player = player.transform;
 
 
-        //CharacterHpBar bar = Instantiate(hpBarPrefab,hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
-        //bar.trackingTarget = player;
-        //bar.SetPlayerName(PhotonNetwork.NickName);
+        
 
 
         if (PhotonNetwork.IsMasterClient)
@@ -107,7 +105,13 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("ShowRanking", RpcTarget.All,ranking);
     }
 
-
+    public void spawnHpBar(GameObject target,string name)
+    {
+        Debug.Log("¿Ã∏ß«• : "+name);
+        CharacterHpBar bar = Instantiate(hpBarPrefab, hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
+        bar.trackingTarget = target;
+        bar.SetPlayerName(name);
+    }
 
     [PunRPC]
     void ShowRanking(RankingData[] ranking)
@@ -128,8 +132,8 @@ public class GameManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            timer += Time.deltaTime;
-            if(timer > 60)
+            timer -= Time.deltaTime;
+            if(timer <= 0)
             {
                 photonView.RPC(nameof(GameOver), RpcTarget.All);
             }
@@ -151,6 +155,7 @@ public class GameManager : MonoBehaviourPun
     IEnumerator Respawn(GameObject player)
     {
         yield return new WaitForSeconds(5);
+        player.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform.position;
         player.SetActive(true);
     }
 
