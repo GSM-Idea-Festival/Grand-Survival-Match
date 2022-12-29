@@ -62,7 +62,8 @@ public class Attacker : MonoBehaviour
             {
                 prefab.GetComponent<HitBox>().damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
             }
-            prefab.tag = transform.tag;
+            prefab.GetComponent<HitBox>().attacker = gameObject;
+            
         }
     }
 }

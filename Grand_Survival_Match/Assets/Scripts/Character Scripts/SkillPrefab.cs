@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkillPrefab : MonoBehaviour
 {
-    public GameObject Attacker;
+    public GameObject Attacker { set; private get; }
 
     public GameObject[] Target;
 

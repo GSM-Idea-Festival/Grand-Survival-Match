@@ -100,24 +100,24 @@ public class GameManager : MonoBehaviourPun
 
     public void RespawnRequest(GameObject player)
     {
-        photonView.RPC(nameof(SetPlayerFalse), RpcTarget.All);
+        photonView.RPC(nameof(SetPlayerFalse), RpcTarget.All, player);
         StartCoroutine(Respawn(player));
     }
 
     IEnumerator Respawn(GameObject player)
     {
         yield return new WaitForSeconds(5);
-        photonView.RPC(nameof(SetPlayerTrue), RpcTarget.All);
+        photonView.RPC(nameof(SetPlayerTrue), RpcTarget.All,player);
     }
 
     [PunRPC]
-    void SetPlayerFalse()
+    void SetPlayerFalse(GameObject player)
     {
         player.SetActive(false);
     }
 
     [PunRPC]
-    void SetPlayerTrue()
+    void SetPlayerTrue(GameObject player)
     {
         player.SetActive(true);
     }

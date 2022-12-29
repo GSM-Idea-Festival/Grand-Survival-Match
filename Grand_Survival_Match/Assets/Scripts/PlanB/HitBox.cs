@@ -6,7 +6,7 @@ using UnityEngine;
 public class HitBox : MonoBehaviour
 {
     public float damage { protected get; set; }
-    GameObject attacker;
+    public GameObject attacker { protected get; set; }
 
     protected virtual void Start()
     {
