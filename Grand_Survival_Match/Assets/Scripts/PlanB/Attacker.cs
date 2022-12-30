@@ -67,10 +67,10 @@ public class Attacker : MonoBehaviourPun
             {
                 prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
             }
-            prefab.GetComponent<HitBox>().attacker = gameObject;
+            prefab.GetComponent<HitBox>().Attacker = gameObject.GetComponent<PhotonView>().ViewID;
             prefab.GetComponent<HitBox>().destroyTimer = attackDatas[index].DestroyTimer;
-            prefab.GetComponent<HitBox>().activeTime = attackDatas[index].ActiveTime;
-            prefab.GetComponent<HitBox>().activeDelayTime = attackDatas[index].ActiveDelayTime;
+            prefab.GetComponent<HitBox>().ActiveTime = attackDatas[index].ActiveTime;
+            prefab.GetComponent<HitBox>().ActiveDelayTime = attackDatas[index].ActiveDelayTime;
             prefab.GetComponent<HitBox>().ShareTimerWrap();
         }
     }

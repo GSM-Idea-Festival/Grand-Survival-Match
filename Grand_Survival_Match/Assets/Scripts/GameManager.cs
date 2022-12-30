@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviourPun
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
+        
     }
 
     void Start()
