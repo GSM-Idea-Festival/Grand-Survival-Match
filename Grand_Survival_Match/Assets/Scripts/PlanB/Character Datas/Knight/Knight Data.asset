@@ -20,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 691b20db6f620ef4a923bae4aff3a0ee, type: 2}
   - {fileID: 11400000, guid: b8223d85800968b4ba6feb5bdd9bfea4, type: 2}
   - {fileID: 11400000, guid: 969f552cad8a39b4bac7429a52a64519, type: 2}
+  - {fileID: 11400000, guid: e1914ca6bcb6c1942a6f66d5b775c5f4, type: 2}
   maxMana: 0
