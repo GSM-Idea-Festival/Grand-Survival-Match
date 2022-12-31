@@ -12,6 +12,13 @@ public class AttackData : ScriptableObject
         get { return attackFrefab; }
     }
 
+    [SerializeField]
+    private GameObject indicatorFrefab;
+    public GameObject IndicatorFrefab
+    {
+        get { return indicatorFrefab; }
+    }
+
 
     [SerializeField]
     private float damage;

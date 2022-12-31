@@ -11,6 +11,12 @@ public class Control : MonoBehaviourPun
     Attacker attacker;
     protected Animator animator;
 
+    KeyCode Qkey = KeyCode.Q;
+    KeyCode Wkey = KeyCode.W;
+    KeyCode Ekey = KeyCode.E;
+    KeyCode Rkey = KeyCode.R;
+    KeyCode Tkey = KeyCode.T;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,20 +30,28 @@ public class Control : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            RaycastHit hit;
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity);
+
+            attacker.TargetRotation = Quaternion.LookRotation(hit.point - transform.position);
+
             if (Input.GetMouseButtonDown(1))
             {
-                RaycastHit hit;
-
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
                 {
                     Move(hit.point);
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(Qkey))
             {
+                attacker.IndicatorIndex = 0;
+            }else if (Input.GetKeyUp(Qkey) && attacker.IndicatorIndex == 0)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(0);
             }
+
             if (Input.GetKeyDown(KeyCode.W))
             {
                 UseAttack(1);
