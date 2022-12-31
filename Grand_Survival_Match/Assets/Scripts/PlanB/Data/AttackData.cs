@@ -12,12 +12,51 @@ public class AttackData : ScriptableObject
         get { return attackFrefab; }
     }
 
+    [SerializeField]
+    private GameObject indicatorFrefab;
+    public GameObject IndicatorFrefab
+    {
+        get { return indicatorFrefab; }
+    }
+
 
     [SerializeField]
     private float damage;
     public float Damage
     {
         get { return damage; }
+    }
+
+
+    [SerializeField]
+    private float heal;
+    public float Heal
+    {
+        get { return heal; }
+    }
+
+
+    [SerializeField]
+    private float barrier;
+    public float Barrier
+    {
+        get { return barrier; }
+    }
+
+
+    [SerializeField]
+    private BuffWithTime[] giveToEnemyBuffs;
+    public BuffWithTime[] GiveToEnemyBuffs
+    {
+        get { return giveToEnemyBuffs; }
+    }
+
+
+    [SerializeField]
+    private BuffWithTime[] getBuffs;
+    public BuffWithTime[] GetBuffs
+    {
+        get { return getBuffs; }
     }
 
 
@@ -61,5 +100,13 @@ public class AttackData : ScriptableObject
     public float StunTime
     {
         get { return stunTime; }
+    }
+
+
+    [SerializeField]
+    private float dashRange;
+    public float DashRange
+    {
+        get { return dashRange; }
     }
 }

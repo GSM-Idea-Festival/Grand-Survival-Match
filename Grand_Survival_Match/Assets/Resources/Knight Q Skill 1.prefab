@@ -34175,7 +34175,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3851960422633540931}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34189,7 +34189,7 @@ Transform:
   - {fileID: 1083831239811089444}
   m_Father: {fileID: 5883993159170183041}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!198 &6305419128034220848
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -39080,7 +39080,7 @@ GameObject:
   - component: {fileID: -7034180023998930161}
   - component: {fileID: 5350277554567722740}
   m_Layer: 0
-  m_Name: Knight Q Skill
+  m_Name: Knight Q Skill 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

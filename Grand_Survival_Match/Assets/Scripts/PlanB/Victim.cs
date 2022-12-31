@@ -6,7 +6,7 @@ using Photon.Pun;
 public class Victim : MonoBehaviourPun
 {
     StatManager statManager;
-    
+
 
     private float hp;
     public float Hp
@@ -17,7 +17,21 @@ public class Victim : MonoBehaviourPun
             if (PhotonNetwork.IsMasterClient)
             {
                 hp = Mathf.Clamp(0, value, statManager.GetStat(PlayerStat.Hp));
-                photonView.RPC(nameof(ShareHP), RpcTarget.Others,hp);
+                photonView.RPC(nameof(ShareHP), RpcTarget.Others, hp);
+            }
+        }
+    }
+
+    private float barrier;
+    public float Barrier
+    {
+        get { return barrier; }
+        set
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                barrier = Mathf.Max(0, value);
+                photonView.RPC(nameof(ShareBarrier), RpcTarget.Others, barrier);
             }
         }
     }
@@ -42,12 +56,16 @@ public class Victim : MonoBehaviourPun
         {
             FindObjectOfType<BottomUIManager>().GetComponentInChildren<CharacterHpBar>().SetUIValue(Hp, statManager.GetStat(PlayerStat.Hp), 0);
         }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Barrier -= Time.deltaTime * 25;
+        }
     }
 
     [PunRPC]
     void SpawnHpBar(string name)
     {
-        
+
         FindObjectOfType<GameManager>().spawnHpBar(gameObject, name);
     }
 
@@ -72,22 +90,34 @@ public class Victim : MonoBehaviourPun
             if (Hp <= 0)
             {
                 photonView.RPC(nameof(RespawnRequest), RpcTarget.All);
-                if (photonView.IsMine)
-                {
-                    FindObjectOfType<GameManager>().Death();
-                }
                 //return true;
             }
-            
+
         }
 
         //return false;
+    }
+
+    public void AddBarrier(float barrier)
+    {
+        this.Barrier += barrier;
+    }
+
+    public void TakeHeal(float heal)
+    {
+        Hp += heal;
     }
 
     [PunRPC]
     void ShareHP(float newHp)
     {
         hp = newHp;
+    }
+
+    [PunRPC]
+    void ShareBarrier(float newBarrier)
+    {
+        barrier = newBarrier;
     }
 
     /*public void TakeHeal(float heal)
@@ -99,5 +129,9 @@ public class Victim : MonoBehaviourPun
     void RespawnRequest()
     {
         FindObjectOfType<GameManager>().RespawnRequest(gameObject);
+        if (photonView.IsMine)
+        {
+            FindObjectOfType<GameManager>().Death();
+        }
     }
 }

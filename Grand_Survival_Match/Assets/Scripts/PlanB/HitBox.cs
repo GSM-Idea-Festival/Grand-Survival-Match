@@ -10,19 +10,33 @@ public class HitBox : MonoBehaviourPun
     public float Damage
     {
         get { return damage; }
-        set {
+        set
+        {
             photonView.RPC(nameof(ShareDamage), RpcTarget.All, value);
         }
     }
 
-    public float activeDelayTime;
-    public float activeTime;
-    public float destroyTimer;
+    public float ActiveDelayTime { protected get; set; }
+    public float ActiveTime { protected get; set; }
+    public float destroyTimer { protected get; set; }
 
     bool isActive = false;
     List<GameObject> counts = new List<GameObject>();
 
-    public GameObject attacker { protected get; set; }
+
+    int attacker;
+    public int Attacker
+    {
+        protected get
+        {
+            return attacker;
+        }
+        set
+        {
+            attacker = value;
+            photonView.RPC(nameof(ShareAttacker), RpcTarget.MasterClient, attacker);
+        }
+    }
 
     protected virtual void Start()
     {
@@ -39,28 +53,34 @@ public class HitBox : MonoBehaviourPun
 
     protected virtual void OnTriggerStay(Collider collision)
     {
-        if (isActive && collision.gameObject != attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject)==-1)
+        if (collision.gameObject.GetComponent<PhotonView>() != null)
         {
-            counts.Add(collision.gameObject);
-            Debug.Log("hit");
-            /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != Attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject) == -1)
             {
-                FindObjectOfType<GameManager>().Kill();
-            }*/
-            collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+                counts.Add(collision.gameObject);
+                /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+                {
+                    FindObjectOfType<GameManager>().Kill();
+                }*/
+                collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+                /*foreach (BuffWithTime buff in buffs)
+                {
+                    collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
+                }*/
+            }
         }
     }
 
     public void ShareTimerWrap()
     {
-        photonView.RPC(nameof(ShareTimers), RpcTarget.MasterClient, activeDelayTime, activeTime, destroyTimer);
+        photonView.RPC(nameof(ShareTimers), RpcTarget.MasterClient, ActiveDelayTime, ActiveTime, destroyTimer);
     }
 
     [PunRPC]
     void ShareTimers(float activeDelayTime, float activeTime, float destroyTimer)
     {
-        this.activeDelayTime = activeDelayTime;
-        this.activeTime = activeTime;
+        this.ActiveDelayTime = activeDelayTime;
+        this.ActiveTime = activeTime;
         this.destroyTimer = destroyTimer;
     }
 
@@ -72,14 +92,14 @@ public class HitBox : MonoBehaviourPun
 
     IEnumerator ActiveDelayTimer()
     {
-        yield return new WaitForSeconds(activeDelayTime);
+        yield return new WaitForSeconds(ActiveDelayTime);
         isActive = true;
         StartCoroutine(UnActiveTimer());
     }
 
     IEnumerator UnActiveTimer()
     {
-        yield return new WaitForSeconds(activeTime);
+        yield return new WaitForSeconds(ActiveTime);
         isActive = false;
     }
 
@@ -87,5 +107,11 @@ public class HitBox : MonoBehaviourPun
     void ShareDamage(float newdamage)
     {
         damage = newdamage;
+    }
+
+    [PunRPC]
+    void ShareAttacker(int g)
+    {
+        attacker = g;
     }
 }

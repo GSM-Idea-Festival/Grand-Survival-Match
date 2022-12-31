@@ -12,6 +12,48 @@ public class Attacker : MonoBehaviourPun
     AttackData[] attackDatas;
     float[] coolTime;
 
+
+    GameObject currentIndicator;
+
+    Quaternion targetRotation;
+    public Quaternion TargetRotation
+    {
+        private get { return targetRotation; }
+        set
+        {
+            targetRotation = value;
+            if(currentIndicator != null)
+            {
+                currentIndicator.transform.rotation = value;
+            }
+        }
+    }
+
+    int indicatorIndex = -1;
+    public int IndicatorIndex
+    {
+        get
+        {
+            return indicatorIndex;
+        }
+        set
+        {
+            if (indicatorIndex != value)
+            {
+                if (currentIndicator != null)
+                {
+                    Destroy(currentIndicator);
+                }
+                indicatorIndex = value;
+                if (value != -1 && attackDatas[value].IndicatorFrefab != null)
+                {
+                    currentIndicator = Instantiate(attackDatas[value].IndicatorFrefab, transform);
+                    currentIndicator.transform.rotation = TargetRotation;
+                }
+            }
+        }
+    }
+
     void Start()
     {
         statManager = GetComponent<StatManager>();
@@ -29,15 +71,35 @@ public class Attacker : MonoBehaviourPun
         }
     }
 
+
     public bool UseAttack(int index)
     {
+        IndicatorIndex = -1;
         if (statManager.GetBuff(Buff.Stun))
         {
             return false;
         }
         if (coolTime[index] <= 0)
         {
-            UseAttackRPC(index);
+            StartCoroutine(SpawnAttackFrefab(index));
+            coolTime[index] = attackDatas[index].CoolTime;
+            statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
+            if (attackDatas[index].IndicatorFrefab != null)
+            {
+                transform.rotation = targetRotation;
+            }
+            if (attackDatas[index].DashRange != 0)
+            {
+                GetComponent<Mover>().UseDash(transform.position + targetRotation * Vector3.forward * attackDatas[index].DashRange);
+            }
+            if (attackDatas[index].Heal != 0)
+            {
+                photonView.RPC(nameof(RequestHeal), RpcTarget.MasterClient, attackDatas[index].Heal);
+            }
+            if (attackDatas[index].Barrier != 0)
+            {
+                photonView.RPC(nameof(RequestBarrier), RpcTarget.MasterClient, attackDatas[index].Barrier);
+            }
             return true;
         }
         else
@@ -46,12 +108,6 @@ public class Attacker : MonoBehaviourPun
         }
     }
 
-    void UseAttackRPC(int index)
-    {
-        StartCoroutine(SpawnAttackFrefab(index));
-        coolTime[index] = attackDatas[index].CoolTime;
-        statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
-    }
 
     IEnumerator SpawnAttackFrefab(int index)
     {
@@ -59,6 +115,10 @@ public class Attacker : MonoBehaviourPun
         if (attackDatas[index].AttackFrefab != null)
         {
             GameObject prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
+            if (attackDatas[index].IndicatorFrefab != null)
+            {
+                prefab.transform.rotation = targetRotation;
+            }
             if (!statManager.GetBuff(Buff.DamageUp))
             {
                 prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage);
@@ -67,11 +127,31 @@ public class Attacker : MonoBehaviourPun
             {
                 prefab.GetComponent<HitBox>().Damage = attackDatas[index].Damage * statManager.GetStat(PlayerStat.Damage) * 1.5f;
             }
-            prefab.GetComponent<HitBox>().attacker = gameObject;
+            prefab.GetComponent<HitBox>().Attacker = gameObject.GetComponent<PhotonView>().ViewID;
             prefab.GetComponent<HitBox>().destroyTimer = attackDatas[index].DestroyTimer;
-            prefab.GetComponent<HitBox>().activeTime = attackDatas[index].ActiveTime;
-            prefab.GetComponent<HitBox>().activeDelayTime = attackDatas[index].ActiveDelayTime;
+            prefab.GetComponent<HitBox>().ActiveTime = attackDatas[index].ActiveTime;
+            prefab.GetComponent<HitBox>().ActiveDelayTime = attackDatas[index].ActiveDelayTime;
             prefab.GetComponent<HitBox>().ShareTimerWrap();
+            //prefab.GetComponent<HitBox>().buffs = attackDatas[index].GiveToEnemyBuffs;
+
+            foreach (BuffWithTime buff in attackDatas[index].GetBuffs)
+            {
+                statManager.AddBuff(buff.buff,buff.time);
+            }
+
+            
         }
+    }
+
+    [PunRPC]
+    void RequestHeal(float heal)
+    {
+        GetComponent<Victim>().TakeHeal(heal);
+    }
+
+    [PunRPC]
+    void RequestBarrier(float barrier)
+    {
+        GetComponent<Victim>().AddBarrier(barrier);
     }
 }

@@ -158,7 +158,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
-        instance.GetComponentInChildren<Text>().text = newPlayer.NickName;
+        instance.GetComponent<PlayerName>().nameText.text = newPlayer.NickName;
+        //instance.GetComponentInChildren<Text>().text = newPlayer.NickName;
         instance.GetComponentInChildren<Dropdown>().interactable = false;
         playerShowerMap.Add(newPlayer,instance);
     }

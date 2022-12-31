@@ -11,6 +11,12 @@ public class Control : MonoBehaviourPun
     Attacker attacker;
     protected Animator animator;
 
+    KeyCode Qkey = KeyCode.Q;
+    KeyCode Wkey = KeyCode.W;
+    KeyCode Ekey = KeyCode.E;
+    KeyCode Rkey = KeyCode.R;
+    KeyCode Tkey = KeyCode.T;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,34 +30,65 @@ public class Control : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            RaycastHit hit;
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity);
+
+            attacker.TargetRotation = Quaternion.LookRotation(hit.point - transform.position);
+
             if (Input.GetMouseButtonDown(1))
             {
-                RaycastHit hit;
-
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
                 {
                     Move(hit.point);
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(Qkey))
             {
+                attacker.IndicatorIndex = 0;
+            }else if (Input.GetKeyUp(Qkey) && attacker.IndicatorIndex == 0)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(0);
             }
-            if (Input.GetKeyDown(KeyCode.W))
+
+            if (Input.GetKeyDown(Wkey))
             {
+                attacker.IndicatorIndex = 1;
+            }
+            else if (Input.GetKeyUp(Wkey) && attacker.IndicatorIndex == 1)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(1);
             }
-            if (Input.GetKeyDown(KeyCode.E))
+
+            if (Input.GetKeyDown(Ekey))
             {
+                attacker.IndicatorIndex = 2;
+            }
+            else if (Input.GetKeyUp(Ekey) && attacker.IndicatorIndex == 2)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(2);
             }
-            if (Input.GetKeyDown(KeyCode.R))
+
+            if (Input.GetKeyDown(Rkey))
             {
+                attacker.IndicatorIndex = 3;
+            }
+            else if (Input.GetKeyUp(Rkey) && attacker.IndicatorIndex == 3)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(3);
             }
-            if (Input.GetKeyDown(KeyCode.T))
+
+            if (Input.GetKeyDown(Tkey))
             {
+                attacker.IndicatorIndex = 4;
+            }
+            else if (Input.GetKeyUp(Tkey) && attacker.IndicatorIndex == 4)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(4);
             }
 

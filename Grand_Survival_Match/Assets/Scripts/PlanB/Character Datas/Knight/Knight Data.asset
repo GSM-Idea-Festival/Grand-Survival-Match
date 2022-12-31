@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ae8760b53a99f4184c6302ddfbc7c7, type: 3}
-  m_Name: CharacterData
+  m_Name: Knight Data
   m_EditorClassIdentifier: 
   characterName: 
   maxHp: 100
   moveSpeed: 1
   attackData:
   - {fileID: 11400000, guid: cf6a143849a5e38408b23d526a5ac309, type: 2}
+  - {fileID: 11400000, guid: 691b20db6f620ef4a923bae4aff3a0ee, type: 2}
+  - {fileID: 11400000, guid: b8223d85800968b4ba6feb5bdd9bfea4, type: 2}
+  - {fileID: 11400000, guid: 969f552cad8a39b4bac7429a52a64519, type: 2}
+  - {fileID: 11400000, guid: e1914ca6bcb6c1942a6f66d5b775c5f4, type: 2}
   maxMana: 0

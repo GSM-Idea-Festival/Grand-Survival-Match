@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
-public class StatManager : MonoBehaviour
+public class StatManager : MonoBehaviourPun
 {
     [SerializeField] private CharacterData characterData;
     public CharacterData CharacterData
@@ -27,15 +28,19 @@ public class StatManager : MonoBehaviour
 
     public void AddBuff(Buff addedBuff, float time)
     {
+        if (addedBuff != Buff.Stun || !GetBuff(Buff.UnStoppable))
+        {
+            photonView.RPC(nameof(AddBuffRPC), RpcTarget.All, addedBuff, time);
+        }
+    }
+
+    [PunRPC]
+    void AddBuffRPC(Buff addedBuff, float time)
+    {
         if (buffList[(int)addedBuff] < time && time > 0)
         {
             buffList[(int)addedBuff] = time;
         }
-    }
-
-    public void ClearBuff(Buff buff)
-    {
-        buffList[(int)buff] = 0;
     }
 
     public bool GetBuff(Buff buff)
@@ -69,4 +74,6 @@ public class StatManager : MonoBehaviour
         }
         return value;
     }
+
+    
 }
