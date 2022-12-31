@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RankingManager : MonoBehaviour
+public class RankingManager : MonoBehaviourPun
 {
     public GameObject rankInfoPrefab;
     public GameObject rankInfoLayer;
@@ -13,7 +13,7 @@ public class RankingManager : MonoBehaviour
     public void SetRank(RankingData[] rankList)
     {
         //버블정렬
-        while (true)
+        /*while (true)
         {
             for (int i = 0; i <PhotonNetwork.PlayerList.Length - 1; i++)
             {
@@ -32,7 +32,7 @@ public class RankingManager : MonoBehaviour
                 }
             }
             break;
-        }
+        }*/
 
         foreach (GameObject g in rankInfoBuf)
         {
@@ -45,10 +45,24 @@ public class RankingManager : MonoBehaviour
 
         for (int j = PhotonNetwork.PlayerList.Length - 1; j >= 0; j--)
         {
+            if (rankList[j].id == -1) {
+                break;
+            }
             GameObject g = Instantiate(rankInfoPrefab, rankInfoLayer.transform);
             Text rankName = g.GetComponentInChildren<Text>();
             rankName.text = (PhotonNetwork.PlayerList.Length - j) + ". " + PhotonNetwork.PlayerList[rankList[j].id].NickName + " " + rankList[j].kill + "/" + rankList[j].death;
             rankInfoBuf[j] = g;
         }
+    }
+
+    public void SendRanking(RankingData[] data)
+    {
+        photonView.RPC(nameof(RankingLoader), RpcTarget.All, data);
+    }
+
+    [PunRPC]
+    void RankingLoader(RankingData[] ranking)
+    {
+        SetRank(ranking);
     }
 }

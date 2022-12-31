@@ -38,13 +38,13 @@ public class GameManager : MonoBehaviourPun
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
-        
+
     }
 
     void Start()
     {
         GameObject spawnPrefab = null;
-        GameObject spawnBottomInfo = null; 
+        GameObject spawnBottomInfo = null;
         switch (MyCharacterType)
         {
             case CharacterType.Knight:
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviourPun
                 break;
             case CharacterType.Wizard:
                 spawnPrefab = wizardPrefab;
-                spawnBottomInfo= wizardBottomInfo;
+                spawnBottomInfo = wizardBottomInfo;
                 break;
             case CharacterType.Assassin:
                 spawnPrefab = assassinPrefab;
@@ -69,42 +69,50 @@ public class GameManager : MonoBehaviourPun
                 break;
         }
 
-        player = PhotonNetwork.Instantiate(spawnPrefab.name,Vector3.zero,Quaternion.identity);
-        Instantiate(spawnBottomInfo,canvas.transform);
+        player = PhotonNetwork.Instantiate(spawnPrefab.name, Vector3.zero, Quaternion.identity);
+        Instantiate(spawnBottomInfo, canvas.transform);
         FindObjectOfType<Camera>().GetComponent<CameraFollow>().player = player.transform;
 
 
-        
 
 
-        if (PhotonNetwork.IsMasterClient)
+
+        //珐欧 包府
+        for (int i = 0; i < 8; i++)
         {
-            //珐欧 包府
-            for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            if (i < PhotonNetwork.PlayerList.Length)
             {
                 ranking[i].id = i;
                 ranking[i].kill = 0;
                 ranking[i].death = 0;
             }
+            else
+            {
+                ranking[i].id = -1;
+                ranking[i].kill = 0;
+                ranking[i].death = 0;
+            }
         }
+
 
         RequestSendRankingData(0, 0);
     }
 
     public void Kill()
     {
-        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 1, 0);
+        photonView.RPC(nameof(AddRankingData), RpcTarget.All, PhotonNetwork.NickName, 1, 0);
     }
 
     public void Death()
     {
-        photonView.RPC(nameof(AddRankingData), RpcTarget.MasterClient, PhotonNetwork.NickName, 0, 1);
+        photonView.RPC(nameof(AddRankingData), RpcTarget.All, PhotonNetwork.NickName, 0, 1);
     }
 
     [PunRPC]
-    void AddRankingData(string name,int kill,int death)
+    void AddRankingData(string name, int kill, int death)
     {
-        for(int i=0;i< PhotonNetwork.PlayerList.Length; i++)
+        Debug.Log("AddRankingData");
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
             if (PhotonNetwork.PlayerList[ranking[i].id].NickName == name)
             {
@@ -113,10 +121,11 @@ public class GameManager : MonoBehaviourPun
                 break;
             }
         }
-        photonView.RPC("ShowRanking", RpcTarget.All,ranking);
+        ShowRanking(ranking);
+        //photonView.RPC(nameof(ShowRanking), RpcTarget.All, ranking);
     }
 
-    public void spawnHpBar(GameObject target,string name)
+    public void spawnHpBar(GameObject target, string name)
     {
         CharacterHpBar bar = Instantiate(hpBarPrefab, hpBarLayerCanvas.transform).GetComponent<CharacterHpBar>();
         bar.trackingTarget = target;
@@ -130,7 +139,7 @@ public class GameManager : MonoBehaviourPun
         rankingManager.SetRank(ranking);
     }
 
-    public void RequestSendRankingData(int kill,int death)
+    public void RequestSendRankingData(int kill, int death)
     {
         Debug.Log(photonView);
         photonView.RPC("AddRankingData", RpcTarget.MasterClient, PhotonNetwork.NickName, kill, death);
@@ -143,7 +152,7 @@ public class GameManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             gameOverTimer -= Time.deltaTime;
-            if(gameOverTimer <= 0)
+            if (gameOverTimer <= 0)
             {
                 photonView.RPC(nameof(GameOver), RpcTarget.All);
             }

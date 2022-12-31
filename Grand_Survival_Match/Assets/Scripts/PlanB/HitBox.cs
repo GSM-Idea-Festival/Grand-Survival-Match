@@ -50,15 +50,17 @@ public class HitBox : MonoBehaviourPun
 
     protected virtual void OnTriggerStay(Collider collision)
     {
-        if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != Attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject)==-1)
+        if (collision.gameObject.GetComponent<PhotonView>() != null)
         {
-            counts.Add(collision.gameObject);
-            Debug.Log("hit");
-            /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != Attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject) == -1)
             {
-                FindObjectOfType<GameManager>().Kill();
-            }*/
-            collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+                counts.Add(collision.gameObject);
+                /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+                {
+                    FindObjectOfType<GameManager>().Kill();
+                }*/
+                collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+            }
         }
     }
 
