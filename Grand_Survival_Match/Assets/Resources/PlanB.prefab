@@ -183,7 +183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[0].Name
@@ -1720,7 +1720,7 @@ PrefabInstance:
     - target: {fileID: 95241917264262668, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c0462238c8c799e419a4991762a69725, type: 2}
+      objectReference: {fileID: 22100000, guid: 536fc5a3dac631649a31dae421437640, type: 2}
     m_RemovedComponents:
     - {fileID: 114847229407519648, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
     - {fileID: 1276669123, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}

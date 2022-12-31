@@ -10,7 +10,8 @@ public class HitBox : MonoBehaviourPun
     public float Damage
     {
         get { return damage; }
-        set {
+        set
+        {
             photonView.RPC(nameof(ShareDamage), RpcTarget.All, value);
         }
     }
@@ -22,8 +23,10 @@ public class HitBox : MonoBehaviourPun
     bool isActive = false;
     List<GameObject> counts = new List<GameObject>();
 
+
     int attacker;
-    public int Attacker {
+    public int Attacker
+    {
         protected get
         {
             return attacker;
@@ -60,6 +63,10 @@ public class HitBox : MonoBehaviourPun
                     FindObjectOfType<GameManager>().Kill();
                 }*/
                 collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+                /*foreach (BuffWithTime buff in buffs)
+                {
+                    collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
+                }*/
             }
         }
     }

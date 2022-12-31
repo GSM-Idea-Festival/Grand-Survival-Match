@@ -120,6 +120,12 @@ public class Attacker : MonoBehaviourPun
             prefab.GetComponent<HitBox>().ActiveTime = attackDatas[index].ActiveTime;
             prefab.GetComponent<HitBox>().ActiveDelayTime = attackDatas[index].ActiveDelayTime;
             prefab.GetComponent<HitBox>().ShareTimerWrap();
+            //prefab.GetComponent<HitBox>().buffs = attackDatas[index].GiveToEnemyBuffs;
+
+            foreach (BuffWithTime buff in attackDatas[index].GetBuffs)
+            {
+                statManager.AddBuff(buff.buff,buff.time);
+            }
         }
     }
 }
