@@ -28,7 +28,10 @@ public class StatManager : MonoBehaviourPun
 
     public void AddBuff(Buff addedBuff, float time)
     {
-        photonView.RPC(nameof(AddBuffRPC), RpcTarget.All, addedBuff, time);
+        if (addedBuff != Buff.Stun || !GetBuff(Buff.UnStoppable))
+        {
+            photonView.RPC(nameof(AddBuffRPC), RpcTarget.All, addedBuff, time);
+        }
     }
 
     [PunRPC]

@@ -51,7 +51,7 @@ public class Mover : MonoBehaviour
             else
             {
                 agent.isStopped = true;
-                transform.position = Vector3.Lerp(transform.position, dashTargetPos,Time.deltaTime * 10);
+                transform.position = Vector3.Lerp(transform.position, dashTargetPos,Time.deltaTime * 6);
             }
         }
     }
@@ -73,6 +73,7 @@ public class Mover : MonoBehaviour
 
     public void UseDash(Vector3 targetPos)
     {
+        isDashing = true;
         agent.isStopped = true;
         dashTargetPos = targetPos;
     }

@@ -85,4 +85,12 @@ public class AttackData : ScriptableObject
     {
         get { return stunTime; }
     }
+
+
+    [SerializeField]
+    private float dashRange;
+    public float DashRange
+    {
+        get { return dashRange; }
+    }
 }

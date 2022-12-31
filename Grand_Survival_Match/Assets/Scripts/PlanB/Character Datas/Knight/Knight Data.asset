@@ -18,4 +18,5 @@ MonoBehaviour:
   attackData:
   - {fileID: 11400000, guid: cf6a143849a5e38408b23d526a5ac309, type: 2}
   - {fileID: 11400000, guid: 691b20db6f620ef4a923bae4aff3a0ee, type: 2}
+  - {fileID: 11400000, guid: b8223d85800968b4ba6feb5bdd9bfea4, type: 2}
   maxMana: 0

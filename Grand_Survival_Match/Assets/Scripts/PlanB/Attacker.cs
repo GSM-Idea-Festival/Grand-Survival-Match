@@ -88,6 +88,10 @@ public class Attacker : MonoBehaviourPun
             {
                 transform.rotation = targetRotation;
             }
+            if (attackDatas[index].DashRange != 0)
+            {
+                GetComponent<Mover>().UseDash(transform.position + targetRotation * Vector3.forward * attackDatas[index].DashRange);
+            }
             return true;
         }
         else
@@ -126,6 +130,8 @@ public class Attacker : MonoBehaviourPun
             {
                 statManager.AddBuff(buff.buff,buff.time);
             }
+
+            
         }
     }
 }

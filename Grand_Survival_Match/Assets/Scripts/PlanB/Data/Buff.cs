@@ -8,5 +8,6 @@ public enum Buff
     SpeedUp,
     Defence,
     Stun,
-    Immune
+    Immune,
+    UnStoppable
 }
