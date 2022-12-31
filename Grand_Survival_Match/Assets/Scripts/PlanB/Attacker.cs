@@ -84,6 +84,10 @@ public class Attacker : MonoBehaviourPun
             StartCoroutine(SpawnAttackFrefab(index));
             coolTime[index] = attackDatas[index].CoolTime;
             statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
+            if (attackDatas[index].IndicatorFrefab != null)
+            {
+                transform.rotation = targetRotation;
+            }
             return true;
         }
         else
