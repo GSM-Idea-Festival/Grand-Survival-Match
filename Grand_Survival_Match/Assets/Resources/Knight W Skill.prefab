@@ -39108,9 +39108,9 @@ GameObject:
   - component: {fileID: 3341510750625396026}
   - component: {fileID: 3341510750625396025}
   - component: {fileID: 5706309551783266340}
-  - component: {fileID: 3834886111390059590}
   - component: {fileID: 5515012303423638668}
   - component: {fileID: -2798724582956686510}
+  - component: {fileID: 3108024047084669866}
   m_Layer: 0
   m_Name: Knight W Skill
   m_TagString: Untagged
@@ -44018,25 +44018,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3834886111390059590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341510750625396023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330f9f6a36e204f419fcd0fb7f708b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attacker: {fileID: 0}
-  Target: []
-  CharacterSkill: {fileID: 0}
-  count: 0
-  time: 0.25
-  isSpearMan: 0
-  isWizardQSkill: 0
 --- !u!114 &5515012303423638668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44076,6 +44057,18 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3108024047084669866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341510750625396023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcd15f773ad5ae42ba57d5533f79f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3341510750774240840
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,20 +52,43 @@ public class Control : MonoBehaviourPun
                 UseAttack(0);
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(Wkey))
             {
+                attacker.IndicatorIndex = 1;
+            }
+            else if (Input.GetKeyUp(Wkey) && attacker.IndicatorIndex == 1)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(1);
             }
-            if (Input.GetKeyDown(KeyCode.E))
+
+            if (Input.GetKeyDown(Ekey))
             {
+                attacker.IndicatorIndex = 2;
+            }
+            else if (Input.GetKeyUp(Ekey) && attacker.IndicatorIndex == 2)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(2);
             }
-            if (Input.GetKeyDown(KeyCode.R))
+
+            if (Input.GetKeyDown(Rkey))
             {
+                attacker.IndicatorIndex = 3;
+            }
+            else if (Input.GetKeyUp(Rkey) && attacker.IndicatorIndex == 3)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(3);
             }
-            if (Input.GetKeyDown(KeyCode.T))
+
+            if (Input.GetKeyDown(Tkey))
             {
+                attacker.IndicatorIndex = 4;
+            }
+            else if (Input.GetKeyUp(Tkey) && attacker.IndicatorIndex == 4)
+            {
+                attacker.IndicatorIndex = -1;
                 UseAttack(4);
             }
 

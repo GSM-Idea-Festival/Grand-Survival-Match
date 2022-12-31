@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6981823151164971270}
-  - component: {fileID: 4447764487497942164}
   - component: {fileID: -7563076099378188389}
   - component: {fileID: 5031392746175983513}
-  - component: {fileID: 2160700360997673189}
+  - component: {fileID: 1733080066743865252}
   m_Layer: 0
   m_Name: Knight R Skill
   m_TagString: Untagged
@@ -38,25 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4447764487497942164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6981823151164971269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330f9f6a36e204f419fcd0fb7f708b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attacker: {fileID: 0}
-  Target: []
-  CharacterSkill: {fileID: 0}
-  count: 0
-  time: 3
-  isSpearMan: 0
-  isWizardQSkill: 0
 --- !u!114 &-7563076099378188389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +76,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &2160700360997673189
+--- !u!114 &1733080066743865252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,10 +85,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6981823151164971269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb55e5f8ed754a1448aa952abad4b8b0, type: 3}
+  m_Script: {fileID: 11500000, guid: bbcd15f773ad5ae42ba57d5533f79f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackingTarget: {fileID: 0}
 --- !u!1 &6981823151209179785
 GameObject:
   m_ObjectHideFlags: 0

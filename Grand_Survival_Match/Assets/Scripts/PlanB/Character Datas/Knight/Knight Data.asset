@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ae8760b53a99f4184c6302ddfbc7c7, type: 3}
-  m_Name: CharacterData
+  m_Name: Knight Data
   m_EditorClassIdentifier: 
   characterName: 
   maxHp: 100

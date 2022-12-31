@@ -19,6 +19,8 @@ public class Mover : MonoBehaviour
     float rotateVelocity;
 
     Vector3 targetPos;
+    Vector3 dashTargetPos;
+    bool isDashing;
 
     // Start is called before the first frame update
     void Start()
@@ -40,17 +42,38 @@ public class Mover : MonoBehaviour
             agent.isStopped = true;
         }
 
+        if (isDashing)
+        {
+            if(Vector3.Distance(transform.position,dashTargetPos) <= 0.3)
+            {
+                isDashing = false;
+            }
+            else
+            {
+                agent.isStopped = true;
+                transform.position = Vector3.Lerp(transform.position, dashTargetPos,Time.deltaTime * 10);
+            }
+        }
     }
 
     public void UseMove(Vector3 targetPos)
     {
-        agent.isStopped = false;
         this.targetPos = targetPos;
-        agent.SetDestination(targetPos);
+        if (!statManager.GetBuff(Buff.Stun))
+        {
+            agent.isStopped = false;
+            agent.SetDestination(targetPos);
 
-        Quaternion rotationToLookAt = Quaternion.LookRotation(targetPos - transform.position);
-        float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+            Quaternion rotationToLookAt = Quaternion.LookRotation(targetPos - transform.position);
+            float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
 
-        transform.eulerAngles = new Vector3(0, rotationY, 0);
+            transform.eulerAngles = new Vector3(0, rotationY, 0);
+        }
+    }
+
+    public void UseDash(Vector3 targetPos)
+    {
+        agent.isStopped = true;
+        dashTargetPos = targetPos;
     }
 }
