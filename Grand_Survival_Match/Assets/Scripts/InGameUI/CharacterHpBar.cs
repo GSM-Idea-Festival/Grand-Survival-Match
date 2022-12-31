@@ -46,8 +46,9 @@ public class CharacterHpBar : MonoBehaviour
         }
         if (trackingTarget != null)
         {
-            SetUIValue(trackingTarget.GetComponent<Victim>().Hp, trackingTarget.GetComponent<StatManager>().GetStat(PlayerStat.Hp), 0);
+            SetUIValue(trackingTarget.GetComponent<Victim>().Hp, trackingTarget.GetComponent<StatManager>().GetStat(PlayerStat.Hp), trackingTarget.GetComponent<Victim>().Barrier);
         }
+
     }
 
     public void SetUIValue(float hp,float maxHp,float barrier)
@@ -73,7 +74,7 @@ public class CharacterHpBar : MonoBehaviour
         {
 /*            if (barrier == 0f)
             {*/
-                text.text = (hp + barrier) + "/" + maxHp;
+                text.text = (int)(hp + barrier) + "/" + (int)maxHp;
 /*            }
             else
             {

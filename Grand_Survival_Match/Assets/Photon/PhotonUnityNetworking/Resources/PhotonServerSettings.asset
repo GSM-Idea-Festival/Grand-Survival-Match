@@ -60,6 +60,9 @@ MonoBehaviour:
   - ShareAttacker
   - RankingLoader
   - AddBuffRPC
+  - ShareBarrier
+  - RequestBarrier
+  - RequestHeal
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

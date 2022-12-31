@@ -29,6 +29,22 @@ public class AttackData : ScriptableObject
 
 
     [SerializeField]
+    private float heal;
+    public float Heal
+    {
+        get { return heal; }
+    }
+
+
+    [SerializeField]
+    private float barrier;
+    public float Barrier
+    {
+        get { return barrier; }
+    }
+
+
+    [SerializeField]
     private BuffWithTime[] giveToEnemyBuffs;
     public BuffWithTime[] GiveToEnemyBuffs
     {

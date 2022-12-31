@@ -92,6 +92,14 @@ public class Attacker : MonoBehaviourPun
             {
                 GetComponent<Mover>().UseDash(transform.position + targetRotation * Vector3.forward * attackDatas[index].DashRange);
             }
+            if (attackDatas[index].Heal != 0)
+            {
+                photonView.RPC(nameof(RequestHeal), RpcTarget.MasterClient, attackDatas[index].Heal);
+            }
+            if (attackDatas[index].Barrier != 0)
+            {
+                photonView.RPC(nameof(RequestBarrier), RpcTarget.MasterClient, attackDatas[index].Barrier);
+            }
             return true;
         }
         else
@@ -133,5 +141,17 @@ public class Attacker : MonoBehaviourPun
 
             
         }
+    }
+
+    [PunRPC]
+    void RequestHeal(float heal)
+    {
+        GetComponent<Victim>().TakeHeal(heal);
+    }
+
+    [PunRPC]
+    void RequestBarrier(float barrier)
+    {
+        GetComponent<Victim>().AddBarrier(barrier);
     }
 }
