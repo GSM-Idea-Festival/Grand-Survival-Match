@@ -36,6 +36,7 @@ public class Control : MonoBehaviourPun
                 Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity);
 
                 attacker.TargetRotation = Quaternion.LookRotation(hit.point - transform.position);
+                attacker.TargetPos = hit.point;
             }
 
             if (Input.GetMouseButtonDown(1))
