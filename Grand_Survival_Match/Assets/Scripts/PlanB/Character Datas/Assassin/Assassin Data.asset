@@ -16,9 +16,9 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 1
   attackData:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
+  - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
+  - {fileID: 11400000, guid: adfc940567db1d640b06308cf01ce8a6, type: 2}
+  - {fileID: 11400000, guid: 52c6f1dedbb2cfc40bce59bb6467beae, type: 2}
+  - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
   maxMana: 0
