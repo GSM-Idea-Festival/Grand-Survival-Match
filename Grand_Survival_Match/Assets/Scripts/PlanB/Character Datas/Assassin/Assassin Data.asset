@@ -17,8 +17,8 @@ MonoBehaviour:
   moveSpeed: 1
   attackData:
   - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
-  - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
+  - {fileID: 11400000, guid: fd6c02804740f5a44bc4c338a20147d0, type: 2}
   - {fileID: 11400000, guid: adfc940567db1d640b06308cf01ce8a6, type: 2}
   - {fileID: 11400000, guid: 52c6f1dedbb2cfc40bce59bb6467beae, type: 2}
-  - {fileID: 11400000, guid: 4dc6e714eefd85b4e8f56dba396e7572, type: 2}
+  - {fileID: 11400000, guid: f3979b62cd86b494fa97eb0f78e63e33, type: 2}
   maxMana: 0

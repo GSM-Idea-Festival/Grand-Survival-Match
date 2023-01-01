@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c75ad9ad99b664691bf84a775105ff, type: 3}
-  m_Name: Assassin E
+  m_Name: Assassin T
   m_EditorClassIdentifier: 
-  attackFrefab: {fileID: 1871041086231115576, guid: 723bac2026d3ef747b1e0d6cb0ec69b9, type: 3}
+  attackFrefab: {fileID: 8440170721088204535, guid: b4e73950a95e33948bb8064d22251b14, type: 3}
   indicatorFrefab: {fileID: 795787725143366518, guid: 813664208eac1cd418a7e5f8e40e0a9b, type: 3}
   damage: 10
   heal: 0
@@ -20,9 +20,9 @@ MonoBehaviour:
   giveToEnemyBuffs: []
   getBuffs: []
   coolTime: 1
-  spawnDelayTime: 0.2
-  activeDelayTime: 0
-  activeTime: 1
-  destroyTimer: 1
-  stunTime: 0.6
-  dashRange: 0
+  spawnDelayTime: 0.3
+  activeDelayTime: 0.1
+  activeTime: 0.1
+  destroyTimer: 2
+  stunTime: 0.3
+  dashRange: 8

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Assassin Q
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 5883993159170183047, guid: 8fd8664f491e2954682d901b505d750a, type: 3}
-  indicatorFrefab: {fileID: 795787725143366518, guid: e3ca274836b313d418d81a414446b8ef, type: 3}
+  indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
   damage: 10
   heal: 0
   barrier: 0
