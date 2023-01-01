@@ -19,7 +19,7 @@ MonoBehaviour:
   barrier: 0
   giveToEnemyBuffs: []
   getBuffs: []
-  coolTime: 1
+  coolTime: 4
   spawnDelayTime: 0.2
   activeDelayTime: 0
   activeTime: 1
