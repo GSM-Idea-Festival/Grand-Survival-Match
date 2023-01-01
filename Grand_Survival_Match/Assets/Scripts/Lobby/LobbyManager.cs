@@ -23,7 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     Text myCharacterText;
 
     //룸 내에서 보이는 플레이어리스트 목록
-    Dictionary<Player,GameObject> playerShowerMap = new Dictionary<Player, GameObject>();
+    Dictionary<Player, GameObject> playerShowerMap = new Dictionary<Player, GameObject>();
     //로비에서 보이는 룸리스트 목록
     List<GameObject> showedRoomPrefabs = new List<GameObject>();
     //로비에서 룸리스트 보여줄때 쓰는 정보
@@ -34,7 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         set
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = value;
             }
@@ -68,14 +68,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         //Debug.Log(PhotonNetwork.InLobby);
     }
-    
+
     //룸리스트 받아오기
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         //base.OnRoomListUpdate(roomList);
-        foreach(RoomInfo info in roomList)
+        foreach (RoomInfo info in roomList)
         {
-            if(this.roomList.Contains(info))
+            if (this.roomList.Contains(info))
             {
                 this.roomList.Remove(info);
             }
@@ -93,7 +93,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomLayer.SetActive(true);
         Debug.Log(PhotonNetwork.LocalPlayer);
         //플레이어리스트 출력
-        foreach(Player player in PhotonNetwork.PlayerList)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
             GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
             instance.GetComponent<PlayerName>().nameText.text = player.NickName;
@@ -103,7 +103,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 Destroy(instance.GetComponent<PlayerName>().characterText);
             }
             playerShowerMap.Add(player, instance);
-            if(player.NickName == PhotonNetwork.NickName)
+            if (player.NickName == PhotonNetwork.NickName)
             {
                 myCharacterText = instance.GetComponent<PlayerName>().characterText;
             }
@@ -116,7 +116,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             HostingButton.SetActive(false);
         }
 
-        RoomnameText.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name+"님의 게임";
+        RoomnameText.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name + "님의 게임";
     }
 
     //버튼 연결용 wrap
@@ -135,14 +135,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void ShowRoomList()
     {
         //이미 출력된 목록 제거
-        for(;showedRoomPrefabs.Count != 0;)
+        for (; showedRoomPrefabs.Count != 0;)
         {
             Destroy(showedRoomPrefabs[0]);
             showedRoomPrefabs.Remove(showedRoomPrefabs[0]);
         }
-        
+
         //다시 출력
-        for(int i = 0; i < roomList.Count; i++)
+        for (int i = 0; i < roomList.Count; i++)
         {
             if (roomList[i].PlayerCount != 0 && roomList[i].PlayerCount != roomList[i].MaxPlayers)
             {
@@ -157,11 +157,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //다른 플레이어 참가시 목록에 표시
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
+        /*GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
         instance.GetComponent<PlayerName>().nameText.text = newPlayer.NickName;
         //instance.GetComponentInChildren<Text>().text = newPlayer.NickName;
         instance.GetComponentInChildren<Dropdown>().interactable = false;
-        playerShowerMap.Add(newPlayer,instance);
+        playerShowerMap.Add(newPlayer,instance);*/
+
+        GameObject instance = Instantiate(playerNamePrefab, playerNameLayer.transform);
+        instance.GetComponent<PlayerName>().nameText.text = newPlayer.NickName;
+        instance.GetComponentInChildren<Dropdown>().interactable = newPlayer.NickName == PhotonNetwork.LocalPlayer.NickName;
+        Destroy(instance.GetComponent<PlayerName>().characterText);
+        playerShowerMap.Add(newPlayer, instance);
     }
 
     //플레이어 퇴장시 목록에서 제거
@@ -178,7 +184,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomSelectLayer.SetActive(true);
 
         //출력된 플레이어리스트 초기화
-        foreach(GameObject g in playerShowerMap.Values)
+        foreach (GameObject g in playerShowerMap.Values)
         {
             Destroy(g);
         }
