@@ -124,6 +124,6 @@ public class AttackData : ScriptableObject
     public bool IsAreaSkill
     {
         get { return isAreaSkill; }
-    }
+    }   
 
 }

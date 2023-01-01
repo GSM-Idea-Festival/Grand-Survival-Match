@@ -31,6 +31,17 @@ public class HitBox : MonoBehaviourPun
 
     float areaDelayTimer;
 
+    BuffWithTime[] giveBuffs;
+    public BuffWithTime[] GiveBuffs
+    {
+        get { return giveBuffs; }
+        set
+        {
+            giveBuffs = value;
+            photonView.RPC(nameof(ShareBuffs),RpcTarget.MasterClient, giveBuffs);
+        }
+    }
+
     int attackerID;
     public int AttackerID
     {
@@ -103,10 +114,10 @@ public class HitBox : MonoBehaviourPun
                     {
                         FindObjectOfType<GameManager>().Kill(attackerName);
                     }
-                    /*foreach (BuffWithTime buff in )
+                    foreach (BuffWithTime buff in GiveBuffs)
                     {
-                        collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
-                    }*/
+                        collision.gameObject.GetComponent<StatManager>().AddBuff((int)buff.buff, buff.time);
+                    }
                 }
             }
         }
@@ -123,6 +134,12 @@ public class HitBox : MonoBehaviourPun
         this.ActiveDelayTime = activeDelayTime;
         this.ActiveTime = activeTime;
         this.destroyTimer = destroyTimer;
+    }
+
+    [PunRPC]
+    void ShareBuffs(BuffWithTime[] newbuff)
+    {
+        giveBuffs = newbuff;
     }
 
     IEnumerator DestroyTimer()
