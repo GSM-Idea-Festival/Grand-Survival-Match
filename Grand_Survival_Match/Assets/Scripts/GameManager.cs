@@ -98,9 +98,9 @@ public class GameManager : MonoBehaviourPun
         RequestSendRankingData(0, 0);
     }
 
-    public void Kill()
+    public void Kill(string playerName)
     {
-        photonView.RPC(nameof(AddRankingData), RpcTarget.All, PhotonNetwork.NickName, 1, 0);
+        photonView.RPC(nameof(AddRankingData), RpcTarget.All, playerName, 1, 0);
     }
 
     public void Death()

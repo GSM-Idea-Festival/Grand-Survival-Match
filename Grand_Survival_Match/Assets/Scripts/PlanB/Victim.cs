@@ -73,7 +73,7 @@ public class Victim : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void TakeDamage(float damage)
+    public bool TakeDamage(float damage)
     {
         if (PhotonNetwork.IsMasterClient)
         {
@@ -93,12 +93,12 @@ public class Victim : MonoBehaviourPun
             if (Hp <= 0)
             {
                 photonView.RPC(nameof(RespawnRequest), RpcTarget.All);
-                //return true;
+                return true;
             }
 
         }
 
-        //return false;
+        return false;
     }
 
     public void AddBarrier(float barrier)
