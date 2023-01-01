@@ -31,9 +31,12 @@ public class Control : MonoBehaviourPun
         if (photonView.IsMine)
         {
             RaycastHit hit;
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity);
+            if (!GetComponent<StatManager>().GetBuff(Buff.Stun) && !mover.IsDashing) {
+                
+                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity);
 
-            attacker.TargetRotation = Quaternion.LookRotation(hit.point - transform.position);
+                attacker.TargetRotation = Quaternion.LookRotation(hit.point - transform.position);
+            }
 
             if (Input.GetMouseButtonDown(1))
             {
