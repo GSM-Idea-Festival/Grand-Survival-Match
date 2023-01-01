@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 815965724}
   - component: {fileID: -4957907003312966567}
   - component: {fileID: 5067953226597406082}
+  - component: {fileID: 2518050864595967392}
   m_Layer: 0
   m_Name: SpearMan Ult Q Skill
   m_TagString: Untagged
@@ -119,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330f9f6a36e204f419fcd0fb7f708b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attacker: {fileID: 0}
   Target: []
   CharacterSkill: {fileID: 11400000, guid: 0a09a17e66c63c447b1a030a13cc2dce, type: 2}
   count: 0
@@ -144,7 +144,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5067953226597406082}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -164,6 +165,18 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &2518050864595967392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314787664237178328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcd15f773ad5ae42ba57d5533f79f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1314787664735532677
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,9 +22,10 @@ public class Attacker : MonoBehaviourPun
         set
         {
             targetRotation = value;
+            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
             if(currentIndicator != null)
             {
-                currentIndicator.transform.rotation = value;
+                currentIndicator.transform.rotation = targetRotation;
             }
         }
     }
@@ -81,7 +82,7 @@ public class Attacker : MonoBehaviourPun
         }
         if (coolTime[index] <= 0)
         {
-            StartCoroutine(SpawnAttackFrefab(index));
+            StartCoroutine(SpawnAttackFrefab(index,targetRotation));
             coolTime[index] = attackDatas[index].CoolTime;
             statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
             if (attackDatas[index].IndicatorFrefab != null)
@@ -109,7 +110,7 @@ public class Attacker : MonoBehaviourPun
     }
 
 
-    IEnumerator SpawnAttackFrefab(int index)
+    IEnumerator SpawnAttackFrefab(int index,Quaternion rotation)
     {
         yield return new WaitForSeconds(attackDatas[index].SpawnDelayTime);
         if (attackDatas[index].AttackFrefab != null)
@@ -117,7 +118,7 @@ public class Attacker : MonoBehaviourPun
             GameObject prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
             if (attackDatas[index].IndicatorFrefab != null)
             {
-                prefab.transform.rotation = targetRotation;
+                prefab.transform.rotation = rotation;
             }
             if (!statManager.GetBuff(Buff.DamageUp))
             {

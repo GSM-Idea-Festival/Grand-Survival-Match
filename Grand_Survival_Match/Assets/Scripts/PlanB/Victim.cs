@@ -16,7 +16,7 @@ public class Victim : MonoBehaviourPun
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                hp = Mathf.Clamp(0, value, statManager.GetStat(PlayerStat.Hp));
+                hp = Mathf.Clamp(value, 0, statManager.GetStat(PlayerStat.Hp));
                 photonView.RPC(nameof(ShareHP), RpcTarget.Others, hp);
             }
         }
@@ -58,7 +58,10 @@ public class Victim : MonoBehaviourPun
         }
         if (PhotonNetwork.IsMasterClient)
         {
-            Barrier -= Time.deltaTime * 25;
+            if (Barrier > 0)
+            {
+                Barrier -= Time.deltaTime * 25;
+            }
         }
     }
 
@@ -100,7 +103,7 @@ public class Victim : MonoBehaviourPun
 
     public void AddBarrier(float barrier)
     {
-        this.Barrier += barrier;
+        this.barrier += barrier;
     }
 
     public void TakeHeal(float heal)

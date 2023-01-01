@@ -20,7 +20,7 @@ public class Mover : MonoBehaviour
 
     Vector3 targetPos;
     Vector3 dashTargetPos;
-    bool isDashing;
+    public bool IsDashing { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +42,11 @@ public class Mover : MonoBehaviour
             agent.isStopped = true;
         }
 
-        if (isDashing)
+        if (IsDashing)
         {
             if(Vector3.Distance(transform.position,dashTargetPos) <= 0.3)
             {
-                isDashing = false;
+                IsDashing = false;
             }
             else
             {
@@ -73,7 +73,7 @@ public class Mover : MonoBehaviour
 
     public void UseDash(Vector3 targetPos)
     {
-        isDashing = true;
+        IsDashing = true;
         agent.isStopped = true;
         dashTargetPos = targetPos;
     }
