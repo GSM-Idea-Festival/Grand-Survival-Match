@@ -7,6 +7,9 @@ using UnityEngine;
 public class HitBox : MonoBehaviourPun
 {
     [SerializeField] float moveSpeed;
+    [SerializeField] float moveDelay;
+
+    float moveDelayTimer;
 
     float damage;
     public float Damage
@@ -61,11 +64,13 @@ public class HitBox : MonoBehaviourPun
         {
             StartCoroutine(ActiveDelayTimer());
         }
+        moveDelayTimer = moveDelay;
     }
 
     protected virtual void Update()
     {
-        if(PhotonNetwork.IsMasterClient && moveSpeed != 0)
+        moveDelay -= Time.deltaTime;
+        if(PhotonNetwork.IsMasterClient && moveSpeed != 0 && moveDelay <= 0)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }

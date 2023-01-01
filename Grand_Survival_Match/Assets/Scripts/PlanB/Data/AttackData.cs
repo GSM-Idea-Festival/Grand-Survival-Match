@@ -109,4 +109,12 @@ public class AttackData : ScriptableObject
     {
         get { return dashRange; }
     }
+
+
+    [SerializeField]
+    private bool isNotMelee;
+    public bool IsNotMelee
+    {
+        get { return isNotMelee; }
+    }
 }

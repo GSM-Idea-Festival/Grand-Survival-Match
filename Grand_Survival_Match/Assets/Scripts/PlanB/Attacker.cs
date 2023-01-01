@@ -126,7 +126,15 @@ public class Attacker : MonoBehaviourPun
         yield return new WaitForSeconds(attackDatas[index].SpawnDelayTime);
         if (attackDatas[index].AttackFrefab != null)
         {
-            GameObject prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
+            GameObject prefab;
+            if (!attackDatas[index].IsNotMelee)
+            {
+                prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
+            }
+            else
+            {
+                prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, TargetPos, Quaternion.identity);
+            }
             if (attackDatas[index].IndicatorFrefab != null)
             {
                 prefab.transform.rotation = rotation;
