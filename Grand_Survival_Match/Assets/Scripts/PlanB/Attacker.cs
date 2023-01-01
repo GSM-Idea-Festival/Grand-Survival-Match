@@ -30,6 +30,17 @@ public class Attacker : MonoBehaviourPun
         }
     }
 
+    Vector3 targetPos;
+    public Vector3 TargetPos
+    {
+        private get { return targetPos; }
+        set
+        {
+            targetPos = value;
+            targetPos.y = 0;
+        }
+    }
+
     int indicatorIndex = -1;
     public int IndicatorIndex
     {
@@ -91,7 +102,7 @@ public class Attacker : MonoBehaviourPun
             }
             if (attackDatas[index].DashRange != 0)
             {
-                GetComponent<Mover>().UseDash(transform.position + targetRotation * Vector3.forward * attackDatas[index].DashRange);
+                GetComponent<Mover>().UseDash(transform.position + targetRotation * Vector3.forward * Mathf.Min(attackDatas[index].DashRange,Vector3.Distance(transform.position,TargetPos)));
             }
             if (attackDatas[index].Heal != 0)
             {
