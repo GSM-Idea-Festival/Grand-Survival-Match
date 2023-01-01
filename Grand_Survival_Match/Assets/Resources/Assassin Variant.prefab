@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -450406537957745499, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 65c24ba315324af4b89ee871c672ebc2, type: 2}
     - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_SynchronizeLayers.Array.size
       value: 1
