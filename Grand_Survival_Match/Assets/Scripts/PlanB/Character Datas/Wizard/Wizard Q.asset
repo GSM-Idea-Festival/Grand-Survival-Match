@@ -20,10 +20,11 @@ MonoBehaviour:
   giveToEnemyBuffs: []
   getBuffs: []
   coolTime: 1
-  spawnDelayTime: 0.2
+  spawnDelayTime: 0.1
   activeDelayTime: 0
   activeTime: 4
   destroyTimer: 4
   stunTime: 0.6
   dashRange: 0
   isNotMelee: 0
+  isAreaSkill: 0

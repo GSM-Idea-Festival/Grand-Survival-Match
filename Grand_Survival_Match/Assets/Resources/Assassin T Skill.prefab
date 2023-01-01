@@ -19717,6 +19717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  moveDelay: 0
 --- !u!1 &8479066831940000729
 GameObject:
   m_ObjectHideFlags: 0

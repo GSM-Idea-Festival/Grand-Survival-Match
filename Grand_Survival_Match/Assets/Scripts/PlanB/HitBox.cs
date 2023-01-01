@@ -24,10 +24,12 @@ public class HitBox : MonoBehaviourPun
     public float ActiveDelayTime { protected get; set; }
     public float ActiveTime { protected get; set; }
     public float destroyTimer { protected get; set; }
+    public bool isAreaSkill { protected get; set; }
 
     bool isActive = false;
     List<GameObject> counts = new List<GameObject>();
 
+    float areaDelayTimer;
 
     int attackerID;
     public int AttackerID
@@ -74,6 +76,7 @@ public class HitBox : MonoBehaviourPun
         {
             transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
+        areaDelayTimer -= Time.deltaTime;
     }
 
 
@@ -81,21 +84,30 @@ public class HitBox : MonoBehaviourPun
     {
         if (collision.gameObject.GetComponent<PhotonView>() != null)
         {
-            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != AttackerID && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject) == -1)
+            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != AttackerID && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient)
             {
-                counts.Add(collision.gameObject);
-                /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
-                {
-                    FindObjectOfType<GameManager>().Kill();
-                }*/
-                if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
-                {
-                    FindObjectOfType<GameManager>().Kill(attackerName);
+                if ((isAreaSkill && areaDelayTimer <= 0) || counts.IndexOf(collision.gameObject) == -1) {
+                    areaDelayTimer = 0.25f;
+                    counts.Add(collision.gameObject);
+                    /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+                    {
+                        FindObjectOfType<GameManager>().Kill();
+                    }*/
+                    float a = 1;
+                    if (isAreaSkill)
+                    {
+                        a = 0.25f;
+                    }
+
+                    if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage * a))
+                    {
+                        FindObjectOfType<GameManager>().Kill(attackerName);
+                    }
+                    /*foreach (BuffWithTime buff in )
+                    {
+                        collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
+                    }*/
                 }
-                /*foreach (BuffWithTime buff in buffs)
-                {
-                    collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
-                }*/
             }
         }
     }

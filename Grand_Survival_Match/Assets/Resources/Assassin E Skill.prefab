@@ -24561,6 +24561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  moveDelay: 0
 --- !u!114 &7840414328122572020
 MonoBehaviour:
   m_ObjectHideFlags: 0
