@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Buff
+public enum Buff : int
 {
-    DamageUp,
+    DamageUp = 0,
     SpeedUp,
     Defence,
     Stun,

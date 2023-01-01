@@ -26,18 +26,19 @@ public class StatManager : MonoBehaviourPun
         }
     }
 
-    public void AddBuff(Buff addedBuff, float time)
+    public void AddBuff(int addedBuff, float time)
     {
-        if (addedBuff != Buff.Stun || !GetBuff(Buff.UnStoppable))
+        if (addedBuff != (int)Buff.Stun || !GetBuff(Buff.UnStoppable))
         {
-            photonView.RPC(nameof(AddBuffRPC), RpcTarget.All, addedBuff, time);
+            photonView.RPC(nameof(faew), RpcTarget.All, addedBuff,time);
         }
     }
 
     [PunRPC]
-    void AddBuffRPC(Buff addedBuff, float time)
+    void faew(int addedBuff,float time)
     {
-        if (buffList[(int)addedBuff] < time && time > 0)
+        //float time = 2;
+        if (buffList[(int)addedBuff] < time)
         {
             buffList[(int)addedBuff] = time;
         }

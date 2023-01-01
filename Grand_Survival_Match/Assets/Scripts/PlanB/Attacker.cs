@@ -95,7 +95,7 @@ public class Attacker : MonoBehaviourPun
         {
             StartCoroutine(SpawnAttackFrefab(index,targetRotation));
             coolTime[index] = attackDatas[index].CoolTime;
-            statManager.AddBuff(Buff.Stun, attackDatas[index].StunTime);
+            statManager.AddBuff((int)Buff.Stun, attackDatas[index].StunTime);
             if (attackDatas[index].IndicatorFrefab != null)
             {
                 transform.rotation = targetRotation;
@@ -126,7 +126,15 @@ public class Attacker : MonoBehaviourPun
         yield return new WaitForSeconds(attackDatas[index].SpawnDelayTime);
         if (attackDatas[index].AttackFrefab != null)
         {
-            GameObject prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
+            GameObject prefab;
+            if (!attackDatas[index].IsNotMelee)
+            {
+                prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, transform.position, transform.rotation);
+            }
+            else
+            {
+                prefab = PhotonNetwork.Instantiate(attackDatas[index].AttackFrefab.name, TargetPos, Quaternion.identity);
+            }
             if (attackDatas[index].IndicatorFrefab != null)
             {
                 prefab.transform.rotation = rotation;
@@ -144,12 +152,14 @@ public class Attacker : MonoBehaviourPun
             prefab.GetComponent<HitBox>().destroyTimer = attackDatas[index].DestroyTimer;
             prefab.GetComponent<HitBox>().ActiveTime = attackDatas[index].ActiveTime;
             prefab.GetComponent<HitBox>().ActiveDelayTime = attackDatas[index].ActiveDelayTime;
+            prefab.GetComponent<HitBox>().isAreaSkill = attackDatas[index].IsAreaSkill;
+            prefab.GetComponent<HitBox>().GiveBuffs = attackDatas[index].GiveToEnemyBuffs;
             prefab.GetComponent<HitBox>().ShareTimerWrap();
             //prefab.GetComponent<HitBox>().buffs = attackDatas[index].GiveToEnemyBuffs;
 
             foreach (BuffWithTime buff in attackDatas[index].GetBuffs)
             {
-                statManager.AddBuff(buff.buff,buff.time);
+                statManager.AddBuff((int)buff.buff,buff.time);
             }
 
             

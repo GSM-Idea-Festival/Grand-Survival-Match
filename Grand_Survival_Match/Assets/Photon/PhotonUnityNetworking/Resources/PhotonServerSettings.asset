@@ -65,6 +65,9 @@ MonoBehaviour:
   - RequestHeal
   - ShareAttackerID
   - ShareAttackerName
+  - ShareBuffs
+  - ShareBuffRPC
+  - faew
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

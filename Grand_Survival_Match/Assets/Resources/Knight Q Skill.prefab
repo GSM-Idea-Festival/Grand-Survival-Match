@@ -39176,6 +39176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  moveDelay: 0
 --- !u!65 &5350277554567722740
 BoxCollider:
   m_ObjectHideFlags: 0
