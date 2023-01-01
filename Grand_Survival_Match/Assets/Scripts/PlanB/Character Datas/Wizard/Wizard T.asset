@@ -10,21 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c75ad9ad99b664691bf84a775105ff, type: 3}
-  m_Name: Wizard E
+  m_Name: Wizard T
   m_EditorClassIdentifier: 
-  attackFrefab: {fileID: 1604487808337520302, guid: b1781c928deb4dc428729bfff290a57f, type: 3}
+  attackFrefab: {fileID: 5236437913552926457, guid: 5aaa3c27f5aefed4cb95e50a43e31c9d, type: 3}
   indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
-  damage: 10
+  damage: 5
   heal: 0
   barrier: 0
-  giveToEnemyBuffs: []
+  giveToEnemyBuffs:
+  - buff: 3
+    time: 3
   getBuffs: []
   coolTime: 1
-  spawnDelayTime: 0.2
-  activeDelayTime: 0
-  activeTime: 5.5
-  destroyTimer: 6
+  spawnDelayTime: 0
+  activeDelayTime: 0.1
+  activeTime: 1.7
+  destroyTimer: 2
   stunTime: 0.6
   dashRange: 0
   isNotMelee: 1
-  isAreaSkill: 1
+  isAreaSkill: 0
