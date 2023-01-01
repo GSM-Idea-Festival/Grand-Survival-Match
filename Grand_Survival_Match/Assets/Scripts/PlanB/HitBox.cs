@@ -26,17 +26,28 @@ public class HitBox : MonoBehaviourPun
     List<GameObject> counts = new List<GameObject>();
 
 
-    int attacker;
-    public int Attacker
+    int attackerID;
+    public int AttackerID
     {
         protected get
         {
-            return attacker;
+            return attackerID;
         }
         set
         {
-            attacker = value;
-            photonView.RPC(nameof(ShareAttacker), RpcTarget.MasterClient, attacker);
+            attackerID = value;
+            photonView.RPC(nameof(ShareAttackerID), RpcTarget.MasterClient, attackerID);
+        }
+    }
+
+    string attackerName;
+    public string AttackerName
+    {
+        protected get { return attackerName; }
+        set
+        {
+            attackerName = value;
+            photonView.RPC(nameof(ShareAttackerName), RpcTarget.MasterClient, attackerName);
         }
     }
 
@@ -65,14 +76,17 @@ public class HitBox : MonoBehaviourPun
     {
         if (collision.gameObject.GetComponent<PhotonView>() != null)
         {
-            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != Attacker && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject) == -1)
+            if (isActive && collision.gameObject.GetComponent<PhotonView>().ViewID != AttackerID && collision.gameObject.GetComponent<Victim>() != null && PhotonNetwork.IsMasterClient && counts.IndexOf(collision.gameObject) == -1)
             {
                 counts.Add(collision.gameObject);
                 /*if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
                 {
                     FindObjectOfType<GameManager>().Kill();
                 }*/
-                collision.gameObject.GetComponent<Victim>().TakeDamage(Damage);
+                if (collision.gameObject.GetComponent<Victim>().TakeDamage(Damage))
+                {
+                    FindObjectOfType<GameManager>().Kill(attackerName);
+                }
                 /*foreach (BuffWithTime buff in buffs)
                 {
                     collision.gameObject.AddComponent<StatManager>().AddBuff(buff.buff, buff.time);
@@ -120,8 +134,14 @@ public class HitBox : MonoBehaviourPun
     }
 
     [PunRPC]
-    void ShareAttacker(int g)
+    void ShareAttackerID(int g)
     {
-        attacker = g;
+        attackerID = g;
+    }
+
+    [PunRPC]
+    void ShareAttackerName(string name)
+    {
+        attackerName = name;
     }
 }

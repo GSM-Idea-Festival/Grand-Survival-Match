@@ -10,23 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12c75ad9ad99b664691bf84a775105ff, type: 3}
-  m_Name: Knight E
+  m_Name: Assassin Q
   m_EditorClassIdentifier: 
-  attackFrefab: {fileID: 2598318851274290065, guid: bc69616a686235f4187a2115eb4e47ea, type: 3}
-  indicatorFrefab: {fileID: 795787725143366518, guid: 813664208eac1cd418a7e5f8e40e0a9b, type: 3}
+  attackFrefab: {fileID: 5883993159170183047, guid: 8fd8664f491e2954682d901b505d750a, type: 3}
+  indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
   damage: 10
   heal: 0
   barrier: 0
   giveToEnemyBuffs: []
-  getBuffs:
-  - buff: 2
-    time: 3
-  - buff: 5
-    time: 3
+  getBuffs: []
   coolTime: 1
-  spawnDelayTime: 0.4
+  spawnDelayTime: 0.2
   activeDelayTime: 0
-  activeTime: 0.1
-  destroyTimer: 2
-  stunTime: 0.3
-  dashRange: 4
+  activeTime: 0.4
+  destroyTimer: 1
+  stunTime: 0.6
+  dashRange: 0
