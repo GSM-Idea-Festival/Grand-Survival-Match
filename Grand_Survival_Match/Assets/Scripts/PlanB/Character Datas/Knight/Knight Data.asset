@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight Data
   m_EditorClassIdentifier: 
   characterName: 
-  maxHp: 100
+  maxHp: 150
   moveSpeed: 1
   attackData:
   - {fileID: 11400000, guid: cf6a143849a5e38408b23d526a5ac309, type: 2}
