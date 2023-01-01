@@ -15,7 +15,7 @@ MonoBehaviour:
   attackFrefab: {fileID: 7583471755740047454, guid: e308a7fabac937844b9332fff3d13eb2, type: 3}
   indicatorFrefab: {fileID: 0}
   damage: 0
-  heal: 15
+  heal: 20
   barrier: 30
   giveToEnemyBuffs: []
   getBuffs:

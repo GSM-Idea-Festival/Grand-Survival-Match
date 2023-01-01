@@ -19,10 +19,10 @@ MonoBehaviour:
   barrier: 0
   giveToEnemyBuffs: []
   getBuffs: []
-  coolTime: 1
+  coolTime: 3
   spawnDelayTime: 0
   activeDelayTime: 0
   activeTime: 0
   destroyTimer: 2
   stunTime: 0.3
-  dashRange: 8
+  dashRange: 3.5
