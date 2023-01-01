@@ -16,17 +16,17 @@ MonoBehaviour:
   indicatorFrefab: {fileID: 795787725143366518, guid: 813664208eac1cd418a7e5f8e40e0a9b, type: 3}
   damage: 10
   heal: 0
-  barrier: 0
+  barrier: 30
   giveToEnemyBuffs: []
   getBuffs:
   - buff: 2
     time: 3
   - buff: 5
     time: 3
-  coolTime: 1
+  coolTime: 5
   spawnDelayTime: 0.4
   activeDelayTime: 0
   activeTime: 0.1
   destroyTimer: 2
   stunTime: 0.3
-  dashRange: 4
+  dashRange: 5

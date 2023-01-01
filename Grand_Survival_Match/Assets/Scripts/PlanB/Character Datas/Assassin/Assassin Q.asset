@@ -24,5 +24,5 @@ MonoBehaviour:
   activeDelayTime: 0
   activeTime: 0.4
   destroyTimer: 1
-  stunTime: 0.6
+  stunTime: 0.3
   dashRange: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpearMan Data
   m_EditorClassIdentifier: 
   characterName: 
-  maxHp: 100
+  maxHp: 125
   moveSpeed: 1
   attackData:
   - {fileID: 11400000, guid: 5c43c50bb1b4dfc418ecf0ad354b1736, type: 2}
