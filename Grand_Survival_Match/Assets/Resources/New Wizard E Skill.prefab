@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1604487808337520272}
   - component: {fileID: 1604487808337520303}
-  - component: {fileID: 5233231313589961352}
   - component: {fileID: 224116453064621255}
   - component: {fileID: 2380987469120244655}
   - component: {fileID: 3461867451104892683}
   - component: {fileID: 4540883504568405587}
+  - component: {fileID: 8998203404185259442}
   m_Layer: 0
   m_Name: New Wizard E Skill
   m_TagString: Untagged
@@ -60,19 +60,6 @@ MonoBehaviour:
   m_randomRot: {x: 0, y: 0, z: 0}
   m_randomScale: {x: 0, y: 0, z: 0}
   isObjectAttachToParent: 1
---- !u!135 &5233231313589961352
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604487808337520302}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &224116453064621255
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,6 +129,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!65 &8998203404185259442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604487808337520302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 45, y: 5, z: 45}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3977176867202766350
 GameObject:
   m_ObjectHideFlags: 0
@@ -9919,7 +9919,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 54c27dcec8d66954086142447de42bfa, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
