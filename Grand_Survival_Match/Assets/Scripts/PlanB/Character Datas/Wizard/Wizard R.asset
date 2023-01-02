@@ -16,12 +16,14 @@ MonoBehaviour:
   indicatorFrefab: {fileID: 0}
   damage: 10
   heal: 0
-  barrier: 50
-  giveToEnemyBuffs: []
+  barrier: 75
+  giveToEnemyBuffs:
+  - buff: 3
+    time: 1.5
   getBuffs:
   - buff: 2
     time: 3
-  coolTime: 1
+  coolTime: 7
   spawnDelayTime: 0
   activeDelayTime: 0
   activeTime: 4

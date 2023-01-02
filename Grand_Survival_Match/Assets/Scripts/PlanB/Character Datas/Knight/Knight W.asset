@@ -17,7 +17,9 @@ MonoBehaviour:
   damage: 15
   heal: 0
   barrier: 0
-  giveToEnemyBuffs: []
+  giveToEnemyBuffs:
+  - buff: 3
+    time: 1
   getBuffs: []
   coolTime: 6
   spawnDelayTime: 0.2
@@ -26,3 +28,5 @@ MonoBehaviour:
   destroyTimer: 1
   stunTime: 0.6
   dashRange: 0
+  isNotMelee: 0
+  isAreaSkill: 0
