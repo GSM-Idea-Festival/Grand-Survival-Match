@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 795787725143366518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 795787724627972530}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _angle: 0
-  _length: 4
+  _length: 2.67
   _width: 1
   _fillProgress: 0
   _bodyRenderer: {fileID: 795787725827229073}

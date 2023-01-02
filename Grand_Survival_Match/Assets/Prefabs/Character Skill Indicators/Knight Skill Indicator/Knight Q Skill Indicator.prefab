@@ -375,9 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3b0c906f884918937c3bdfb1962023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arc: 90
+  _arc: 65
   _angle: 0
-  _radius: 2
+  _radius: 3
   _centreDot: {fileID: 4959673387545823818}
   _leftSide: {fileID: 4959673387596281394}
   _rightSide: {fileID: 4959673387995538374}
