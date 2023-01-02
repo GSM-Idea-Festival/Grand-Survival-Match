@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight T
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 5685637337513244916, guid: 170931665e2d6854a855330846ec651c, type: 3}
-  indicatorFrefab: {fileID: 0}
+  indicatorFrefab: {fileID: 4959673387738588304, guid: 1b30d69fb33d8ce428e9d712f909addd, type: 3}
   damage: 20
   heal: 0
   barrier: 0
