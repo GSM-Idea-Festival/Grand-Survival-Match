@@ -997,8 +997,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "\uCC3D\uC220\uC0AC"
       m_Image: {fileID: 0}
-    - m_Text: "\uC800\uACA9\uC218"
-      m_Image: {fileID: 0}
     - m_Text: "\uC554\uC0B4\uC790"
       m_Image: {fileID: 0}
   m_OnValueChanged:
