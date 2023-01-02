@@ -19,7 +19,7 @@ MonoBehaviour:
   barrier: 0
   giveToEnemyBuffs:
   - buff: 3
-    time: 2.5
+    time: 2
   getBuffs: []
   coolTime: 8
   spawnDelayTime: 0
