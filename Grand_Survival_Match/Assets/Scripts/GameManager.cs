@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviourPun
     GameObject player;
 
 
-    [SerializeField] float gameOverTimer = 60;
+    [SerializeField] float gameOverTimer = 600;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
