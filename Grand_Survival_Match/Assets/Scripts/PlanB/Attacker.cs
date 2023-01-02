@@ -76,10 +76,13 @@ public class Attacker : MonoBehaviourPun
     // Update is called once per frame
     protected virtual void Update()
     {
-        for (int i = 0; i < coolTime.Length; i++)
+        if (photonView.IsMine)
         {
-            coolTime[i] -= Time.deltaTime;
-            FindObjectOfType<BottomUIManager>().SetCoolTime(i, coolTime[i], statManager.CharacterData.AttackData[i].CoolTime);
+            for (int i = 0; i < coolTime.Length; i++)
+            {
+                coolTime[i] -= Time.deltaTime;
+                FindObjectOfType<BottomUIManager>().SetCoolTime(i, coolTime[i], statManager.CharacterData.AttackData[i].CoolTime);
+            }
         }
     }
 
