@@ -187,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_SynchronizeParameters.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1276669118, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
       propertyPath: m_SynchronizeParameters.Array.data[0].Name

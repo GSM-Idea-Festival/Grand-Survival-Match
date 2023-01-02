@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Wizard W
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 3766834815055439323, guid: 215ca16afbf3d934a9640d4f50cbcc22, type: 3}
-  indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
-  damage: 30
+  indicatorFrefab: {fileID: 2992555806691152843, guid: a6f31cdabfc76c54d9d68e5dbe4db2be, type: 3}
+  damage: 45
   heal: 0
   barrier: 0
   giveToEnemyBuffs:
   - buff: 3
-    time: 0.5
+    time: 1
   getBuffs: []
-  coolTime: 0.5
+  coolTime: 3.5
   spawnDelayTime: 0.5
   activeDelayTime: 1.1
   activeTime: 4
   destroyTimer: 4
-  stunTime: 0.6
+  stunTime: 0.3
   dashRange: 0
   isNotMelee: 1
   isAreaSkill: 0

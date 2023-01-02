@@ -24,5 +24,7 @@ MonoBehaviour:
   activeDelayTime: 0
   activeTime: 0
   destroyTimer: 2
-  stunTime: 0.2
+  stunTime: 0
   dashRange: 0
+  isNotMelee: 0
+  isAreaSkill: 0

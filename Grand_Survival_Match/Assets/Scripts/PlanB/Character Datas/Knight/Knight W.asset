@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 6234818455853893159, guid: 639a7e77493aabb41864091accecdec2, type: 3}
   indicatorFrefab: {fileID: 795787725143366518, guid: 79c1049fd44ea9047b7a196aa45b7e43, type: 3}
-  damage: 35
+  damage: 40
   heal: 0
   barrier: 0
   giveToEnemyBuffs:
   - buff: 3
     time: 1
   getBuffs: []
-  coolTime: 4
+  coolTime: 6
   spawnDelayTime: 0.2
   activeDelayTime: 0.3
   activeTime: 0.1
   destroyTimer: 1
-  stunTime: 0.6
+  stunTime: 0.75
   dashRange: 0
   isNotMelee: 0
   isAreaSkill: 0

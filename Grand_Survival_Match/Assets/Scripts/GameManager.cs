@@ -33,8 +33,20 @@ public class GameManager : MonoBehaviourPun
 
     GameObject player;
 
+    float gameOverTimer = 60 * 8;
+    public float GameOverTimer
+    {
+        get { return gameOverTimer; }
+        set
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                gameOverTimer = value;
+                photonView.RPC(nameof(ShareTimer), RpcTarget.All, gameOverTimer);
+            }
+        }
+    }
 
-    [SerializeField] float gameOverTimer = 600;
     private void Awake()
     {
         PhotonPeer.RegisterType(typeof(RankingData), 128, RankingSerialization.SerializeRanking, RankingSerialization.DeserializeRanking);
@@ -99,6 +111,12 @@ public class GameManager : MonoBehaviourPun
         RequestSendRankingData(0, 0);
     }
 
+    [PunRPC]
+    void ShareTimer(float timer)
+    {
+        gameOverTimer = timer;
+    }
+
     public void Kill(string playerName)
     {
         photonView.RPC(nameof(AddRankingData), RpcTarget.All, playerName, 1, 0);
@@ -152,8 +170,8 @@ public class GameManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            gameOverTimer -= Time.deltaTime;
-            if (gameOverTimer <= 0)
+            GameOverTimer -= Time.deltaTime;
+            if (GameOverTimer <= 0)
             {
                 photonView.RPC(nameof(GameOver), RpcTarget.All);
             }

@@ -39,9 +39,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 64429107}
     m_Modifications:
+    - target: {fileID: 795787724627972530, guid: b01c1edae599aa94097c7ee6f47b8f39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 795787725143366518, guid: b01c1edae599aa94097c7ee6f47b8f39, type: 3}
       propertyPath: m_Name
       value: Wizard Q Skill Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 795787725143366518, guid: b01c1edae599aa94097c7ee6f47b8f39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 795787725143366520, guid: b01c1edae599aa94097c7ee6f47b8f39, type: 3}
       propertyPath: m_RootOrder
@@ -117,9 +125,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard T Skill Indicator
       objectReference: {fileID: 0}
+    - target: {fileID: 7057534979050265283, guid: 3a6c5b8e5b54bbd4eb0e8107068b22fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7057534979050265285, guid: 3a6c5b8e5b54bbd4eb0e8107068b22fb, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7057534979050265285, guid: 3a6c5b8e5b54bbd4eb0e8107068b22fb, type: 3}
       propertyPath: m_LocalScale.x
@@ -175,144 +187,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a6c5b8e5b54bbd4eb0e8107068b22fb, type: 3}
---- !u!1001 &951453768
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7548180198109297873}
-    m_Modifications:
-    - target: {fileID: 4014743706267212441, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_Name
-      value: Wizard E Skill Range Indicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.15000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.15000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.020000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014743706267212447, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6e07a51d4c9c4944a88f90360d8aaa33, type: 3}
---- !u!1001 &1226633566
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7548180198109297873}
-    m_Modifications:
-    - target: {fileID: 562445335773975163, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_Name
-      value: Wizard W Skill Range Indicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.020000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401621410000669164, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f5116610e7565194b868fb2fbde3e3fc, type: 3}
 --- !u!1001 &1497525171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +197,10 @@ PrefabInstance:
     - target: {fileID: 1555009206541165441, guid: 86587d8ecfc89e14dabbd74999fbfb8c, type: 3}
       propertyPath: m_Name
       value: Wizard E Skill Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555009206541165441, guid: 86587d8ecfc89e14dabbd74999fbfb8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1555009206541165443, guid: 86587d8ecfc89e14dabbd74999fbfb8c, type: 3}
       propertyPath: m_RootOrder
@@ -393,9 +271,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard W Skill Indicator
       objectReference: {fileID: 0}
+    - target: {fileID: 2992555806691152843, guid: a6f31cdabfc76c54d9d68e5dbe4db2be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3401383167469588660, guid: a6f31cdabfc76c54d9d68e5dbe4db2be, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3401383167469588660, guid: a6f31cdabfc76c54d9d68e5dbe4db2be, type: 3}
       propertyPath: m_LocalScale.x

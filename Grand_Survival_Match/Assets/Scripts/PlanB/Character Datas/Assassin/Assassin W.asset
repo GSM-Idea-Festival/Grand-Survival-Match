@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Assassin W
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 7196101468527216612, guid: 78d50b75cb985664a87362d53373da89, type: 3}
-  indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
+  indicatorFrefab: {fileID: 4959673387738588304, guid: c655987c4cb0bd24fa3f7eb247aaf373, type: 3}
   damage: 20
   heal: 0
   barrier: 10
   giveToEnemyBuffs: []
   getBuffs: []
-  coolTime: 1
+  coolTime: 1.5
   spawnDelayTime: 0.2
   activeDelayTime: 0
   activeTime: 0.1
   destroyTimer: 1
-  stunTime: 0.2
+  stunTime: 0.1
   dashRange: 0
   isNotMelee: 0
   isAreaSkill: 0
