@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 1314787664237178328, guid: bcea9f861c56ef648a2dd4e3e254a18c, type: 3}
   indicatorFrefab: {fileID: 795787725143366518, guid: 305f205bbe7545c4ab90e6a6b4be52fa, type: 3}
-  damage: 5
+  damage: 30
   heal: 10
-  barrier: 15
+  barrier: 0
   giveToEnemyBuffs: []
   getBuffs: []
   coolTime: 5
@@ -26,3 +26,5 @@ MonoBehaviour:
   destroyTimer: 2
   stunTime: 0.4
   dashRange: 5
+  isNotMelee: 0
+  isAreaSkill: 0

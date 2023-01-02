@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 6234818455853893159, guid: 639a7e77493aabb41864091accecdec2, type: 3}
   indicatorFrefab: {fileID: 795787725143366518, guid: 79c1049fd44ea9047b7a196aa45b7e43, type: 3}
-  damage: 15
+  damage: 35
   heal: 0
   barrier: 0
   giveToEnemyBuffs:
   - buff: 3
     time: 1
   getBuffs: []
-  coolTime: 6
+  coolTime: 4
   spawnDelayTime: 0.2
   activeDelayTime: 0.3
   activeTime: 0.1

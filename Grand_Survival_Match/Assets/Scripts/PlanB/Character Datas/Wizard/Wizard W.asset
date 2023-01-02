@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackFrefab: {fileID: 3766834815055439323, guid: 215ca16afbf3d934a9640d4f50cbcc22, type: 3}
   indicatorFrefab: {fileID: 4959673387738588304, guid: a905c234edef6d34cb8d5105f37a1e53, type: 3}
-  damage: 25
+  damage: 50
   heal: 0
   barrier: 0
   giveToEnemyBuffs:
