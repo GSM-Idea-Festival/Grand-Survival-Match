@@ -83,7 +83,7 @@ public class HitBox : MonoBehaviourPun
     protected virtual void Update()
     {
         moveDelay -= Time.deltaTime;
-        if(PhotonNetwork.IsMasterClient && moveSpeed != 0 && moveDelay <= 0)
+        if(photonView.IsMine && moveSpeed != 0 && moveDelay <= 0)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
