@@ -23,7 +23,7 @@ public class PlayerName : MonoBehaviour
                 GameManager.MyCharacterType = CharacterType.SpearMan;
                 break;
             case 3:
-                GameManager.MyCharacterType = CharacterType.Gunner;
+                GameManager.MyCharacterType = CharacterType.Assassin;
                 break;
             case 4:
                 GameManager.MyCharacterType = CharacterType.Assassin;
