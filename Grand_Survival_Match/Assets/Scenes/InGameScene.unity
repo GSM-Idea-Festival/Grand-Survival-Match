@@ -1046,7 +1046,7 @@ MonoBehaviour:
   hpBarLayerCanvas: {fileID: 1731249599}
   rankingManager: {fileID: 1290327500}
   hpBarPrefab: {fileID: 1983158596142020649, guid: 4ebed84ed4d25a84d86954914b46022c, type: 3}
-  gameOverTimer: 60
+  gameOverTimer: 600
 --- !u!4 &1852177919
 Transform:
   m_ObjectHideFlags: 0
