@@ -39,7 +39,7 @@ public class Control : MonoBehaviourPun
                 attacker.TargetPos = hit.point;
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(1))
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
                 {
