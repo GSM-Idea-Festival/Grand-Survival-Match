@@ -5,10 +5,11 @@ using Photon.Pun;
 
 public class CharacterTransformSharer : MonoBehaviourPun, IPunObservable
 {
-    // Start is called before the first frame update
+    Rigidbody rigid;
+
     void Start()
     {
-        
+        rigid = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -22,10 +23,12 @@ public class CharacterTransformSharer : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
         }
         else
         {
             transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }
