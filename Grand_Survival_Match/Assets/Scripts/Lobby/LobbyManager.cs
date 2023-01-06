@@ -56,7 +56,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.ConnectUsingSettings();
     }
-
+    
     //끊기면 재시도
     public override void OnDisconnected(DisconnectCause cause)
     {
