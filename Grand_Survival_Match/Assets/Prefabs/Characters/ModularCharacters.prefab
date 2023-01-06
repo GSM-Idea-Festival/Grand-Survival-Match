@@ -42057,7 +42057,6 @@ GameObject:
   - component: {fileID: 1276669121}
   - component: {fileID: 1276669117}
   - component: {fileID: 1276669118}
-  - component: {fileID: 1276669119}
   - component: {fileID: 1276669120}
   - component: {fileID: 1276669122}
   - component: {fileID: 7307597001213309754}
@@ -42065,6 +42064,7 @@ GameObject:
   - component: {fileID: 2072345408141356834}
   - component: {fileID: -4021402778352262820}
   - component: {fileID: 8061859488799761914}
+  - component: {fileID: 1478586496310778101}
   m_Layer: 0
   m_Name: ModularCharacters
   m_TagString: Untagged
@@ -42155,22 +42155,6 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters: []
   m_SynchronizeLayers: []
---- !u!114 &1276669119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588895830433058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &1276669120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42191,7 +42175,8 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1276669118}
-  - {fileID: 1276669119}
+  - {fileID: 0}
+  - {fileID: 1478586496310778101}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -42276,6 +42261,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6060444aff6a2d4f8e75cf98348388f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1478586496310778101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588895830433058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f051cd71506464b9c35b0c87b0b1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1595597176900030
