@@ -17,7 +17,7 @@ public class HitBox : MonoBehaviourPun
         get { return damage; }
         set
         {
-            photonView.RPC(nameof(ShareDamage), RpcTarget.All, value);
+            photonView.RPC(nameof(ShareDamage), RpcTarget.MasterClient, value);
         }
     }
 
