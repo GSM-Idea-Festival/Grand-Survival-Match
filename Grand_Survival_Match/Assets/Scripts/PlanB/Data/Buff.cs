@@ -5,9 +5,9 @@ using UnityEngine;
 public enum Buff : int
 {
     DamageUp = 0,
-    SpeedUp,
-    Defence,
-    Stun,
-    Immune,
-    UnStoppable
+    SpeedUp = 1,
+    Defence = 2,
+    Stun = 3,
+    Immune = 4,
+    UnStoppable = 5
 }

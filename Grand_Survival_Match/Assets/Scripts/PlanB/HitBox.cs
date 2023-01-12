@@ -37,6 +37,7 @@ public class HitBox : MonoBehaviourPun
         get { return giveBuffs; }
         set
         {
+            //Debug.LogWarning("버프정보 보냄 : " + value[0].buff);
             giveBuffs = value;
             photonView.RPC(nameof(ShareBuffs),RpcTarget.MasterClient, giveBuffs);
         }
@@ -140,6 +141,7 @@ public class HitBox : MonoBehaviourPun
     void ShareBuffs(BuffWithTime[] newbuff)
     {
         giveBuffs = newbuff;
+        //Debug.LogWarning("버프정보 받음 : " + GiveBuffs[0].buff);
     }
 
     IEnumerator DestroyTimer()
