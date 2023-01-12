@@ -20,7 +20,6 @@ public class GameTimer : MonoBehaviour
     {
         int timer;
         timer = (int)gameManager.GameOverTimer;
-        Debug.Log(timer);   
         text.text = (timer / 60).ToString() + " : "+ (timer % 60).ToString();
     }
 }

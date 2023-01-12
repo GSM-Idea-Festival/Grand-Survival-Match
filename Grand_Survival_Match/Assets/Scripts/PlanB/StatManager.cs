@@ -13,7 +13,7 @@ public class StatManager : MonoBehaviourPun
     }
     float[] buffList;
 
-    protected virtual void Awake()
+    protected virtual void OnEnable()
     {
         buffList = new float[System.Enum.GetValues(typeof(Buff)).Length];
     }

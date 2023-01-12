@@ -16,11 +16,11 @@ public class BuffWithTimeSerialization : MonoBehaviour
             byte[] bytes = mem;
             int index = 0;
 
-            Protocol.Serialize(Convert.ToInt16(data.buff), bytes, ref index);
+            Protocol.Serialize((int)data.buff, bytes, ref index);
             Protocol.Serialize(data.time, bytes, ref index);
             outStream.Write(bytes, 0, 4 + 6);
         }
-
+        Debug.LogWarning("버프 보냄 : " + (int)data.buff + ", " + data.time);
         return 4 + 6;
     }
 
@@ -38,6 +38,8 @@ public class BuffWithTimeSerialization : MonoBehaviour
             Protocol.Deserialize(out data.time, mem, ref index);
             data.buff = (Buff)a;
         }
+        Debug.LogWarning("버프 받음 : " + a + ", " + data.time);
+
         return data;
     }
 }
