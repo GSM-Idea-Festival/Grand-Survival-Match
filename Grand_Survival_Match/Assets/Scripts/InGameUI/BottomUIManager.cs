@@ -7,9 +7,9 @@ public class BottomUIManager : MonoBehaviour
 {
     [SerializeField] CharacterHpBar hpSlider;
     [SerializeField] CoolTimeShower[] skillCoolTime;
-    [SerializeField] Text atkText;
-    [SerializeField] Text defText;
-    [SerializeField] Text dexText;
+    //[SerializeField] Text atkText;
+    //[SerializeField] Text defText;
+    //[SerializeField] Text dexText;
 
     public void SetHpUIValue(float value, float shiled, float maxValue)
     {
@@ -21,10 +21,10 @@ public class BottomUIManager : MonoBehaviour
         skillCoolTime[index].SetUIValue(coolTime, maxCoolTime);
     }
 
-    public void SetStatText(float atk,float def,float dex)
-    {
-        atkText.text = "ATK : " + (int)atk;
-        defText.text = "DEF : " + (int)def;
-        dexText.text = "DEX : " + (int)dex;
-    }
+    //public void SetStatText(float atk,float def,float dex)
+    //{
+    //    atkText.text = "ATK : " + (int)atk;
+    //    defText.text = "DEF : " + (int)def;
+    //    dexText.text = "DEX : " + (int)dex;
+    //}
 }

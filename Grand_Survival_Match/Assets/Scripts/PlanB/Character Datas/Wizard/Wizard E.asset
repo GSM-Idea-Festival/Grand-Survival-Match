@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c75ad9ad99b664691bf84a775105ff, type: 3}
+  m_Name: Wizard E
+  m_EditorClassIdentifier: 
+  attackFrefab: {fileID: 1604487808337520302, guid: b1781c928deb4dc428729bfff290a57f, type: 3}
+  indicatorFrefab: {fileID: 1555009206541165441, guid: 86587d8ecfc89e14dabbd74999fbfb8c, type: 3}
+  damage: 10
+  heal: 0
+  barrier: 0
+  giveToEnemyBuffs: []
+  getBuffs: []
+  coolTime: 8
+  spawnDelayTime: 0.2
+  activeDelayTime: 0
+  activeTime: 5.5
+  destroyTimer: 6
+  stunTime: 0.6
+  dashRange: 0
+  isNotMelee: 1
+  isAreaSkill: 1

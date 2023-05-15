@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DTT.AreaOfEffectRegions;
+using Photon.Pun;
 
 public class Knight : CharacterStats
 {
@@ -53,7 +54,7 @@ public class Knight : CharacterStats
         SkillIndicatorActivate();
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //∞‘¿” »≠∏È ≥ªø° ∏∂øÏΩ∫ πÊ«‚¿∏∑Œ ∑π¿Ã πﬂªÁ
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //Í≤åÏûÑ ÌôîÎ©¥ ÎÇ¥Ïóê ÎßàÏö∞Ïä§ Î∞©Ìñ•ÏúºÎ°ú Î†àÏù¥ Î∞úÏÇ¨
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -63,13 +64,13 @@ public class Knight : CharacterStats
         Quaternion transRot = Quaternion.LookRotation(position - player.transform.position);
         transRot.eulerAngles = new Vector3(0, transRot.eulerAngles.y, transRot.eulerAngles.z);
 
-        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //∏∂øÏΩ∫∞° ∫∏∞Ì¿÷¥¬ πÊ«‚¿∏∑Œ Ω∫≈≥ «•Ω√±‚ »∏¿¸ º≥¡§
+        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //ÎßàÏö∞Ïä§Í∞Ä Î≥¥Í≥†ÏûàÎäî Î∞©Ìñ•ÏúºÎ°ú Ïä§ÌÇ¨ ÌëúÏãúÍ∏∞ ÌöåÏ†Ñ ÏÑ§Ï†ï
 
     }
 
-    void SkillIndicatorActivate()
+    protected override void SkillIndicatorActivate()
     {
-        #region QΩ∫≈≥
+        #region QÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
         {
             qSkillOn = true;
@@ -95,14 +96,14 @@ public class Knight : CharacterStats
         }
         #endregion
 
-        #region WΩ∫≈≥
+        #region WÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
             UseW(5);
         }
         #endregion
 
-        #region EΩ∫≈≥
+        #region EÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.E) && eCooltime <= 0)
         {
             ESkillIndicator.GetComponent<LineRegion>().FillProgress = 0;
@@ -137,14 +138,14 @@ public class Knight : CharacterStats
         }
         #endregion
 
-        #region RΩ∫≈≥
+        #region RÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.R) && rCooltime <= 0)
         {
             UseR(5);
         }
         #endregion
 
-        #region TΩ∫≈≥
+        #region TÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.T) && tCooltime <= 0)
         {
             tSkillOn = true;
@@ -177,13 +178,13 @@ public class Knight : CharacterStats
         QSkillData.DebuffDatas[0].value = atk;
         QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
-        Instantiate(QSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(QSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseW(float coolTime)
     {
         base.UseW(coolTime);
-        Instantiate(WSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(WSkillPrefab.name, gameObject.transform.position, gameObject.transform.rotation);
         StartCoroutine(SetATK(75, 2f));
     }
 
@@ -206,15 +207,24 @@ public class Knight : CharacterStats
     protected override void UseR(float coolTime)
     {
         base.UseR(coolTime);
-        Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation).transform.parent = player.transform;
+        
+        photonView.RPC(nameof(SetPos),RpcTarget.All);
         SetHpBarrier(3, 0.1f);
     }
 
+    [PunRPC]
+    void SetPos()
+    {
+        GameObject g = Instantiate(RSkillPrefab, gameObject.transform.position, gameObject.transform.rotation);
+        g.transform.parent = player.transform;
+        g.transform.localPosition = Vector3.zero;
+        g.GetComponent<TrackingPlayerSkill>().trackingTarget = gameObject;
+    }
     protected override void UseT(float coolTime)
     {
         base.UseT(coolTime);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
-        Instantiate(TSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(TSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 }
