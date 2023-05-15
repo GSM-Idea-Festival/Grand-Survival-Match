@@ -53,7 +53,7 @@ public class SpearMan : CharacterStats
         base.Update();
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //°ÔÀÓ È­¸é ³»¿¡ ¸¶¿ì½º ¹æÇâÀ¸·Î ·¹ÀÌ ¹ß»ç
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //ê²Œìž„ í™”ë©´ ë‚´ì— ë§ˆìš°ìŠ¤ ë°©í–¥ìœ¼ë¡œ ë ˆì´ ë°œì‚¬
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -63,7 +63,7 @@ public class SpearMan : CharacterStats
         Quaternion transRot = Quaternion.LookRotation(position - player.transform.position);
         transRot.eulerAngles = new Vector3(0, transRot.eulerAngles.y, transRot.eulerAngles.z);
 
-        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //¸¶¿ì½º°¡ º¸°íÀÖ´Â ¹æÇâÀ¸·Î ½ºÅ³ Ç¥½Ã±â È¸Àü ¼³Á¤
+        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //ë§ˆìš°ìŠ¤ê°€ ë³´ê³ ìžˆëŠ” ë°©í–¥ìœ¼ë¡œ ìŠ¤í‚¬ í‘œì‹œê¸° íšŒì „ ì„¤ì •
 
         if (tSkillTime > 0)
         {
@@ -77,7 +77,7 @@ public class SpearMan : CharacterStats
 
     protected override void SkillIndicatorActivate()
     {
-        #region Q½ºÅ³
+        #region QìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
         {
             qSkillOn = true;
@@ -113,7 +113,7 @@ public class SpearMan : CharacterStats
         }
         #endregion
 
-        #region W½ºÅ³
+        #region WìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
             qSkillOn = false;
@@ -140,7 +140,7 @@ public class SpearMan : CharacterStats
         }
         #endregion
 
-        #region E½ºÅ³
+        #region EìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.E) && eCooltime <= 0)
         {
             qSkillOn = false;
@@ -167,7 +167,7 @@ public class SpearMan : CharacterStats
         }
         #endregion
 
-        #region R½ºÅ³
+        #region RìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.R) && rCooltime <= 0)
         {
             qSkillOn = false;
@@ -194,7 +194,7 @@ public class SpearMan : CharacterStats
         }
         #endregion
 
-        #region T½ºÅ³
+        #region TìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.T) && tCooltime <= 0)
         {
             UseT(15);

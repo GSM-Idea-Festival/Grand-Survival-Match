@@ -8,13 +8,13 @@ public class CharacterStats : MonoBehaviourPun
 {
     public NavMeshAgent agent;
 
-    protected float maxHP; //ÃÖ´ëÃ¼·Â
-    protected float hp;    //ÇöÀçÃ¼·Â
-    protected float atk;   //±âº»°ø°İ·Â
-    protected float def;   //¹æ¾î·Â
-    protected float speed; //ÀÌµ¿¼Óµµ
-    protected float barrier; //º¸È£¸·
-    protected float stunTime; //±âÀı½Ã°£
+    protected float maxHP; //ìµœëŒ€ì²´ë ¥
+    protected float hp;    //í˜„ì¬ì²´ë ¥
+    protected float atk;   //ê¸°ë³¸ê³µê²©ë ¥
+    protected float def;   //ë°©ì–´ë ¥
+    protected float speed; //ì´ë™ì†ë„
+    protected float barrier; //ë³´í˜¸ë§‰
+    protected float stunTime; //ê¸°ì ˆì‹œê°„
 
     protected float qCooltime;
     protected float wCooltime;
@@ -22,8 +22,8 @@ public class CharacterStats : MonoBehaviourPun
     protected float rCooltime;
     protected float tCooltime;
 
-    protected bool isUnstoppable;   //ÀúÁöºÒ°¡
-    protected bool isSkillUsing;    //½ºÅ³»ç¿ëÁß
+    protected bool isUnstoppable;   //ì €ì§€ë¶ˆê°€
+    protected bool isSkillUsing;    //ìŠ¤í‚¬ì‚¬ìš©ì¤‘
     protected bool isDead
     {
         get
@@ -34,7 +34,7 @@ public class CharacterStats : MonoBehaviourPun
         {
             //FindObjectOfType<GameManager>().RespawnRequest(gameObject);
         }
-    }        //»ç¸Á
+    }        //ì‚¬ë§
 
     #region Property
     public float MaxHP { get { return maxHP; } }
@@ -53,7 +53,7 @@ public class CharacterStats : MonoBehaviourPun
     public bool IsSkillUsing { get { return isSkillUsing; } }
     public bool IsDead { get { return isDead; } }
     #endregion
-    //ÇÁ·ÎÆÛÆ¼
+    //í”„ë¡œí¼í‹°
 
     private void Start()
     {
@@ -146,7 +146,7 @@ public class CharacterStats : MonoBehaviourPun
 
             photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
-    }   //´ë¹ÌÁö
+    }   //ëŒ€ë¯¸ì§€
 
     [PunRPC]
     public void HpDamaged(float percent)
@@ -190,7 +190,7 @@ public class CharacterStats : MonoBehaviourPun
 
             photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
-    }   //ÇöÀçÃ¼·Â ºñ·Ê ´ë¹ÌÁö
+    }   //í˜„ì¬ì²´ë ¥ ë¹„ë¡€ ëŒ€ë¯¸ì§€
 
     [PunRPC]
     public void LostHpDamaged(float percent)
@@ -234,7 +234,7 @@ public class CharacterStats : MonoBehaviourPun
 
             photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
-    }   //ÀÒÀºÃ¼·Â ºñ·Ê ´ë¹ÌÁö
+    }   //ìƒì€ì²´ë ¥ ë¹„ë¡€ ëŒ€ë¯¸ì§€
 
     public void Heal(int value)
     {
@@ -251,9 +251,9 @@ public class CharacterStats : MonoBehaviourPun
 
             photonView.RPC("ApplyUpdateHP", RpcTarget.Others, hp);
         }
-    }   //Ã¼·ÂÈ¸º¹
+    }   //ì²´ë ¥íšŒë³µ
 
-    #region ½ºÅ³»ç¿ë
+    #region ìŠ¤í‚¬ì‚¬ìš©
     protected virtual void UseQ(float coolTime)
     {
         qCooltime = coolTime;
@@ -283,7 +283,7 @@ public class CharacterStats : MonoBehaviourPun
             return;
         }
         stunTime = time;
-    }   //½ºÅÏ ¼³Á¤
+    }   //ìŠ¤í„´ ì„¤ì •
 
     public void SkillCoolInit(int skillIndex)
     {
@@ -305,7 +305,7 @@ public class CharacterStats : MonoBehaviourPun
                 tCooltime = 0;
                 break;
         }
-    }   //½ºÅ³ÄğÅ¸ÀÓ ÃÊ±âÈ­
+    }   //ìŠ¤í‚¬ì¿¨íƒ€ì„ ì´ˆê¸°í™”
 
     protected virtual void SkillIndicatorActivate()
     {
@@ -318,7 +318,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         atk -= value;
         yield break;
-    }   //±âº»°ø°İ·Â ¼³Á¤
+    }   //ê¸°ë³¸ê³µê²©ë ¥ ì„¤ì •
 
     public IEnumerator SetDEF(float value, float time)
     {
@@ -326,7 +326,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         def -= value;
         yield break;
-    }   //¹æ¾î·Â ¼³Á¤
+    }   //ë°©ì–´ë ¥ ì„¤ì •
     
     public IEnumerator SetPercentDEF(float value, float time)
     {
@@ -335,7 +335,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         def -= addDef;
         yield break;
-    }   //ÇöÀç ¹æ¾î·Â ºñ·Ê ¹æ¾î·Â Áõ°¡
+    }   //í˜„ì¬ ë°©ì–´ë ¥ ë¹„ë¡€ ë°©ì–´ë ¥ ì¦ê°€
 
     public IEnumerator SetHpDef(float value, float time)
     {
@@ -344,7 +344,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         def -= addDef;
         yield break;
-    }   //ÃÖ´ë Ã¼·Â ºñ·Ê ¹æ¾î·Â Áõ°¡
+    }   //ìµœëŒ€ ì²´ë ¥ ë¹„ë¡€ ë°©ì–´ë ¥ ì¦ê°€
 
     public IEnumerator SetSpeed(float value, float time)
     {
@@ -356,7 +356,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         speed -= value;
         yield break;
-    }   //ÀÌµ¿¼Óµµ ¼³Á¤
+    }   //ì´ë™ì†ë„ ì„¤ì •
 
     public IEnumerator SetBarrier(float value, float time)
     {
@@ -364,7 +364,7 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         barrier -= value;
         yield break;
-    }   //º¸È£¸· ¼³Á¤
+    }   //ë³´í˜¸ë§‰ ì„¤ì •
 
     public IEnumerator SetHpBarrier(float value, float time)
     {
@@ -373,12 +373,12 @@ public class CharacterStats : MonoBehaviourPun
         yield return new WaitForSeconds(time);
         barrier -= addBarrier;
         yield break;
-    }   //ÃÖ´ëÃ¼·Âºñ·Ê º¸È£¸· ¼³Á¤
+    }   //ìµœëŒ€ì²´ë ¥ë¹„ë¡€ ë³´í˜¸ë§‰ ì„¤ì •
 
     public IEnumerator SetUnstoppable(float time)
     {
         isUnstoppable = true;
         yield return new WaitForSeconds(time);
         isUnstoppable = false;
-    }   //ÀúÁöºÒ°¡ ¼³Á¤
+    }   //ì €ì§€ë¶ˆê°€ ì„¤ì •
 }

@@ -51,9 +51,10 @@ public class Knight : CharacterStats
     protected override void Update()
     {
         base.Update();
+        SkillIndicatorActivate();
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //°ÔÀÓ È­¸é ³»¿¡ ¸¶¿ì½º ¹æÇâÀ¸·Î ·¹ÀÌ ¹ß»ç
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //ê²Œì„ í™”ë©´ ë‚´ì— ë§ˆìš°ìŠ¤ ë°©í–¥ìœ¼ë¡œ ë ˆì´ ë°œì‚¬
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -63,13 +64,13 @@ public class Knight : CharacterStats
         Quaternion transRot = Quaternion.LookRotation(position - player.transform.position);
         transRot.eulerAngles = new Vector3(0, transRot.eulerAngles.y, transRot.eulerAngles.z);
 
-        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //¸¶¿ì½º°¡ º¸°íÀÖ´Â ¹æÇâÀ¸·Î ½ºÅ³ Ç¥½Ã±â È¸Àü ¼³Á¤
+        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //ë§ˆìš°ìŠ¤ê°€ ë³´ê³ ìˆëŠ” ë°©í–¥ìœ¼ë¡œ ìŠ¤í‚¬ í‘œì‹œê¸° íšŒì „ ì„¤ì •
 
     }
 
     protected override void SkillIndicatorActivate()
     {
-        #region Q½ºÅ³
+        #region QìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
         {
             qSkillOn = true;
@@ -95,14 +96,14 @@ public class Knight : CharacterStats
         }
         #endregion
 
-        #region W½ºÅ³
+        #region WìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
             UseW(5);
         }
         #endregion
 
-        #region E½ºÅ³
+        #region EìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.E) && eCooltime <= 0)
         {
             ESkillIndicator.GetComponent<LineRegion>().FillProgress = 0;
@@ -137,14 +138,14 @@ public class Knight : CharacterStats
         }
         #endregion
 
-        #region R½ºÅ³
+        #region RìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.R) && rCooltime <= 0)
         {
             UseR(5);
         }
         #endregion
 
-        #region T½ºÅ³
+        #region TìŠ¤í‚¬
         if (Input.GetKeyDown(KeyCode.T) && tCooltime <= 0)
         {
             tSkillOn = true;
@@ -219,7 +220,6 @@ public class Knight : CharacterStats
         g.transform.localPosition = Vector3.zero;
         g.GetComponent<TrackingPlayerSkill>().trackingTarget = gameObject;
     }
-
     protected override void UseT(float coolTime)
     {
         base.UseT(coolTime);
