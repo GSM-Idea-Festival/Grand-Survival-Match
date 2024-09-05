@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
+        CharacterStats = gameObject.GetComponent<CharacterStats>();
     }
 
     // Update is called once per frame

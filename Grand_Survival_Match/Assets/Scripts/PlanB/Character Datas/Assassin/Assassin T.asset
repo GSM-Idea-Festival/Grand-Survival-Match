@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c75ad9ad99b664691bf84a775105ff, type: 3}
+  m_Name: Assassin T
+  m_EditorClassIdentifier: 
+  attackFrefab: {fileID: 8440170721088204535, guid: b4e73950a95e33948bb8064d22251b14, type: 3}
+  indicatorFrefab: {fileID: 795787725143366518, guid: cdcdc2c2a4206a242bfc20e11e33a024, type: 3}
+  damage: 30
+  heal: 0
+  barrier: 0
+  giveToEnemyBuffs:
+  - buff: 3
+    time: 1.5
+  getBuffs:
+  - buff: 0
+    time: 2
+  coolTime: 10
+  spawnDelayTime: 0.3
+  activeDelayTime: 0.1
+  activeTime: 0.1
+  destroyTimer: 2
+  stunTime: 0.2
+  dashRange: 12.5
+  isNotMelee: 0
+  isAreaSkill: 0

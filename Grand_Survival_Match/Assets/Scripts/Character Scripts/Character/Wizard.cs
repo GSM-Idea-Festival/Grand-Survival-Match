@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DTT.AreaOfEffectRegions;
+using Photon.Pun;
 
 public class Wizard : CharacterStats
 {
@@ -53,10 +54,9 @@ public class Wizard : CharacterStats
     protected override void Update()
     {
         base.Update();
-        SkillIndicatorActivate();
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //∞‘¿” »≠∏È ≥ªø° ∏∂øÏΩ∫ πÊ«‚¿∏∑Œ ∑π¿Ã πﬂªÁ
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);        //Í≤åÏûÑ ÌôîÎ©¥ ÎÇ¥Ïóê ÎßàÏö∞Ïä§ Î∞©Ìñ•ÏúºÎ°ú Î†àÏù¥ Î∞úÏÇ¨
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -66,7 +66,7 @@ public class Wizard : CharacterStats
         Quaternion transRot = Quaternion.LookRotation(position - player.transform.position);
         transRot.eulerAngles = new Vector3(0, transRot.eulerAngles.y, transRot.eulerAngles.z);
 
-        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //∏∂øÏΩ∫∞° ∫∏∞Ì¿÷¥¬ πÊ«‚¿∏∑Œ Ω∫≈≥ «•Ω√±‚ »∏¿¸ º≥¡§
+        SkillIndicatorAxis.transform.rotation = Quaternion.Lerp(transRot, SkillIndicatorAxis.transform.rotation, 0f);       //ÎßàÏö∞Ïä§Í∞Ä Î≥¥Í≥†ÏûàÎäî Î∞©Ìñ•ÏúºÎ°ú Ïä§ÌÇ¨ ÌëúÏãúÍ∏∞ ÌöåÏ†Ñ ÏÑ§Ï†ï
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -91,9 +91,9 @@ public class Wizard : CharacterStats
 
         TSkillIndicator.transform.position = new Vector3(WSkillHitPos.x, 0.1f, WSkillHitPos.z);
     }
-    void SkillIndicatorActivate()
+    protected override void SkillIndicatorActivate()
     {
-        #region QΩ∫≈≥
+        #region QÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.Q) && qCooltime <= 0)
         {
             qSkillOn = true;
@@ -119,7 +119,7 @@ public class Wizard : CharacterStats
         }
         #endregion
 
-        #region WΩ∫≈≥
+        #region WÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.W) && wCooltime <= 0)
         {
             wSkillOn = true;
@@ -149,7 +149,7 @@ public class Wizard : CharacterStats
         }
         #endregion
 
-        #region EΩ∫≈≥
+        #region EÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.E) && eCooltime <= 0)
         {
             eSkillOn = true;
@@ -179,7 +179,7 @@ public class Wizard : CharacterStats
         }
         #endregion
 
-        #region TΩ∫≈≥
+        #region TÏä§ÌÇ¨
         if (Input.GetKeyDown(KeyCode.T) && tCooltime <= 0)
         {
             tSkillOn = true;
@@ -215,7 +215,7 @@ public class Wizard : CharacterStats
         QSkillData.DebuffDatas[0].value = atk;
         QSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         QSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = QSkillData;
-        Instantiate(QSkillPrefab, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
+        PhotonNetwork.Instantiate(QSkillPrefab.name, gameObject.transform.position, SkillIndicatorAxis.transform.rotation);
     }
 
     protected override void UseW(float coolTime)
@@ -224,7 +224,7 @@ public class Wizard : CharacterStats
         WSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         WSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = WSkillData;
         Vector3 pos = new Vector3(WSkillHitPos.x, -0.5f, WSkillHitPos.z);
-        Instantiate(WSkillPrefab, pos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(WSkillPrefab.name, pos, gameObject.transform.rotation);
     }
 
     protected override void UseE(float coolTime)
@@ -233,7 +233,7 @@ public class Wizard : CharacterStats
         ESkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         ESkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = ESkillData;
         Vector3 pos = new Vector3(ESkillHitPos.x, 0, ESkillHitPos.z);
-        Instantiate(ESkillPrefab, pos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(ESkillPrefab.name, pos, gameObject.transform.rotation);
     }
 
     protected override void UseR(float coolTime)
@@ -246,6 +246,6 @@ public class Wizard : CharacterStats
         base.UseT(coolTime);
         TSkillPrefab.GetComponent<SkillPrefab>().Attacker = this.gameObject;
         TSkillPrefab.GetComponent<SkillPrefab>().CharacterSkill = TSkillData;
-        Instantiate(TSkillPrefab, WSkillHitPos, gameObject.transform.rotation);
+        PhotonNetwork.Instantiate(TSkillPrefab.name, WSkillHitPos, gameObject.transform.rotation);
     }
 }
